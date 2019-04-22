@@ -1,0 +1,15 @@
+@import "../../vaiables.scss";
+
+.Layout {
+  min-height: 100vh;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Content {
+  //   flex-grow: 1;
+}
