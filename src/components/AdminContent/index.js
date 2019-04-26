@@ -3,6 +3,7 @@ import styles from "./AdminContent.module.scss";
 import NavBar from "./NavBar/NavBar";
 import MainMenu from "./MainMenu/MainMenu";
 import OccupancyPage from "./OccupacyPage/OccupacyPage";
+import NewsletterPage from "./NewsletterPage/NewsletterPage";
 import { Layout } from "antd";
 
 const AdminContent = () => (
@@ -15,7 +16,8 @@ const AdminContent = () => (
         <MainMenu />
       </Layout.Sider>
       <Layout.Content className={styles.Content}>
-        <OccupancyPage />
+        {/* <OccupancyPage /> */}
+        <NewsletterPage />
       </Layout.Content>
     </Layout>
   </Layout>
