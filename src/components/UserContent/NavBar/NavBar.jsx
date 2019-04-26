@@ -2,9 +2,13 @@ import React from "react";
 import styles from "./NavBar.module.scss";
 import { Menu, Dropdown, Icon } from "antd";
 
-const DropdownMenuOverlay = ({ onOpenLoginModal, onOpenSignUpModal }) => (
+const DropdownMenuOverlay = ({
+  onOpenLoginModal,
+  onOpenSignUpModal,
+  onOpenFaqModal
+}) => (
   <Menu>
-    <Menu.Item key="1">
+    <Menu.Item key="1" onClick={onOpenFaqModal}>
       <Icon type="question-circle" />
       FAQ
     </Menu.Item>
@@ -19,7 +23,12 @@ const DropdownMenuOverlay = ({ onOpenLoginModal, onOpenSignUpModal }) => (
   </Menu>
 );
 
-const NavBar = ({ setOpenPage, onOpenLoginModal, onOpenSignUpModal }) => {
+const NavBar = ({
+  setOpenPage,
+  onOpenLoginModal,
+  onOpenSignUpModal,
+  onOpenFaqModal
+}) => {
   return (
     <>
       <Menu mode="horizontal" theme="dark" onClick={e => setOpenPage(e.key)}>
@@ -41,6 +50,7 @@ const NavBar = ({ setOpenPage, onOpenLoginModal, onOpenSignUpModal }) => {
           <DropdownMenuOverlay
             onOpenLoginModal={onOpenLoginModal}
             onOpenSignUpModal={onOpenSignUpModal}
+            onOpenFaqModal={onOpenFaqModal}
           />
         }
         className={styles.DropDown}

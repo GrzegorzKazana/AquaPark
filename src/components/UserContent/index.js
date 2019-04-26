@@ -6,12 +6,14 @@ import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
+import FaqModal from "./Modals/FaqModal";
 import { Layout } from "antd";
 
 const UserContent = () => {
   const [openPage, setOpenPage] = useState("0");
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
+  const [faqModalOpen, setFaqModalOpen] = useState(false);
 
   const loginSubmit = vals => {
     console.log(vals);
@@ -31,6 +33,7 @@ const UserContent = () => {
             setOpenPage={setOpenPage}
             onOpenLoginModal={() => setloginModalOpen(true)}
             onOpenSignUpModal={() => setSignUpModalOpen(true)}
+            onOpenFaqModal={() => setFaqModalOpen(true)}
           />
         </Layout.Header>
         <Layout.Content className={styles.Content}>
@@ -48,6 +51,10 @@ const UserContent = () => {
         open={signUpModalOpen}
         handleSubmit={signUpSubmit}
         handleCancel={() => setSignUpModalOpen(false)}
+      />
+      <FaqModal
+        open={faqModalOpen}
+        handleClose={() => setFaqModalOpen(false)}
       />
     </>
   );
