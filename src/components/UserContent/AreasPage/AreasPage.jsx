@@ -1,0 +1,61 @@
+import React from "react";
+import "./AreasPage.scss";
+import styles from "./AreasPage.module.scss";
+import { Carousel, Typography, Icon } from "antd";
+
+const CarouselCard = ({ title, description, image }) => (
+  <div className={styles.CarouselItem}>
+    <img
+      className={styles.CarouselItem__Image}
+      alt="example"
+      src={
+        image ||
+        "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzA0MzRjZGI4MTJlNjdkMzBmNV93aW5kb3dzX3hwX2JsaXNzLXdpZGUuanBnIl0sWyJwIiwidGh1bWIiLCJ4MzkwPiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA4MSAtYXV0by1vcmllbnQiXV0/windows_xp_bliss-wide.jpg"
+      }
+    />
+    <span className={styles.CarouselItem__Description}>
+      <Typography>
+        <Typography.Title>{title}</Typography.Title>
+        <Typography.Paragraph>{description}</Typography.Paragraph>
+      </Typography>
+    </span>
+  </div>
+);
+
+const AreasPage = () => {
+  const carouselRef = React.createRef();
+
+  const swipeLeft = () => carouselRef.current && carouselRef.current.prev();
+  const swipeRight = () => carouselRef.current && carouselRef.current.next();
+
+  return (
+    <>
+      <Icon
+        type="left"
+        className={styles.CarouselNavigationButtonLeft}
+        onClick={swipeLeft}
+      />
+      <Icon
+        type="right"
+        className={styles.CarouselNavigationButtonRight}
+        onClick={swipeRight}
+      />
+
+      <Carousel ref={carouselRef}>
+        <CarouselCard
+          title="Strefa Basenów"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
+        />
+        <CarouselCard
+          title="Strefa Saun"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
+        />
+        <CarouselCard
+          title="Strefa Spa"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
+        />
+      </Carousel>
+    </>
+  );
+};
+export default AreasPage;

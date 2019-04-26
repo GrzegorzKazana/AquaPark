@@ -3,38 +3,34 @@ import { Menu, Icon } from "antd";
 
 const NavBar = () => (
   <Menu mode="horizontal" theme="dark">
+    <Menu.Item key="mail">
+      <Icon type="mail" />
+      Witaj
+    </Menu.Item>
     <Menu.SubMenu
       title={
         <span>
           <Icon type="mail" />
-          One
+          Atrakcje
         </span>
       }
     >
-      <Menu.Item>asdasd</Menu.Item>
-      <Menu.Item>fghfgh</Menu.Item>
+      <Menu.Item>Strefa Basenów</Menu.Item>
+      <Menu.Item>Strefa Saun</Menu.Item>
+      <Menu.Item>Strefa Spa</Menu.Item>
     </Menu.SubMenu>
     <Menu.SubMenu
       title={
         <span>
           <Icon type="mail" />
-          One
+          Cennik
         </span>
       }
     >
-      <Menu.Item>asdasd</Menu.Item>
-      <Menu.Item>fghfgh</Menu.Item>
-    </Menu.SubMenu>
-    <Menu.SubMenu
-      title={
-        <span>
-          <Icon type="mail" />
-          One
-        </span>
-      }
-    >
-      <Menu.Item>asdasd</Menu.Item>
-      <Menu.Item>fghfgh</Menu.Item>
+      <Menu.Item>Cennik Basenów</Menu.Item>
+      <Menu.Item>Cennik Saun</Menu.Item>
+      <Menu.Item>Cennik Spa</Menu.Item>
+      <Menu.Item>Cennik karnetów</Menu.Item>
     </Menu.SubMenu>
   </Menu>
 );

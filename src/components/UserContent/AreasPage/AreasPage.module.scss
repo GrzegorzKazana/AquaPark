@@ -1,0 +1,48 @@
+@import "../../../vaiables.scss";
+
+.CarouselItem {
+  height: 100%;
+  width: 100%;
+  background-color: #ffa;
+  position: relative;
+
+  & .CarouselItem__Image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  & .CarouselItem__Description {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding-bottom: 16px;
+    background-color: rgba(#fff, 0.75);
+  }
+}
+
+%CarouselNavigationButton {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+
+  & svg {
+    width: 3rem;
+    height: 3rem;
+    transition: transform $animation-duration $animation-easing;
+  }
+
+  & svg:hover {
+    transform: scale(1.2);
+  }
+}
+
+.CarouselNavigationButtonLeft {
+  @extend %CarouselNavigationButton;
+  left: 16px;
+}
+
+.CarouselNavigationButtonRight {
+  @extend %CarouselNavigationButton;
+  right: 16px;
+}
