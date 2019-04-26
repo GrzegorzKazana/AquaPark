@@ -4,6 +4,7 @@ import NavBar from "./NavBar/NavBar";
 import MainMenu from "./MainMenu/MainMenu";
 import OccupancyPage from "./OccupacyPage/OccupacyPage";
 import NewsletterPage from "./NewsletterPage/NewsletterPage";
+import PricesPage from "./Pricing/PricesPage/PricesPage";
 import { Layout } from "antd";
 
 const AdminContent = () => (
@@ -17,7 +18,8 @@ const AdminContent = () => (
       </Layout.Sider>
       <Layout.Content className={styles.Content}>
         {/* <OccupancyPage /> */}
-        <NewsletterPage />
+        {/* <NewsletterPage /> */}
+        <PricesPage />
       </Layout.Content>
     </Layout>
   </Layout>
