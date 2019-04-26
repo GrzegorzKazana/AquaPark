@@ -5,15 +5,22 @@ import WelcomePage from "./WelcomePage/WelcomePage";
 import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
 import LogInModal from "./Modals/LogInModal";
+import SignUpModal from "./Modals/SignUpModal";
 import { Layout } from "antd";
 
 const UserContent = () => {
   const [openPage, setOpenPage] = useState("0");
-  const [loginModalOpen, setloginModalOpen] = useState(true);
+  const [loginModalOpen, setloginModalOpen] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
 
   const loginSubmit = vals => {
     console.log(vals);
     setloginModalOpen(false);
+  };
+
+  const signUpSubmit = vals => {
+    console.log(vals);
+    setSignUpModalOpen(false);
   };
 
   return (
@@ -23,6 +30,7 @@ const UserContent = () => {
           <NavBar
             setOpenPage={setOpenPage}
             onOpenLoginModal={() => setloginModalOpen(true)}
+            onOpenSignUpModal={() => setSignUpModalOpen(true)}
           />
         </Layout.Header>
         <Layout.Content className={styles.Content}>
@@ -35,6 +43,11 @@ const UserContent = () => {
         open={loginModalOpen}
         handleSubmit={loginSubmit}
         handleCancel={() => setloginModalOpen(false)}
+      />
+      <SignUpModal
+        open={signUpModalOpen}
+        handleSubmit={signUpSubmit}
+        handleCancel={() => setSignUpModalOpen(false)}
       />
     </>
   );

@@ -1,18 +1,11 @@
 import React from "react";
-import { Button, Modal, Form, Input, Radio, Icon, Checkbox } from "antd";
+import { Modal, Form, Input, Icon } from "antd";
 
 const LogInModal = ({
   handleSubmit,
   handleCancel,
   open,
-  form: {
-    getFieldDecorator,
-    getFieldsError,
-    getFieldError,
-    isFieldTouched,
-    validateFields,
-    resetFields
-  }
+  form: { getFieldDecorator, validateFields, resetFields }
 }) => {
   const onCancel = () => {
     resetFields();
@@ -30,7 +23,7 @@ const LogInModal = ({
       onCancel={onCancel}
       onOk={onSubmit}
     >
-      <Form className="login-form">
+      <Form>
         <Form.Item>
           {getFieldDecorator("userName", {
             rules: [{ required: true, message: "Please input your username!" }]
