@@ -32,41 +32,44 @@ const NavBar = ({
 }) => {
   const onClick = item => setOpenPage(item.key);
   return (
-    <>
-      <Menu mode="horizontal" theme="dark" onClick={onClick}>
-        <Menu.Item key={views.WELCOME}>
-          <Icon type="info-circle" style={{ fontSize: "1.5rem" }} />
-          Witaj
-        </Menu.Item>
-        <Menu.Item key={views.AREAS}>
-          <Icon type="smile" style={{ fontSize: "1.5rem" }} />
-          Atrakcje
-        </Menu.Item>
-        <Menu.Item key={views.PRICES}>
-          <Icon type="dollar" style={{ fontSize: "1.5rem" }} />
-          Cennik
-        </Menu.Item>
-        <Menu.Item key={views.CHECKOUT}>
-          <Badge count={2}>
-            <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
-          </Badge>
-        </Menu.Item>
-      </Menu>
-      <Dropdown
-        overlay={
-          <DropdownMenuOverlay
-            onOpenLoginModal={onOpenLoginModal}
-            onOpenSignUpModal={onOpenSignUpModal}
-            onOpenFaqModal={onOpenFaqModal}
-          />
-        }
-        className={styles.DropDown}
-      >
-        <a className="ant-dropdown-link" href="# ">
-          <Icon type="user" style={{ fontSize: "1.5rem" }} />
-        </a>
-      </Dropdown>
-    </>
+    <div className={styles.Header}>
+      AQUAPARK
+      <div className={styles.HeaderMenu}>
+        <Menu mode="horizontal" theme="dark" onClick={onClick}>
+          <Menu.Item key={views.WELCOME}>
+            <Icon type="info-circle" style={{ fontSize: "1.5rem" }} />
+            Witaj
+          </Menu.Item>
+          <Menu.Item key={views.AREAS}>
+            <Icon type="smile" style={{ fontSize: "1.5rem" }} />
+            Atrakcje
+          </Menu.Item>
+          <Menu.Item key={views.PRICES}>
+            <Icon type="dollar" style={{ fontSize: "1.5rem" }} />
+            Cennik
+          </Menu.Item>
+          <Menu.Item key={views.CHECKOUT}>
+            <Badge count={2}>
+              <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
+            </Badge>
+          </Menu.Item>
+        </Menu>
+        <Dropdown
+          overlay={
+            <DropdownMenuOverlay
+              onOpenLoginModal={onOpenLoginModal}
+              onOpenSignUpModal={onOpenSignUpModal}
+              onOpenFaqModal={onOpenFaqModal}
+            />
+          }
+          className={styles.DropDown}
+        >
+          <a className="ant-dropdown-link" href="# ">
+            <Icon type="user" style={{ fontSize: "1.5rem" }} />
+          </a>
+        </Dropdown>
+      </div>
+    </div>
   );
 };
 export default NavBar;

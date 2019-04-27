@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./UserContent.module.scss";
 import NavBar from "./NavBar/NavBar";
+import NavBarLoggedIn from "./NavBar/NavBarLoggedIn";
 import WelcomePage from "./WelcomePage/WelcomePage";
 import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
@@ -36,7 +37,7 @@ const UserContent = () => {
   return (
     <>
       <Layout className={styles.Layout}>
-        <Layout.Header className={styles.Header}>
+        <Layout.Header>
           <NavBar
             views={views}
             setOpenPage={setOpenPage}
@@ -44,6 +45,12 @@ const UserContent = () => {
             onOpenSignUpModal={() => setSignUpModalOpen(true)}
             onOpenFaqModal={() => setFaqModalOpen(true)}
           />
+          {/* <NavBarLoggedIn
+            views={views}
+            onLogOut={() => console.log("logged out")}
+            setOpenPage={setOpenPage}
+            onOpenFaqModal={() => setFaqModalOpen(true)}
+          /> */}
         </Layout.Header>
         <Layout.Content className={styles.Content}>
           {openPage === views.WELCOME && <WelcomePage />}
