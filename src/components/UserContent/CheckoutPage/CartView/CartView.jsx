@@ -38,7 +38,7 @@ const discountOptions = [
 
 export const CartView = ({ handleSubmit }) => {
   return (
-    <Card title="Koszyk" style={{ height: "100%" }}>
+    <Card title="Koszyk" style={{ minHeight: "100%" }}>
       <List
         size="small"
         //   footer={<div>Footer</div>}

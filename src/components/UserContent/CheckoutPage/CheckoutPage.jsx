@@ -19,7 +19,7 @@ const steps = [
   }
 ];
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ onOpenLoginModal }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const isStepFirst = currentStep === 0;
   const isStepLast = currentStep === steps.length;
@@ -36,7 +36,10 @@ const CheckoutPage = () => {
         </Steps>
         <div className={styles.CheckoutMain}>
           {/* <CartView handleSubmit={next} /> */}
-          <CustomerDataView handleSubmit={next} />
+          <CustomerDataView
+            handleSubmit={next}
+            onOpenLoginModal={onOpenLoginModal}
+          />
         </div>
       </div>
     </Card>

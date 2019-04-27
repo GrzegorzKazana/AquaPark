@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CustomerDataView.module.scss";
-import { Card, Form, Input, Button, Switch } from "antd";
+import { Card, Form, Input, Button, Switch, Divider, Icon } from "antd";
 
 const defaultUserData = {
   email: "skrrt@gmail.com",
@@ -77,7 +77,8 @@ const CustomerDataForm = Form.create()(
   }
 );
 
-export const CustomerDataView = ({ handleSubmit }) => {
+export const CustomerDataView = ({ handleSubmit, onOpenLoginModal }) => {
+  const [loggedIn, setLoggedIn] = useState(true);
   const [edditing, setEdditing] = useState(false);
 
   const onSubmit = vals => {
@@ -87,11 +88,22 @@ export const CustomerDataView = ({ handleSubmit }) => {
   };
 
   return (
-    <Card title="Dane" style={{ height: "100%" }}>
-      <div className={styles.CustomerDataSwitchWrapper}>
-        <Switch checked={edditing} onChange={val => setEdditing(val)} />
-        <h2>Edytuj dane z profilu</h2>
-      </div>
+    <Card title="Dane" style={{ minHeight: "100%" }}>
+      {loggedIn ? (
+        <div className={styles.CustomerDataSwitchWrapper}>
+          <Switch checked={edditing} onChange={val => setEdditing(val)} />
+          <h2>Edytuj dane z profilu</h2>
+        </div>
+      ) : (
+        <div className={styles.CustomerDataButtonWrapper}>
+          <Button onClick={onOpenLoginModal}>
+            <Icon type="login" />
+            Zaloguj się
+          </Button>
+          <Divider>Lub wypełnij formularz</Divider>
+        </div>
+      )}
+
       <CustomerDataForm handleSubmit={onSubmit} disabled={!edditing} />
       <Button
         form="myForm"

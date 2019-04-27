@@ -49,7 +49,9 @@ const UserContent = () => {
           {openPage === views.WELCOME && <WelcomePage />}
           {openPage === views.AREAS && <AreasPage />}
           {openPage === views.PRICES && <PricingPage />}
-          {openPage === views.CHECKOUT && <CheckoutPage />}
+          {openPage === views.CHECKOUT && (
+            <CheckoutPage onOpenLoginModal={() => setloginModalOpen(true)} />
+          )}
         </Layout.Content>
       </Layout>
       <LogInModal
