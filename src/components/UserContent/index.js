@@ -4,6 +4,7 @@ import NavBar from "./NavBar/NavBar";
 import WelcomePage from "./WelcomePage/WelcomePage";
 import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
+import CheckoutPage from "./CheckoutPage/CheckoutPage";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
@@ -17,7 +18,7 @@ const views = {
 };
 
 const UserContent = () => {
-  const [openPage, setOpenPage] = useState(views.WELCOME);
+  const [openPage, setOpenPage] = useState(views.CHECKOUT);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);
@@ -48,6 +49,7 @@ const UserContent = () => {
           {openPage === views.WELCOME && <WelcomePage />}
           {openPage === views.AREAS && <AreasPage />}
           {openPage === views.PRICES && <PricingPage />}
+          {openPage === views.CHECKOUT && <CheckoutPage />}
         </Layout.Content>
       </Layout>
       <LogInModal
