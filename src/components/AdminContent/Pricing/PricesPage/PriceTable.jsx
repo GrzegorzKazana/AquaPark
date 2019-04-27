@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./PriceTable.module.scss";
 import { Table, Input, Form, Button, Popconfirm } from "antd";
 
@@ -136,7 +136,7 @@ const EditableTable = () => {
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      key: dataSource.length.toString()
+      key: parseInt(dataSource[dataSource.length - 1].key + 1).toString()
     });
     setDataSource([...dataSource, newData]);
   };
@@ -148,37 +148,38 @@ const EditableTable = () => {
     }
   };
 
-  const columnsWithEdit = columns.map(col =>
-    col.editable
-      ? {
-          ...col,
-          onCell: record => ({
-            record,
-            editable: col.editable,
-            dataIndex: col.dataIndex,
-            title: col.title,
-            handleSave
-          })
-        }
-      : col
+  const wrappedColumns = useMemo(
+    () => [
+      ...columns.map(col =>
+        col.editable
+          ? {
+              ...col,
+              onCell: record => ({
+                record,
+                editable: col.editable,
+                dataIndex: col.dataIndex,
+                title: col.title,
+                handleSave
+              })
+            }
+          : col
+      ),
+      {
+        title: "",
+        dataIndex: "",
+        render: (text, record) =>
+          dataSource.length >= 1 ? (
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => handleDelete(record.key)}
+            >
+              <a href="javascript:;">Delete</a>
+            </Popconfirm>
+          ) : null
+      }
+    ],
+    [columns]
   );
-
-  const columnsWithDelete = [
-    ...columnsWithEdit,
-    {
-      title: "",
-      dataIndex: "",
-      render: (text, record) =>
-        dataSource.length >= 1 ? (
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key)}
-          >
-            <a href="javascript:;">Delete</a>
-          </Popconfirm>
-        ) : null
-    }
-  ];
 
   return (
     <>
@@ -187,7 +188,7 @@ const EditableTable = () => {
         rowClassName={styles.EditableRow}
         bordered
         dataSource={dataSource}
-        columns={columnsWithDelete}
+        columns={wrappedColumns}
         pagination={false}
       />
       <div className={styles.ButtonContainer}>
