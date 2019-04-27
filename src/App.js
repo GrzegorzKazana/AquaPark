@@ -3,6 +3,6 @@ import "antd/dist/antd.css";
 import UserContent from "./components/UserContent";
 import AdminContent from "./components/AdminContent";
 
-const App = () => <AdminContent />;
+const App = () => <UserContent />;
 
 export default App;

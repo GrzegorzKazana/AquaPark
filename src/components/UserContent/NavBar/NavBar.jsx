@@ -24,23 +24,25 @@ const DropdownMenuOverlay = ({
 );
 
 const NavBar = ({
+  views,
   setOpenPage,
   onOpenLoginModal,
   onOpenSignUpModal,
   onOpenFaqModal
 }) => {
+  const onClick = item => setOpenPage(item.key);
   return (
     <>
-      <Menu mode="horizontal" theme="dark" onClick={e => setOpenPage(e.key)}>
-        <Menu.Item key="0">
+      <Menu mode="horizontal" theme="dark" onClick={onClick}>
+        <Menu.Item key={views.WELCOME}>
           <Icon type="info-circle" />
           Witaj
         </Menu.Item>
-        <Menu.Item key="1">
+        <Menu.Item key={views.AREAS}>
           <Icon type="smile" />
           Atrakcje
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item key={views.PRICES}>
           <Icon type="dollar" />
           Cennik
         </Menu.Item>

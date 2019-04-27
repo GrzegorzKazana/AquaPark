@@ -9,6 +9,12 @@ import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
 import { Layout } from "antd";
 
+const views = {
+  WELCOME: "0",
+  AREAS: "1",
+  PRICES: "2"
+};
+
 const UserContent = () => {
   const [openPage, setOpenPage] = useState("0");
   const [loginModalOpen, setloginModalOpen] = useState(false);
@@ -30,6 +36,7 @@ const UserContent = () => {
       <Layout className={styles.Layout}>
         <Layout.Header className={styles.Header}>
           <NavBar
+            views={views}
             setOpenPage={setOpenPage}
             onOpenLoginModal={() => setloginModalOpen(true)}
             onOpenSignUpModal={() => setSignUpModalOpen(true)}
@@ -37,9 +44,9 @@ const UserContent = () => {
           />
         </Layout.Header>
         <Layout.Content className={styles.Content}>
-          {openPage === "0" && <WelcomePage />}
-          {openPage === "1" && <AreasPage />}
-          {openPage === "2" && <PricingPage />}
+          {openPage === views.WELCOME && <WelcomePage />}
+          {openPage === views.AREAS && <AreasPage />}
+          {openPage === views.PRICES && <PricingPage />}
         </Layout.Content>
       </Layout>
       <LogInModal
