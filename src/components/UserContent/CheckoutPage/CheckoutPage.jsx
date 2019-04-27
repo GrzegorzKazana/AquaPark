@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "./CheckoutPage.module.scss";
-import { Card, Steps, Button } from "antd";
+import { Card, Steps } from "antd";
 import { CartView } from "./CartView/CartView";
 import { CustomerDataView } from "./CustomerDataView/CustomerDataView";
 import { PurchaseView } from "./PurchaseView/PurchaseView";
@@ -10,26 +10,29 @@ const CheckoutPage = ({ onOpenLoginModal }) => {
   const prev = () => setCurrentStep(currentStep - 1);
   const next = () => setCurrentStep(currentStep + 1);
 
-  const steps = [
-    {
-      title: "First",
-      content: <CartView handleSubmit={next} />
-    },
-    {
-      title: "Second",
-      content: (
-        <CustomerDataView
-          handleCancel={prev}
-          handleSubmit={next}
-          onOpenLoginModal={onOpenLoginModal}
-        />
-      )
-    },
-    {
-      title: "Last",
-      content: <PurchaseView handleCancel={prev} />
-    }
-  ];
+  const steps = useMemo(
+    () => [
+      {
+        title: "Koszyk",
+        content: <CartView handleSubmit={next} />
+      },
+      {
+        title: "Dane",
+        content: (
+          <CustomerDataView
+            handleCancel={prev}
+            handleSubmit={next}
+            onOpenLoginModal={onOpenLoginModal}
+          />
+        )
+      },
+      {
+        title: "Zakup",
+        content: <PurchaseView handleCancel={prev} />
+      }
+    ],
+    [onOpenLoginModal, prev, next]
+  );
 
   return (
     <Card className={styles.CheckoutPage} bodyStyle={{ height: "100%" }}>

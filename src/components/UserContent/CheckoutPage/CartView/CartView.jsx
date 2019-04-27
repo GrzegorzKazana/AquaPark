@@ -37,6 +37,27 @@ const discountOptions = [
 ];
 
 export const CartView = ({ handleSubmit }) => {
+  const renderListItem = item => (
+    <List.Item className={styles.CartListItem}>
+      <h4 className={styles.CartListItemTitle}>{item.ticketType}</h4>
+      <Select style={{ width: "150px" }} defaultValue={discountOptions[0].key}>
+        {discountOptions.map(disc => (
+          <Select.Option value={disc.key} key={disc.key}>
+            {disc.name}
+          </Select.Option>
+        ))}
+      </Select>
+      <h3 className={styles.CartListItemPrice}>{item.ticketPrice}zł</h3>
+      <Popconfirm
+        title="Sure to delete?"
+        style={{ float: "right" }}
+        // onConfirm={() => handleDelete(record.key)}
+      >
+        <Button shape="circle" icon="delete" style={{ float: "right" }} />
+      </Popconfirm>
+    </List.Item>
+  );
+
   return (
     <Card
       title="Koszyk"
@@ -49,33 +70,7 @@ export const CartView = ({ handleSubmit }) => {
           //   footer={<div>Footer</div>}
           bordered
           dataSource={data}
-          renderItem={item => (
-            <List.Item className={styles.CartListItem}>
-              <h4 className={styles.CartListItemTitle}>{item.ticketType}</h4>
-              <Select
-                style={{ width: "150px" }}
-                defaultValue={discountOptions[0].key}
-              >
-                {discountOptions.map(disc => (
-                  <Select.Option value={disc.key} key={disc.key}>
-                    {disc.name}
-                  </Select.Option>
-                ))}
-              </Select>
-              <h3 className={styles.CartListItemPrice}>{item.ticketPrice}zł</h3>
-              <Popconfirm
-                title="Sure to delete?"
-                style={{ float: "right" }}
-                // onConfirm={() => handleDelete(record.key)}
-              >
-                <Button
-                  shape="circle"
-                  icon="delete"
-                  style={{ float: "right" }}
-                />
-              </Popconfirm>
-            </List.Item>
-          )}
+          renderItem={renderListItem}
         />
         <div>
           <Divider />
