@@ -19,7 +19,7 @@ const views = {
 };
 
 const UserContent = () => {
-  const [openPage, setOpenPage] = useState(views.CHECKOUT);
+  const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);

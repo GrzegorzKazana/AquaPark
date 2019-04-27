@@ -3,3 +3,11 @@
 .DropDown {
   padding: 0px 16px;
 }
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  color: #fff;
+}

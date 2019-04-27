@@ -23,7 +23,7 @@ const AdminContent = () => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
-      <Layout.Header className={styles.Header}>
+      <Layout.Header>
         <NavBar />
       </Layout.Header>
       <Layout>

@@ -13,7 +13,8 @@ const DropdownMenuOverlay = ({ onLogOut }) => (
 
 const NavBar = ({ onLogOut }) => {
   return (
-    <>
+    <div className={styles.Header}>
+      <span>PANEL ADMINISTRACYJNY</span>
       <Dropdown
         overlay={<DropdownMenuOverlay onLogOut={onLogOut} />}
         className={styles.DropDown}
@@ -22,7 +23,7 @@ const NavBar = ({ onLogOut }) => {
           <Icon type="user" />
         </a>
       </Dropdown>
-    </>
+    </div>
   );
 };
 export default NavBar;
