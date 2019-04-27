@@ -3,7 +3,7 @@ import styles from "./EditableTable.module.scss";
 import { Table, Button, Popconfirm } from "antd";
 import { EditableFormRow, EditableCell } from "./EditableRow";
 
-const EditableTable = ({ columns, dataDefault }) => {
+const EditableTable = ({ columns, dataDefault, onSubmit }) => {
   const [dataSource, setDataSource] = useState(dataDefault);
 
   const handleSave = row =>
@@ -79,7 +79,11 @@ const EditableTable = ({ columns, dataDefault }) => {
         <Button className={styles.ActionButton} onClick={handleAdd}>
           Dodaj
         </Button>
-        <Button type="primary" className={styles.ActionButton}>
+        <Button
+          type="primary"
+          className={styles.ActionButton}
+          onClick={() => onSubmit(dataSource)}
+        >
           Zapisz
         </Button>
       </div>

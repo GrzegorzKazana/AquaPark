@@ -45,17 +45,33 @@ const PricesPage = () => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <Tabs tabPosition="top">
-        <Tabs.TabPane tab="Stefa Basenów" key="1">
-          <EditableTable dataDefault={dataDefault} columns={columns} />
+        <Tabs.TabPane tab="Stefa Basenów" key="1" forceRender>
+          <EditableTable
+            dataDefault={dataDefault}
+            columns={columns}
+            onSubmit={data => console.log(data)}
+          />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Strefa Sauny" key="2">
-          <EditableTable dataDefault={dataDefault} columns={columns} />
+        <Tabs.TabPane tab="Strefa Sauny" key="2" forceRender>
+          <EditableTable
+            dataDefault={dataDefault}
+            columns={columns}
+            onSubmit={data => console.log(data)}
+          />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Strefa Spa" key="3">
-          <EditableTable dataDefault={dataDefault} columns={columns} />
+        <Tabs.TabPane tab="Strefa Spa" key="3" forceRender>
+          <EditableTable
+            dataDefault={dataDefault}
+            columns={columns}
+            onSubmit={data => console.log(data)}
+          />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Karnety" key="4">
-          <EditableTable dataDefault={dataDefault} columns={columns} />
+        <Tabs.TabPane tab="Karnety" key="4" forceRender>
+          <EditableTable
+            dataDefault={dataDefault}
+            columns={columns}
+            onSubmit={data => console.log(data)}
+          />
         </Tabs.TabPane>
       </Tabs>
     </Card>
