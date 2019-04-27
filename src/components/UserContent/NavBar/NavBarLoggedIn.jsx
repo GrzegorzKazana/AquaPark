@@ -19,17 +19,22 @@ const NavBarLoggedIn = ({ setOpenPage, onLogOut, onOpenFaqModal }) => {
   return (
     <>
       <Menu mode="horizontal" theme="dark" onClick={e => setOpenPage(e.key)}>
-        <Menu.Item key="0">
-          <Icon type="info-circle" />
+        <Menu.Item key={views.WELCOME}>
+          <Icon type="info-circle" style={{ fontSize: "1.5rem" }} />
           Witaj
         </Menu.Item>
-        <Menu.Item key="1">
-          <Icon type="smile" />
+        <Menu.Item key={views.AREAS}>
+          <Icon type="smile" style={{ fontSize: "1.5rem" }} />
           Atrakcje
         </Menu.Item>
-        <Menu.Item key="2">
-          <Icon type="dollar" />
+        <Menu.Item key={views.PRICES}>
+          <Icon type="dollar" style={{ fontSize: "1.5rem" }} />
           Cennik
+        </Menu.Item>
+        <Menu.Item key={views.CHECKOUT}>
+          <Badge count={2}>
+            <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
+          </Badge>
         </Menu.Item>
       </Menu>
       <Dropdown

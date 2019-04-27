@@ -12,11 +12,12 @@ import { Layout } from "antd";
 const views = {
   WELCOME: "0",
   AREAS: "1",
-  PRICES: "2"
+  PRICES: "2",
+  CHECKOUT: "3"
 };
 
 const UserContent = () => {
-  const [openPage, setOpenPage] = useState("0");
+  const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);

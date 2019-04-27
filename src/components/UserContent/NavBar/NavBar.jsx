@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./NavBar.module.scss";
-import { Menu, Dropdown, Icon } from "antd";
+import { Menu, Dropdown, Icon, Badge } from "antd";
 
 const DropdownMenuOverlay = ({
   onOpenLoginModal,
@@ -35,16 +35,21 @@ const NavBar = ({
     <>
       <Menu mode="horizontal" theme="dark" onClick={onClick}>
         <Menu.Item key={views.WELCOME}>
-          <Icon type="info-circle" />
+          <Icon type="info-circle" style={{ fontSize: "1.5rem" }} />
           Witaj
         </Menu.Item>
         <Menu.Item key={views.AREAS}>
-          <Icon type="smile" />
+          <Icon type="smile" style={{ fontSize: "1.5rem" }} />
           Atrakcje
         </Menu.Item>
         <Menu.Item key={views.PRICES}>
-          <Icon type="dollar" />
+          <Icon type="dollar" style={{ fontSize: "1.5rem" }} />
           Cennik
+        </Menu.Item>
+        <Menu.Item key={views.CHECKOUT}>
+          <Badge count={2}>
+            <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
+          </Badge>
         </Menu.Item>
       </Menu>
       <Dropdown
@@ -58,7 +63,7 @@ const NavBar = ({
         className={styles.DropDown}
       >
         <a className="ant-dropdown-link" href="# ">
-          <Icon type="user" />
+          <Icon type="user" style={{ fontSize: "1.5rem" }} />
         </a>
       </Dropdown>
     </>
