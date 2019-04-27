@@ -1,0 +1,23 @@
+@import "../../../../vaiables.scss";
+
+.CartListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+
+  & .CartListItemTitle {
+    flex-grow: 1;
+  }
+
+  & .CartListItemPrice {
+    margin: 0px 32px;
+  }
+}
+
+.CheckoutCardContentFoorter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}

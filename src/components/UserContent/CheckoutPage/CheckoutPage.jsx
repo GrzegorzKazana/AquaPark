@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CheckoutPage.module.scss";
 import { Card, Steps, Button } from "antd";
+import { CartView } from "./CartView/CartView";
 
 const steps = [
   {
@@ -32,7 +33,9 @@ const CheckoutPage = () => {
             <Steps.Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className={styles.CheckoutMain}>asd</div>
+        <div className={styles.CheckoutMain}>
+          <CartView />
+        </div>
 
         <div className={styles.CheckoutFooter}>
           <Button disabled={isStepFirst} onClick={prev}>
