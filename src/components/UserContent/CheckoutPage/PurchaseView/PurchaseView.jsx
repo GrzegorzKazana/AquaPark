@@ -4,7 +4,7 @@ import { Card, Button } from "antd";
 
 export const PurchaseView = ({ handleCancel }) => (
   <Card
-    style={{ height: "100%", display: "flex" }}
+    style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}
     bodyStyle={{ flexGrow: 1, position: "relative" }}
   >
     <div className={styles.PurchaseView}>
@@ -13,7 +13,7 @@ export const PurchaseView = ({ handleCancel }) => (
       </Button>
     </div>
     <Button
-      style={{ position: "absoulte", bottom: 32, left: 0 }}
+      style={{ position: "absolute", bottom: 24, left: 24 }}
       onClick={handleCancel}
     >
       Prev

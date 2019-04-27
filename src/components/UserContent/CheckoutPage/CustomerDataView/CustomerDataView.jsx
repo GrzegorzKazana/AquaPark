@@ -92,33 +92,41 @@ export const CustomerDataView = ({
   };
 
   return (
-    <Card title="Dane" style={{ minHeight: "100%" }}>
-      {loggedIn ? (
-        <div className={styles.CustomerDataSwitchWrapper}>
-          <Switch checked={edditing} onChange={val => setEdditing(val)} />
-          <h2>Edytuj dane z profilu</h2>
-        </div>
-      ) : (
-        <div className={styles.CustomerDataButtonWrapper}>
-          <Button onClick={onOpenLoginModal}>
-            <Icon type="login" />
-            Zaloguj się
-          </Button>
-          <Divider>Lub wypełnij formularz</Divider>
-        </div>
-      )}
+    <Card
+      title="Dane"
+      style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}
+      bodyStyle={{ flexGrow: 1, display: "flex" }}
+    >
+      <div className={styles.CustomerDataContent}>
+        {loggedIn ? (
+          <div className={styles.CustomerDataSwitchWrapper}>
+            <Switch checked={edditing} onChange={val => setEdditing(val)} />
+            <h2>Edytuj dane z profilu</h2>
+          </div>
+        ) : (
+          <div className={styles.CustomerDataButtonWrapper}>
+            <Button onClick={onOpenLoginModal}>
+              <Icon type="login" />
+              Zaloguj się
+            </Button>
+            <Divider>Lub wypełnij formularz</Divider>
+          </div>
+        )}
 
-      <CustomerDataForm handleSubmit={onSubmit} disabled={!edditing} />
-      <Button onClick={handleCancel}>Prev</Button>
-      <Button
-        form="myForm"
-        key="submit"
-        htmlType="submit"
-        type="primary"
-        style={{ float: "right" }}
-      >
-        Next
-      </Button>
+        <CustomerDataForm handleSubmit={onSubmit} disabled={!edditing} />
+        <div>
+          <Button onClick={handleCancel}>Prev</Button>
+          <Button
+            form="myForm"
+            key="submit"
+            htmlType="submit"
+            type="primary"
+            style={{ float: "right" }}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
     </Card>
   );
 };
