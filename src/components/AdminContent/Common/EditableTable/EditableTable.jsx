@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import styles from "./EditableTable.module.scss";
 import { Table, Button, Popconfirm } from "antd";
 import { EditableFormRow, EditableCell } from "./EditableRow";
@@ -6,16 +6,21 @@ import { EditableFormRow, EditableCell } from "./EditableRow";
 const EditableTable = ({ columns, dataDefault, onSubmit }) => {
   const [dataSource, setDataSource] = useState(dataDefault);
 
-  const handleSave = row =>
-    setDataSource(
-      dataSource.map(item =>
-        row.key === item.key ? { ...item, ...row } : item
-      )
-    );
+  const handleSave = useCallback(
+    row =>
+      setDataSource(ds =>
+        ds.map(item => (row.key === item.key ? { ...item, ...row } : item))
+      ),
+    []
+  );
 
-  const handleDelete = key =>
-    dataSource.length > 1 &&
-    setDataSource(dataSource.filter(item => item.key !== key));
+  const handleDelete = useCallback(
+    key =>
+      setDataSource(ds =>
+        ds.length > 1 ? ds.filter(item => item.key !== key) : ds
+      ),
+    []
+  );
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
@@ -50,19 +55,18 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
       {
         title: "",
         dataIndex: "",
-        render: (text, record) =>
-          dataSource.length >= 1 ? (
-            <Popconfirm
-              title="Sure to delete?"
-              style={{ float: "right" }}
-              onConfirm={() => handleDelete(record.key)}
-            >
-              <Button shape="circle" icon="delete" style={{ float: "right" }} />
-            </Popconfirm>
-          ) : null
+        render: (text, record) => (
+          <Popconfirm
+            title="Sure to delete?"
+            style={{ float: "right" }}
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <Button shape="circle" icon="delete" style={{ float: "right" }} />
+          </Popconfirm>
+        )
       }
     ],
-    [columns]
+    [columns, handleDelete, handleSave]
   );
 
   return (
