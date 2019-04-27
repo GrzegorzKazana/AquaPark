@@ -36,7 +36,7 @@ const discountOptions = [
   }
 ];
 
-export const CartView = () => {
+export const CartView = ({ handleSubmit }) => {
   return (
     <Card title="Koszyk" style={{ height: "100%" }}>
       <List
@@ -73,6 +73,9 @@ export const CartView = () => {
         <h2>Suma:</h2>
         <h1>646zł</h1>
       </div>
+      <Button onClick={handleSubmit} type="primary" style={{ float: "right" }}>
+        Next
+      </Button>
     </Card>
   );
 };

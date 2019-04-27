@@ -1,0 +1,12 @@
+@import "../../../../vaiables.scss";
+
+.CustomerDataSwitchWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & h2 {
+    padding: 0px 16px;
+    margin: 0;
+  }
+}
