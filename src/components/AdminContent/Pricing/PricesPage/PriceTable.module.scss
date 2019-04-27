@@ -14,3 +14,14 @@
   border-radius: 4px;
   padding: 4px 11px;
 }
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 16px 0px;
+
+  & .ActionButton {
+    margin-left: 16px;
+  }
+}

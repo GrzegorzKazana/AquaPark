@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PricesPage.module.scss";
 import PriceTable from "./PriceTable";
-import { Card, Input, Button, Tabs } from "antd";
+import { Card, Tabs } from "antd";
 
 const PricesPage = () => {
   return (
@@ -20,9 +20,6 @@ const PricesPage = () => {
           <PriceTable />
         </Tabs.TabPane>
       </Tabs>
-      <Button type="primary" className={styles.PriceEndButton}>
-        Wyślij
-      </Button>
     </Card>
   );
 };

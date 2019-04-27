@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./PriceTable.module.scss";
-import { Table, Input, Form } from "antd";
+import { Table, Input, Form, Button, Popconfirm } from "antd";
 
 const EditableContext = React.createContext();
 
@@ -84,22 +84,22 @@ const EditableCell = props => {
 
 const dataDefeault = [
   {
-    key: "1",
+    key: "0",
     ticketType: "Bilet poranny 6:00-12:00",
     ticketPrice: 30
   },
   {
-    key: "2",
+    key: "1",
     ticketType: "Bilet popołudniowy 12:00-18:00",
     ticketPrice: 30
   },
   {
-    key: "3",
+    key: "2",
     ticketType: "Bilet wieczorny 18:00-22:00",
     ticketPrice: 40
   },
   {
-    key: "4",
+    key: "3",
     ticketType: "Bilet całodniowy",
     ticketPrice: 50
   }
@@ -120,14 +120,25 @@ const columns = [
   }
 ];
 
-const EditableTable = props => {
+const EditableTable = () => {
   const [dataSource, setDataSource] = useState(dataDefeault);
 
-  const handleSave = row => {
-    const newData = dataSource.map(item =>
-      row.key === item.key ? { ...item, ...row } : item
+  const handleSave = row =>
+    setDataSource(
+      dataSource.map(item =>
+        row.key === item.key ? { ...item, ...row } : item
+      )
     );
-    setDataSource(newData);
+
+  const handleDelete = key =>
+    dataSource.length > 1 &&
+    setDataSource(dataSource.filter(item => item.key !== key));
+
+  const handleAdd = () => {
+    const newData = Object.assign({}, dataSource[dataSource.length - 1], {
+      key: dataSource.length.toString()
+    });
+    setDataSource([...dataSource, newData]);
   };
 
   const components = {
@@ -152,17 +163,46 @@ const EditableTable = props => {
       : col
   );
 
+  const columnsWithDelete = [
+    ...columnsWithEdit,
+    {
+      title: "",
+      dataIndex: "",
+      render: (text, record) =>
+        dataSource.length >= 1 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.key)}
+          >
+            <a href="javascript:;">Delete</a>
+          </Popconfirm>
+        ) : null
+    }
+  ];
+
   return (
-    <div>
+    <>
       <Table
         components={components}
         rowClassName={styles.EditableRow}
         bordered
         dataSource={dataSource}
-        columns={columnsWithEdit}
+        columns={columnsWithDelete}
         pagination={false}
       />
-    </div>
+      <div className={styles.ButtonContainer}>
+        <Button
+          type="primary"
+          className={styles.ActionButton}
+          onClick={handleAdd}
+        >
+          Dodaj
+        </Button>
+        <Button type="primary" className={styles.ActionButton}>
+          Zapisz
+        </Button>
+      </div>
+    </>
   );
 };
 export default EditableTable;
