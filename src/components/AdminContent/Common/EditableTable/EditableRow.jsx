@@ -19,7 +19,7 @@ export const EditableCell = props => {
   const toggleEdit = () => setEditing(!editing);
   useEffect(() => {
     editing && inputRef.current.focus();
-  }, [editing]);
+  }, [editing, inputRef]);
 
   const save = (e, form) => {
     const { record, handleSave } = props;
