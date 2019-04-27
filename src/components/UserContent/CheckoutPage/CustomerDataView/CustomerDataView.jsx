@@ -77,7 +77,11 @@ const CustomerDataForm = Form.create()(
   }
 );
 
-export const CustomerDataView = ({ handleSubmit, onOpenLoginModal }) => {
+export const CustomerDataView = ({
+  handleSubmit,
+  onOpenLoginModal,
+  handleCancel
+}) => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [edditing, setEdditing] = useState(false);
 
@@ -105,6 +109,7 @@ export const CustomerDataView = ({ handleSubmit, onOpenLoginModal }) => {
       )}
 
       <CustomerDataForm handleSubmit={onSubmit} disabled={!edditing} />
+      <Button onClick={handleCancel}>Prev</Button>
       <Button
         form="myForm"
         key="submit"

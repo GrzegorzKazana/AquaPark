@@ -3,28 +3,33 @@ import styles from "./CheckoutPage.module.scss";
 import { Card, Steps, Button } from "antd";
 import { CartView } from "./CartView/CartView";
 import { CustomerDataView } from "./CustomerDataView/CustomerDataView";
-
-const steps = [
-  {
-    title: "First",
-    content: "First-content"
-  },
-  {
-    title: "Second",
-    content: "Second-content"
-  },
-  {
-    title: "Last",
-    content: "Last-content"
-  }
-];
+import { PurchaseView } from "./PurchaseView/PurchaseView";
 
 const CheckoutPage = ({ onOpenLoginModal }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const isStepFirst = currentStep === 0;
-  const isStepLast = currentStep === steps.length;
   const prev = () => setCurrentStep(currentStep - 1);
   const next = () => setCurrentStep(currentStep + 1);
+
+  const steps = [
+    {
+      title: "First",
+      content: <CartView handleSubmit={next} />
+    },
+    {
+      title: "Second",
+      content: (
+        <CustomerDataView
+          handleCancel={prev}
+          handleSubmit={next}
+          onOpenLoginModal={onOpenLoginModal}
+        />
+      )
+    },
+    {
+      title: "Last",
+      content: <PurchaseView handleCancel={prev} />
+    }
+  ];
 
   return (
     <Card className={styles.CheckoutPage} bodyStyle={{ height: "100%" }}>
@@ -34,13 +39,7 @@ const CheckoutPage = ({ onOpenLoginModal }) => {
             <Steps.Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className={styles.CheckoutMain}>
-          {/* <CartView handleSubmit={next} /> */}
-          <CustomerDataView
-            handleSubmit={next}
-            onOpenLoginModal={onOpenLoginModal}
-          />
-        </div>
+        <div className={styles.CheckoutMain}>{steps[currentStep].content}</div>
       </div>
     </Card>
   );
