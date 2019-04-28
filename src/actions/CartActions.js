@@ -2,7 +2,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export const addItem = item => ({
   type: ADD_ITEM,
   item: {
-    ...action.item,
+    ...item,
     discount: null,
     priceWithDiscount: item.price
   }
