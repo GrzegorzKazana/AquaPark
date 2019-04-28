@@ -1,4 +1,5 @@
-import { fetchDictFromApi } from "../api/ApiCalls";
+// import { fetchDictFromApi } from "../api/ApiCalls";
+import * as API from "../api/Mock/MockApiCalls";
 import dictionaryList from "../config/dictionaryList";
 
 export const FETCH_DICT = "FETCH_DICT";
@@ -19,7 +20,7 @@ export const fetchDictError = dictionaryName => () => ({
 
 export const fetchDictProcedure = (name, url, dispatch) => {
   dispatch(fetchDict(name)());
-  fetchDictFromApi(name, url)
+  API.fetchDictFromApi(name, url)
     .then(dict => {
       console.log(dict);
       dispatch(loadDict(name)(dict));

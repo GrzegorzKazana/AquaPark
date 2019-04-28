@@ -3,7 +3,9 @@ import { areasDict, pricesDict, classDiscountsDict, userDb } from "./MockData";
 const MOCK_API_TIMEOUT = 500;
 
 const defaultResolve = res =>
-  new Promise((resolve, reject) => setTimeout(resolve(res)), MOCK_API_TIMEOUT);
+  new Promise((resolve, reject) =>
+    setTimeout(() => resolve(res), MOCK_API_TIMEOUT)
+  );
 
 const defaultReject = text => Promise.reject(text);
 
@@ -27,11 +29,15 @@ export const logInUser = (email, password) => {
   return user ? defaultResolve(user) : defaultReject("user not found");
 };
 
+export const logOutUser = (email, password) => {
+  return defaultResolve({ status: "ok" });
+};
+
 export const signUpUser = (email, password) => {
   userDb.push({
     email,
     password,
     isAdmin: false
   });
-  logInUser(email, password);
+  return logInUser(email, password);
 };

@@ -18,7 +18,7 @@ const views = {
   CHECKOUT: "3"
 };
 
-const UserContent = () => {
+const UserContent = props => {
   const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
@@ -26,32 +26,40 @@ const UserContent = () => {
 
   const loginSubmit = vals => {
     console.log(vals);
+    const { email, password } = vals;
+    props.onLogIn(email, password);
     setloginModalOpen(false);
   };
 
   const signUpSubmit = vals => {
     console.log(vals);
+    const { email, password } = vals;
+    props.onSignUp(email, password);
     setSignUpModalOpen(false);
   };
+
+  const isLoggedIn = Boolean(props.state.user.user);
+  const navbar = isLoggedIn ? (
+    <NavBarLoggedIn
+      views={views}
+      onLogOut={props.onLogOut}
+      setOpenPage={setOpenPage}
+      onOpenFaqModal={() => setFaqModalOpen(true)}
+    />
+  ) : (
+    <NavBar
+      views={views}
+      setOpenPage={setOpenPage}
+      onOpenLoginModal={() => setloginModalOpen(true)}
+      onOpenSignUpModal={() => setSignUpModalOpen(true)}
+      onOpenFaqModal={() => setFaqModalOpen(true)}
+    />
+  );
 
   return (
     <>
       <Layout className={styles.Layout}>
-        <Layout.Header>
-          <NavBar
-            views={views}
-            setOpenPage={setOpenPage}
-            onOpenLoginModal={() => setloginModalOpen(true)}
-            onOpenSignUpModal={() => setSignUpModalOpen(true)}
-            onOpenFaqModal={() => setFaqModalOpen(true)}
-          />
-          {/* <NavBarLoggedIn
-            views={views}
-            onLogOut={() => console.log("logged out")}
-            setOpenPage={setOpenPage}
-            onOpenFaqModal={() => setFaqModalOpen(true)}
-          /> */}
-        </Layout.Header>
+        <Layout.Header>{navbar}</Layout.Header>
         <Layout.Content className={styles.Content}>
           {openPage === views.WELCOME && <WelcomePage />}
           {openPage === views.AREAS && <AreasPage />}
