@@ -18,7 +18,7 @@ export const fetchDictError = dictionaryName => () => ({
 
 export const fetchDictThunk = (name, url) => dispatch => {
   dispatch(fetchDict(name)());
-  fetchDictFromApi(url)
+  fetchDictFromApi(name, url)
     .then(dict => {
       console.log(dict);
       dispatch(loadDict(name)(dict));
