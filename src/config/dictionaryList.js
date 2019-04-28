@@ -1,14 +1,17 @@
 export default [
   {
     name: "AREAS",
-    endpoint: ""
+    reducerName: "areas",
+    url: ""
   },
   {
     name: "PRICES",
-    endpoint: ""
+    reducerName: "prices",
+    url: ""
   },
   {
     name: "CLASS_DISCOUNTS",
-    endpoint: ""
+    reducerName: "discounts",
+    url: ""
   }
 ];
