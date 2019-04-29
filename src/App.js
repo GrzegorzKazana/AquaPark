@@ -5,38 +5,20 @@ import AdminContent from "./components/AdminContent";
 
 import { connect } from "react-redux";
 import { fetchAllDictsThunk } from "./actions/DictionaryActions";
-import {
-  logInUserThunk,
-  logOutUserThunk,
-  singUpUserThunk
-} from "./actions/UserActions";
 
-const App = ({ state, fetchDicts, logIn, logOut, signUp }) => {
+const App = ({ user, fetchDicts }) => {
   useEffect(() => {
     fetchDicts();
   }, [fetchDicts]);
 
-  const userState = state.user;
-  const isAdminLoggedIn = userState.user && userState.user.isAdmin;
+  const isAdminLoggedIn = user && user.isAdmin;
 
-  return isAdminLoggedIn ? (
-    <AdminContent />
-  ) : (
-    <UserContent
-      state={state}
-      onLogIn={logIn}
-      onLogOut={logOut}
-      onSignUp={signUp}
-    />
-  );
+  return isAdminLoggedIn ? <AdminContent /> : <UserContent />;
 };
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = state => ({ ...state.user });
 const mapDispatchToProps = dispatch => ({
-  fetchDicts: () => dispatch(fetchAllDictsThunk()),
-  logIn: (email, password) => dispatch(logInUserThunk(email, password)),
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
-  signUp: (email, password) => dispatch(singUpUserThunk(email, password))
+  fetchDicts: () => dispatch(fetchAllDictsThunk())
 });
 
 export default connect(

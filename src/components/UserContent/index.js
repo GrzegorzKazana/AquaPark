@@ -11,6 +11,13 @@ import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
 import { Layout } from "antd";
 
+import { connect } from "react-redux";
+import {
+  logInUserThunk,
+  logOutUserThunk,
+  singUpUserThunk
+} from "../../actions/UserActions";
+
 const views = {
   WELCOME: "0",
   AREAS: "1",
@@ -18,7 +25,7 @@ const views = {
   CHECKOUT: "3"
 };
 
-const UserContent = props => {
+const UserContent = ({ logIn, logOut, signUp, user, cart, prices, areas }) => {
   const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
@@ -27,30 +34,30 @@ const UserContent = props => {
   const loginSubmit = vals => {
     console.log(vals);
     const { email, password } = vals;
-    props.onLogIn(email, password);
+    logIn(email, password);
     setloginModalOpen(false);
   };
 
   const signUpSubmit = vals => {
     console.log(vals);
     const { email, password } = vals;
-    props.onSignUp(email, password);
+    signUp(email, password);
     setSignUpModalOpen(false);
   };
 
-  const isLoggedIn = Boolean(props.state.user.user);
+  const isLoggedIn = Boolean(user.user);
   const navbar = isLoggedIn ? (
     <NavBarLoggedIn
       views={views}
-      numberCartItems={props.state.cart.itemCount}
-      onLogOut={props.onLogOut}
+      numberCartItems={cart.itemCount}
+      onLogOut={logOut}
       setOpenPage={setOpenPage}
       onOpenFaqModal={() => setFaqModalOpen(true)}
     />
   ) : (
     <NavBar
       views={views}
-      numberCartItems={props.state.cart.itemCount}
+      numberCartItems={cart.itemCount}
       setOpenPage={setOpenPage}
       onOpenLoginModal={() => setloginModalOpen(true)}
       onOpenSignUpModal={() => setSignUpModalOpen(true)}
@@ -64,14 +71,12 @@ const UserContent = props => {
         <Layout.Header>{navbar}</Layout.Header>
         <Layout.Content className={styles.Content}>
           {openPage === views.WELCOME && <WelcomePage />}
-          {openPage === views.AREAS && <AreasPage areas={props.state.areas} />}
-          {openPage === views.PRICES && (
-            <PricingPage prices={props.state.prices} />
-          )}
+          {openPage === views.AREAS && <AreasPage areas={areas} />}
+          {openPage === views.PRICES && <PricingPage prices={prices} />}
           {openPage === views.CHECKOUT && (
             <CheckoutPage
               onOpenLoginModal={() => setloginModalOpen(true)}
-              cart={props.state.cart}
+              cart={cart}
             />
           )}
         </Layout.Content>
@@ -93,4 +98,15 @@ const UserContent = props => {
     </>
   );
 };
-export default UserContent;
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({
+  logIn: (email, password) => dispatch(logInUserThunk(email, password)),
+  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
+  signUp: (email, password) => dispatch(singUpUserThunk(email, password))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserContent);
