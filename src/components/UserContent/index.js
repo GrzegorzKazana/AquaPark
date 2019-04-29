@@ -17,6 +17,7 @@ import {
   logOutUserThunk,
   singUpUserThunk
 } from "../../actions/UserActions";
+import { addItem, removeItem, addDiscount } from "../../actions/CartActions";
 
 const views = {
   WELCOME: "0",
@@ -25,7 +26,18 @@ const views = {
   CHECKOUT: "3"
 };
 
-const UserContent = ({ logIn, logOut, signUp, user, cart, prices, areas }) => {
+const UserContent = ({
+  user,
+  cart,
+  prices,
+  areas,
+  logIn,
+  logOut,
+  signUp,
+  addItemToCart,
+  removeItemFromCart,
+  addDiscountToItem
+}) => {
   const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
@@ -72,7 +84,9 @@ const UserContent = ({ logIn, logOut, signUp, user, cart, prices, areas }) => {
         <Layout.Content className={styles.Content}>
           {openPage === views.WELCOME && <WelcomePage />}
           {openPage === views.AREAS && <AreasPage areas={areas} />}
-          {openPage === views.PRICES && <PricingPage prices={prices} />}
+          {openPage === views.PRICES && (
+            <PricingPage prices={prices} addItemToCart={addItemToCart} />
+          )}
           {openPage === views.CHECKOUT && (
             <CheckoutPage
               onOpenLoginModal={() => setloginModalOpen(true)}
@@ -103,7 +117,10 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
   logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
-  signUp: (email, password) => dispatch(singUpUserThunk(email, password))
+  signUp: (email, password) => dispatch(singUpUserThunk(email, password)),
+  addItemToCart: item => dispatch(addItem(item)),
+  removeItemFromCart: item => dispatch(removeItem(item)),
+  addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount))
 });
 
 export default connect(

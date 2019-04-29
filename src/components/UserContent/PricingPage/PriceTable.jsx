@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Table, Button } from "antd";
 
-const columns = [
+const columnsWithBuy = onBuyClick => [
   {
     title: "Rodzaj biletu",
     dataIndex: "ticketTypeName",
@@ -16,18 +16,30 @@ const columns = [
     title: "",
     dataIndex: "ticketAction",
     key: "ticketAction",
-    render: () => <Button type="primary">Kup</Button>
+    render: (text, record) => (
+      <Button type="primary" onClick={() => onBuyClick(record)}>
+        Kup
+      </Button>
+    )
   }
 ];
 
-const PriceTable = ({ tickets }) => {
+const PriceTable = ({ tickets, addItemToCart }) => {
   const ticketsWrapped = useMemo(
     () => tickets.map(ticket => ({ ...ticket, key: ticket.ticketTypeId })),
     [tickets]
   );
 
+  const columnsWrapped = useMemo(() => columnsWithBuy(addItemToCart), [
+    addItemToCart
+  ]);
+
   return (
-    <Table columns={columns} dataSource={ticketsWrapped} pagination={false} />
+    <Table
+      columns={columnsWrapped}
+      dataSource={ticketsWrapped}
+      pagination={false}
+    />
   );
 };
 export default PriceTable;
