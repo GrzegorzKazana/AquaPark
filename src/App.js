@@ -11,22 +11,22 @@ import {
   singUpUserThunk
 } from "./actions/UserActions";
 
-const App = props => {
+const App = ({ state, fetchDicts, logIn, logOut, signUp }) => {
   useEffect(() => {
-    props.fetchDicts();
-  }, []);
+    fetchDicts();
+  }, [fetchDicts]);
 
-  const userState = props.state.user;
+  const userState = state.user;
   const isAdminLoggedIn = userState.user && userState.user.isAdmin;
 
   return isAdminLoggedIn ? (
     <AdminContent />
   ) : (
     <UserContent
-      state={props.state}
-      onLogIn={props.logIn}
-      onLogOut={props.logOut}
-      onSignUp={props.signUp}
+      state={state}
+      onLogIn={logIn}
+      onLogOut={logOut}
+      onSignUp={signUp}
     />
   );
 };

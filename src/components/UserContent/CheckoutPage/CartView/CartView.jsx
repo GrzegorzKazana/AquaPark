@@ -36,10 +36,10 @@ const discountOptions = [
   }
 ];
 
-export const CartView = ({ handleSubmit }) => {
+export const CartView = ({ handleSubmit, cart }) => {
   const renderListItem = item => (
     <List.Item className={styles.CartListItem}>
-      <h4 className={styles.CartListItemTitle}>{item.ticketType}</h4>
+      <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
       <Select style={{ width: "150px" }} defaultValue={discountOptions[0].key}>
         {discountOptions.map(disc => (
           <Select.Option value={disc.key} key={disc.key}>
@@ -47,7 +47,7 @@ export const CartView = ({ handleSubmit }) => {
           </Select.Option>
         ))}
       </Select>
-      <h3 className={styles.CartListItemPrice}>{item.ticketPrice}zł</h3>
+      <h3 className={styles.CartListItemPrice}>{item.price}zł</h3>
       <Popconfirm
         title="Sure to delete?"
         style={{ float: "right" }}
@@ -69,14 +69,14 @@ export const CartView = ({ handleSubmit }) => {
           size="small"
           //   footer={<div>Footer</div>}
           bordered
-          dataSource={data}
+          dataSource={cart.items}
           renderItem={renderListItem}
         />
         <div>
           <Divider />
           <div className={styles.CheckoutCardContentFoorter}>
             <h2>Suma:</h2>
-            <h1>646zł</h1>
+            <h1>{cart.totalPriceWithDiscount}zł</h1>
           </div>
           <Button
             onClick={handleSubmit}

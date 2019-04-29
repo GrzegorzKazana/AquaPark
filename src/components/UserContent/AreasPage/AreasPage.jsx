@@ -22,7 +22,7 @@ const CarouselCard = ({ title, description, image }) => (
   </div>
 );
 
-const AreasPage = () => {
+const AreasPage = ({ areas }) => {
   const carouselRef = React.createRef();
 
   const swipeLeft = () => carouselRef.current && carouselRef.current.prev();
@@ -42,18 +42,13 @@ const AreasPage = () => {
       />
 
       <Carousel ref={carouselRef}>
-        <CarouselCard
-          title="Strefa Basenów"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
-        />
-        <CarouselCard
-          title="Strefa Saun"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
-        />
-        <CarouselCard
-          title="Strefa Spa"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
-        />
+        {areas.dictionary.map(area => (
+          <CarouselCard
+            key={area.areaId}
+            title={area.areaName}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
+          />
+        ))}
       </Carousel>
     </>
   );

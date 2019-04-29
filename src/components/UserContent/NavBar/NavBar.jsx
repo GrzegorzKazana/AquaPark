@@ -28,7 +28,8 @@ const NavBar = ({
   setOpenPage,
   onOpenLoginModal,
   onOpenSignUpModal,
-  onOpenFaqModal
+  onOpenFaqModal,
+  numberCartItems
 }) => {
   const onClick = item => setOpenPage(item.key);
   return (
@@ -49,7 +50,7 @@ const NavBar = ({
             Cennik
           </Menu.Item>
           <Menu.Item key={views.CHECKOUT}>
-            <Badge count={2}>
+            <Badge count={numberCartItems}>
               <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
             </Badge>
           </Menu.Item>
@@ -65,7 +66,7 @@ const NavBar = ({
           className={styles.DropDown}
         >
           <a className="ant-dropdown-link" href="# ">
-            <Icon type="user" style={{ fontSize: "1.5rem" }} />
+            <Icon type="user" />
           </a>
         </Dropdown>
       </div>

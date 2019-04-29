@@ -15,7 +15,13 @@ const DropdownMenuOverlay = ({ onLogOut, onOpenFaqModal }) => (
   </Menu>
 );
 
-const NavBarLoggedIn = ({ views, setOpenPage, onLogOut, onOpenFaqModal }) => {
+const NavBarLoggedIn = ({
+  views,
+  setOpenPage,
+  onLogOut,
+  onOpenFaqModal,
+  numberCartItems
+}) => {
   return (
     <div className={styles.Header}>
       AQUAPARK
@@ -34,7 +40,7 @@ const NavBarLoggedIn = ({ views, setOpenPage, onLogOut, onOpenFaqModal }) => {
             Cennik
           </Menu.Item>
           <Menu.Item key={views.CHECKOUT}>
-            <Badge count={2}>
+            <Badge count={numberCartItems}>
               <Icon type="shopping-cart" style={{ fontSize: "1.5rem" }} />
             </Badge>
           </Menu.Item>

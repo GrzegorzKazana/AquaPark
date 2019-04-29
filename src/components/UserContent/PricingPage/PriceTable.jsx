@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Table, Button } from "antd";
 
 const columns = [
   {
     title: "Rodzaj biletu",
-    dataIndex: "ticketType",
-    key: "ticketType"
+    dataIndex: "ticketTypeName",
+    key: "ticketTypeName"
   },
   {
     title: "Cena",
-    dataIndex: "ticketPrice",
-    key: "ticketPrice"
+    dataIndex: "price",
+    key: "price"
   },
   {
     title: "",
@@ -20,30 +20,14 @@ const columns = [
   }
 ];
 
-const data = [
-  {
-    key: "1",
-    ticketType: "Bilet poranny 6:00-12:00",
-    ticketPrice: "30zł"
-  },
-  {
-    key: "2",
-    ticketType: "Bilet popołudniowy 12:00-18:00",
-    ticketPrice: "30zł"
-  },
-  {
-    key: "3",
-    ticketType: "Bilet wieczorny 18:00-22:00",
-    ticketPrice: "40zł"
-  },
-  {
-    key: "4",
-    ticketType: "Bilet całodniowy",
-    ticketPrice: "50zł"
-  }
-];
+const PriceTable = ({ tickets }) => {
+  const ticketsWrapped = useMemo(
+    () => tickets.map(ticket => ({ ...ticket, key: ticket.ticketTypeId })),
+    [tickets]
+  );
 
-const PriceTable = () => (
-  <Table columns={columns} dataSource={data} pagination={false} />
-);
+  return (
+    <Table columns={columns} dataSource={ticketsWrapped} pagination={false} />
+  );
+};
 export default PriceTable;

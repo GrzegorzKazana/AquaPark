@@ -42,6 +42,7 @@ const UserContent = props => {
   const navbar = isLoggedIn ? (
     <NavBarLoggedIn
       views={views}
+      numberCartItems={props.state.cart.itemCount}
       onLogOut={props.onLogOut}
       setOpenPage={setOpenPage}
       onOpenFaqModal={() => setFaqModalOpen(true)}
@@ -49,6 +50,7 @@ const UserContent = props => {
   ) : (
     <NavBar
       views={views}
+      numberCartItems={props.state.cart.itemCount}
       setOpenPage={setOpenPage}
       onOpenLoginModal={() => setloginModalOpen(true)}
       onOpenSignUpModal={() => setSignUpModalOpen(true)}
@@ -62,10 +64,15 @@ const UserContent = props => {
         <Layout.Header>{navbar}</Layout.Header>
         <Layout.Content className={styles.Content}>
           {openPage === views.WELCOME && <WelcomePage />}
-          {openPage === views.AREAS && <AreasPage />}
-          {openPage === views.PRICES && <PricingPage />}
+          {openPage === views.AREAS && <AreasPage areas={props.state.areas} />}
+          {openPage === views.PRICES && (
+            <PricingPage prices={props.state.prices} />
+          )}
           {openPage === views.CHECKOUT && (
-            <CheckoutPage onOpenLoginModal={() => setloginModalOpen(true)} />
+            <CheckoutPage
+              onOpenLoginModal={() => setloginModalOpen(true)}
+              cart={props.state.cart}
+            />
           )}
         </Layout.Content>
       </Layout>
