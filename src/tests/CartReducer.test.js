@@ -1,6 +1,11 @@
 import { addItem, removeItem, addDiscount } from "../actions/CartActions";
 import CartReducer from "../reducers/CartReducer";
 
+jest.mock("uuid/v4", () => {
+  let value = 1;
+  return () => value++;
+});
+
 describe("testing CartReducer", () => {
   it("handles addItem", () => {
     const initialState = {
@@ -17,7 +22,6 @@ describe("testing CartReducer", () => {
       totalPriceWithDiscount: 10
     };
     const newItem = {
-      id: 1,
       price: 20,
       discount: null,
       priceWithDiscount: 20
@@ -115,7 +119,7 @@ describe("testing CartReducer", () => {
       priceWithDiscount: 20
     };
     const discount = {
-      percent: 0.8
+      discountRate: 0.2
     };
     const expectedState = {
       items: [
@@ -129,7 +133,7 @@ describe("testing CartReducer", () => {
           id: 1,
           price: 20,
           discount: {
-            percent: 0.8
+            discountRate: 0.2
           },
           priceWithDiscount: 16
         }
@@ -155,7 +159,7 @@ describe("testing CartReducer", () => {
           id: 1,
           price: 20,
           discount: {
-            percent: 0.8
+            discountRate: 0.2
           },
           priceWithDiscount: 16
         }
@@ -168,12 +172,12 @@ describe("testing CartReducer", () => {
       id: 1,
       price: 20,
       discount: {
-        percent: 0.8
+        discountRate: 0.2
       },
       priceWithDiscount: 16
     };
     const discount = {
-      percent: 0.75
+      discountRate: 0.25
     };
     const expectedState = {
       items: [
@@ -187,7 +191,7 @@ describe("testing CartReducer", () => {
           id: 1,
           price: 20,
           discount: {
-            percent: 0.75
+            discountRate: 0.25
           },
           priceWithDiscount: 15
         }
