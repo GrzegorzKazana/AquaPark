@@ -5,7 +5,12 @@ import { CartView } from "./CartView/CartView";
 import { CustomerDataView } from "./CustomerDataView/CustomerDataView";
 import { PurchaseView } from "./PurchaseView/PurchaseView";
 
-const CheckoutPage = ({ onOpenLoginModal, cart }) => {
+const CheckoutPage = ({
+  onOpenLoginModal,
+  cart,
+  removeItemFromCart,
+  addDiscountToItem
+}) => {
   const [currentStep, setCurrentStep] = useState(0);
   const prev = () => setCurrentStep(currentStep - 1);
   const next = () => setCurrentStep(currentStep + 1);
@@ -14,7 +19,14 @@ const CheckoutPage = ({ onOpenLoginModal, cart }) => {
     () => [
       {
         title: "Koszyk",
-        content: <CartView handleSubmit={next} cart={cart} />
+        content: (
+          <CartView
+            handleSubmit={next}
+            cart={cart}
+            removeItemFromCart={removeItemFromCart}
+            addDiscountToItem={addDiscountToItem}
+          />
+        )
       },
       {
         title: "Dane",

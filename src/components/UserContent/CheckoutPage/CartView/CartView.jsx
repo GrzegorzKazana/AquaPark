@@ -36,7 +36,12 @@ const discountOptions = [
   }
 ];
 
-export const CartView = ({ handleSubmit, cart }) => {
+export const CartView = ({
+  handleSubmit,
+  cart,
+  removeItemFromCart,
+  addDiscountToItem
+}) => {
   const renderListItem = item => (
     <List.Item className={styles.CartListItem}>
       <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
@@ -51,7 +56,7 @@ export const CartView = ({ handleSubmit, cart }) => {
       <Popconfirm
         title="Sure to delete?"
         style={{ float: "right" }}
-        // onConfirm={() => handleDelete(record.key)}
+        onConfirm={() => removeItemFromCart(item)}
       >
         <Button shape="circle" icon="delete" style={{ float: "right" }} />
       </Popconfirm>

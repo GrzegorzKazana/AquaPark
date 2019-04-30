@@ -91,6 +91,8 @@ const UserContent = ({
             <CheckoutPage
               onOpenLoginModal={() => setloginModalOpen(true)}
               cart={cart}
+              removeItemFromCart={removeItemFromCart}
+              addDiscountToItem={addDiscountToItem}
             />
           )}
         </Layout.Content>
