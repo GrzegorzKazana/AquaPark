@@ -8,6 +8,9 @@ import NewsletterPage from "./NewsletterPage/NewsletterPage";
 import PricesPage from "./Pricing/PricesPage/PricesPage";
 import { Layout } from "antd";
 
+import { connect } from "react-redux";
+import { logOutUserThunk } from "../../actions/UserActions";
+
 const views = {
   OCCUPACY: "0",
   PRICES: "1",
@@ -19,12 +22,12 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = () => {
+const AdminContent = ({ logOut }) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
       <Layout.Header>
-        <NavBar />
+        <NavBar onLogOut={logOut} />
       </Layout.Header>
       <Layout>
         <Layout.Sider theme="light" breakpoint="md" collapsedWidth={0}>
@@ -41,4 +44,13 @@ const AdminContent = () => {
     </Layout>
   );
 };
-export default AdminContent;
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({
+  logOut: (email, password) => dispatch(logOutUserThunk(email, password))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminContent);
