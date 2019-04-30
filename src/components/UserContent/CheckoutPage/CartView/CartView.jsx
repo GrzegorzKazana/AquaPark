@@ -2,57 +2,38 @@ import React from "react";
 import styles from "./CartView.module.scss";
 import { Card, List, Popconfirm, Button, Select, Divider } from "antd";
 
-const data = [
-  {
-    ticketType: "Bilet całodniowy",
-    ticketPrice: 50
-  },
-  {
-    ticketType: "Bilet poranny",
-    ticketPrice: 30
-  }
-];
-
-const discountOptions = [
-  {
-    key: "brak",
-    name: "Normalny 100%",
-    value: 1
-  },
-  {
-    key: "stud",
-    name: "Studencki 51%",
-    value: 0.51
-  },
-  {
-    key: "dziec",
-    name: "Dziecięcy 67%",
-    value: 0.67
-  },
-  {
-    key: "emer",
-    name: "Emeryt 51%",
-    value: 0.51
-  }
-];
-
 export const CartView = ({
   handleSubmit,
   cart,
+  discounts,
   removeItemFromCart,
   addDiscountToItem
 }) => {
   const renderListItem = item => (
     <List.Item className={styles.CartListItem}>
       <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
-      <Select style={{ width: "150px" }} defaultValue={discountOptions[0].key}>
-        {discountOptions.map(disc => (
-          <Select.Option value={disc.key} key={disc.key}>
-            {disc.name}
+      <Select
+        style={{ width: "150px" }}
+        defaultValue={
+          (item.discount || discounts.dictionary[0]).classDiscountId
+        }
+        onChange={id =>
+          addDiscountToItem(
+            item,
+            discounts.dictionary.find(d => d.classDiscountId === id)
+          )
+        }
+      >
+        {discounts.dictionary.map(disc => (
+          <Select.Option
+            value={disc.classDiscountId}
+            key={disc.classDiscountId}
+          >
+            {disc.discountLabel}
           </Select.Option>
         ))}
       </Select>
-      <h3 className={styles.CartListItemPrice}>{item.price}zł</h3>
+      <h3 className={styles.CartListItemPrice}>{item.priceWithDiscount}zł</h3>
       <Popconfirm
         title="Sure to delete?"
         style={{ float: "right" }}
@@ -72,7 +53,6 @@ export const CartView = ({
       <div className={styles.CartViewContent}>
         <List
           size="small"
-          //   footer={<div>Footer</div>}
           bordered
           dataSource={cart.items}
           renderItem={renderListItem}

@@ -29,6 +29,7 @@ const views = {
 const UserContent = ({
   user,
   cart,
+  discounts,
   prices,
   areas,
   logIn,
@@ -91,6 +92,7 @@ const UserContent = ({
             <CheckoutPage
               onOpenLoginModal={() => setloginModalOpen(true)}
               cart={cart}
+              discounts={discounts}
               removeItemFromCart={removeItemFromCart}
               addDiscountToItem={addDiscountToItem}
             />

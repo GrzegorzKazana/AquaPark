@@ -158,18 +158,24 @@ export const pricesDict = [
 export const classDiscountsDict = [
   {
     classDiscountId: 0,
+    className: "normalny",
+    discountRate: 0.0,
+    discountLabel: "Normalny 100%"
+  },
+  {
+    classDiscountId: 1,
     className: "studenci",
     discountRate: 0.49,
     discountLabel: "Studenci 51%"
   },
   {
-    classDiscountId: 1,
+    classDiscountId: 2,
     className: "uczniowie",
     discountRate: 0.3,
     discountLabel: "Uczniowie 70%"
   },
   {
-    classDiscountId: 2,
+    classDiscountId: 3,
     className: "emeryci",
     discountRate: 0.5,
     discountLabel: "Emeryci 50%"

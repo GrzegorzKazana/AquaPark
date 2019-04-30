@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import styles from "./CheckoutPage.module.scss";
 import { Card, Steps } from "antd";
 import { CartView } from "./CartView/CartView";
@@ -9,42 +9,41 @@ const CheckoutPage = ({
   onOpenLoginModal,
   cart,
   removeItemFromCart,
-  addDiscountToItem
+  addDiscountToItem,
+  discounts
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const prev = () => setCurrentStep(currentStep - 1);
   const next = () => setCurrentStep(currentStep + 1);
 
-  const steps = useMemo(
-    () => [
-      {
-        title: "Koszyk",
-        content: (
-          <CartView
-            handleSubmit={next}
-            cart={cart}
-            removeItemFromCart={removeItemFromCart}
-            addDiscountToItem={addDiscountToItem}
-          />
-        )
-      },
-      {
-        title: "Dane",
-        content: (
-          <CustomerDataView
-            handleCancel={prev}
-            handleSubmit={next}
-            onOpenLoginModal={onOpenLoginModal}
-          />
-        )
-      },
-      {
-        title: "Zakup",
-        content: <PurchaseView handleCancel={prev} />
-      }
-    ],
-    [onOpenLoginModal, prev, next, cart]
-  );
+  const steps = [
+    {
+      title: "Koszyk",
+      content: (
+        <CartView
+          handleSubmit={next}
+          cart={cart}
+          discounts={discounts}
+          removeItemFromCart={removeItemFromCart}
+          addDiscountToItem={addDiscountToItem}
+        />
+      )
+    },
+    {
+      title: "Dane",
+      content: (
+        <CustomerDataView
+          handleCancel={prev}
+          handleSubmit={next}
+          onOpenLoginModal={onOpenLoginModal}
+        />
+      )
+    },
+    {
+      title: "Zakup",
+      content: <PurchaseView handleCancel={prev} />
+    }
+  ];
 
   return (
     <Card className={styles.CheckoutPage} bodyStyle={{ height: "100%" }}>
