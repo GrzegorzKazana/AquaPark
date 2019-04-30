@@ -255,6 +255,8 @@ export const userDb = [
   {
     email: "asd@asd.com",
     password: "asd",
+    name: "Jan",
+    surname: "Kowlski",
     isAdmin: false
   },
   {

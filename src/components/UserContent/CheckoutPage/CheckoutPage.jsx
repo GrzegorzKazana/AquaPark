@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CheckoutPage.module.scss";
 import { Card, Steps } from "antd";
 import { CartView } from "./CartView/CartView";
@@ -7,6 +7,7 @@ import { PurchaseView } from "./PurchaseView/PurchaseView";
 
 const CheckoutPage = ({
   onOpenLoginModal,
+  user,
   cart,
   removeItemFromCart,
   addDiscountToItem,
@@ -16,12 +17,28 @@ const CheckoutPage = ({
   const prev = () => setCurrentStep(currentStep - 1);
   const next = () => setCurrentStep(currentStep + 1);
 
+  const [purchaseUserData, setPurchaseUserData] = useState(user.user);
+  const [edittingPurchaseUserData, setEdittingPurchaseUserData] = useState(
+    false
+  );
+
+  useEffect(() => {
+    setPurchaseUserData(user.user);
+  }, [user.user]);
+
+  const handleDataSubmit = userData => {
+    next();
+    console.log(userData);
+    setPurchaseUserData(userData);
+  };
+
   const steps = [
     {
       title: "Koszyk",
       content: (
         <CartView
           handleSubmit={next}
+          purchaseUserData={purchaseUserData}
           cart={cart}
           discounts={discounts}
           removeItemFromCart={removeItemFromCart}
@@ -33,8 +50,12 @@ const CheckoutPage = ({
       title: "Dane",
       content: (
         <CustomerDataView
+          edditing={edittingPurchaseUserData}
+          setEdditing={setEdittingPurchaseUserData}
+          userLoaded={user.userLoaded}
+          purchaseUserData={purchaseUserData}
           handleCancel={prev}
-          handleSubmit={next}
+          handleSubmit={handleDataSubmit}
           onOpenLoginModal={onOpenLoginModal}
         />
       )

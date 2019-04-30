@@ -91,6 +91,7 @@ const UserContent = ({
           {openPage === views.CHECKOUT && (
             <CheckoutPage
               onOpenLoginModal={() => setloginModalOpen(true)}
+              user={user}
               cart={cart}
               discounts={discounts}
               removeItemFromCart={removeItemFromCart}
