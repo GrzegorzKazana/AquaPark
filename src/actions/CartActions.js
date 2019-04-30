@@ -1,10 +1,13 @@
+import uuid from "uuid";
+
 export const ADD_ITEM = "ADD_ITEM";
 export const addItem = item => ({
   type: ADD_ITEM,
   item: {
     ...item,
     discount: null,
-    priceWithDiscount: item.price
+    priceWithDiscount: item.price,
+    id: uuid.v4()
   }
 });
 
