@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./PricesPage.module.scss";
 import { Card, Tabs } from "antd";
-import EditableTableForm from "./EditableTableForm";
+import EditableTable from "../../Common/EditableTable/EditableTable";
+import PeriodDiscountForm from "./EditableTableForm";
 
 const columns = [
   {
@@ -26,11 +27,39 @@ const PricesPage = ({ prices }) => {
       <Tabs tabPosition="top">
         {prices.dictionary.map(price => (
           <Tabs.TabPane tab={price.areaName} key={price.areaId}>
-            <EditableTableForm
+            <EditableTable
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}
               columns={columns}
               onSubmit={data => console.log(data)}
+              createExpandedRowRender={(dataSource, setDataSource) => (
+                record,
+                index
+              ) => {
+                const handleDiscountSubmit = index => discountData => {
+                  setDataSource(
+                    dataSource.map((data, idx) =>
+                      index === idx
+                        ? { ...data, periodDiscount: discountData }
+                        : data
+                    )
+                  );
+                };
+
+                const handleDiscountDelete = index => () =>
+                  setDataSource(
+                    dataSource.map((data, idx) =>
+                      index === idx ? { ...data, periodDiscount: null } : data
+                    )
+                  );
+                return (
+                  <PeriodDiscountForm
+                    ticket={record}
+                    handleSubmit={handleDiscountSubmit(index)}
+                    handleDelete={handleDiscountDelete(index)}
+                  />
+                );
+              }}
             />
           </Tabs.TabPane>
         ))}

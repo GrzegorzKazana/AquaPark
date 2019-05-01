@@ -1,18 +1,13 @@
-import React, { useState, useMemo, useCallback } from "react";
-import styles from "./EditableTableForm.module.scss";
-import { Table, Popconfirm, Form, DatePicker, Input, Button } from "antd";
+import React from "react";
+import { Form, DatePicker, Input, Button } from "antd";
 import moment from "moment";
-import {
-  EditableFormRow,
-  EditableCell
-} from "../../Common/EditableTable/EditableRow";
 
 const PeriodDiscountForm = Form.create()(
   ({
     ticket,
     handleSubmit,
     handleDelete,
-    form: { getFieldDecorator, validateFields }
+    form: { getFieldDecorator, validateFields, resetFields }
   }) => {
     const handleSubmitLocal = e => {
       e.preventDefault();
@@ -63,7 +58,10 @@ const PeriodDiscountForm = Form.create()(
         </Form.Item>
         <Form.Item>
           <Button
-            onClick={handleDelete}
+            onClick={() => {
+              handleDelete();
+              resetFields();
+            }}
             disabled={ticket.periodDiscount === null}
           >
             Usuń
@@ -73,124 +71,4 @@ const PeriodDiscountForm = Form.create()(
     );
   }
 );
-
-const EditableTable = ({ columns, dataDefault, onSubmit, rowKey }) => {
-  const [dataSource, setDataSource] = useState(dataDefault);
-
-  const handleSave = useCallback(
-    row =>
-      setDataSource(ds =>
-        ds.map(item =>
-          row[rowKey] === item[rowKey] ? { ...item, ...row } : item
-        )
-      ),
-    [rowKey]
-  );
-
-  const handleDelete = useCallback(
-    ticketTypeId =>
-      setDataSource(ds =>
-        ds.length > 1 ? ds.filter(item => item[rowKey] !== ticketTypeId) : ds
-      ),
-    [rowKey]
-  );
-
-  const handleAdd = () => {
-    const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      ticketTypeId: parseInt(dataSource[dataSource.length - 1][rowKey] + 1)
-    });
-    setDataSource([...dataSource, newData]);
-  };
-
-  const components = {
-    body: {
-      row: EditableFormRow,
-      cell: EditableCell
-    }
-  };
-
-  const wrappedColumns = useMemo(
-    () => [
-      ...columns.map(col =>
-        col.editable
-          ? {
-              ...col,
-              onCell: record => ({
-                record,
-                numberInput: col.numberInput,
-                editable: col.editable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave
-              })
-            }
-          : col
-      ),
-      {
-        title: "",
-        dataIndex: "",
-        render: (text, record) => (
-          <Popconfirm
-            title="Sure to delete?"
-            style={{ float: "right" }}
-            onConfirm={() => handleDelete(record[rowKey])}
-          >
-            <Button shape="circle" icon="delete" style={{ float: "right" }} />
-          </Popconfirm>
-        )
-      }
-    ],
-    [columns, handleDelete, handleSave, rowKey]
-  );
-
-  const handleDiscountSubmit = index => discountData => {
-    console.log(discountData);
-    setDataSource(
-      dataSource.map((data, idx) =>
-        index === idx ? { ...data, periodDiscount: discountData } : data
-      )
-    );
-  };
-
-  const handleDiscountDelete = index => () =>
-    setDataSource(
-      dataSource.map((data, idx) =>
-        index === idx ? { ...data, periodDiscount: null } : data
-      )
-    );
-
-  return (
-    <>
-      <Table
-        rowKey={rowKey}
-        components={components}
-        rowClassName={styles.EditableRow}
-        bordered
-        dataSource={dataSource}
-        columns={wrappedColumns}
-        pagination={false}
-        expandedRowRender={(record, index) => (
-          <PeriodDiscountForm
-            index={index}
-            ticket={record}
-            handleSubmit={handleDiscountSubmit(index)}
-            handleDelete={handleDiscountDelete(index)}
-          />
-        )}
-      />
-      <div className={styles.ButtonContainer}>
-        <Button className={styles.ActionButton} onClick={handleAdd}>
-          Dodaj
-        </Button>
-        <Button
-          type="primary"
-          className={styles.ActionButton}
-          onClick={() => onSubmit(dataSource)}
-        >
-          Zapisz
-        </Button>
-      </div>
-    </>
-  );
-};
-export default EditableTable;
+export default PeriodDiscountForm;
