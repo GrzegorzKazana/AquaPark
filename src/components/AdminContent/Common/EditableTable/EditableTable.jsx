@@ -28,9 +28,7 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      ticketTypeId: parseInt(
-        dataSource[dataSource.length - 1].ticketTypeId + 1
-      ).toString()
+      ticketTypeId: parseInt(dataSource[dataSource.length - 1].ticketTypeId + 1)
     });
     setDataSource([...dataSource, newData]);
   };
