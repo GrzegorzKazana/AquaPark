@@ -3,7 +3,13 @@ import styles from "./EditableTable.module.scss";
 import { Table, Button, Popconfirm } from "antd";
 import { EditableFormRow, EditableCell } from "./EditableRow";
 
-const EditableTable = ({ columns, dataDefault, onSubmit, rowKey }) => {
+const EditableTable = ({
+  columns,
+  dataDefault,
+  onSubmit,
+  rowKey,
+  expandedRowRender
+}) => {
   const [dataSource, setDataSource] = useState(dataDefault);
 
   const handleSave = useCallback(
@@ -82,6 +88,7 @@ const EditableTable = ({ columns, dataDefault, onSubmit, rowKey }) => {
         dataSource={dataSource}
         columns={wrappedColumns}
         pagination={false}
+        expandedRowRender={expandedRowRender}
       />
       <div className={styles.ButtonContainer}>
         <Button className={styles.ActionButton} onClick={handleAdd}>

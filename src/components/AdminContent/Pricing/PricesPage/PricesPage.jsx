@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PricesPage.module.scss";
 import { Card, Tabs } from "antd";
-import EditableTable from "../../Common/EditableTable/EditableTable";
+import EditableTableForm from "./EditableTableForm";
 
 const columns = [
   {
@@ -26,7 +26,7 @@ const PricesPage = ({ prices }) => {
       <Tabs tabPosition="top">
         {prices.dictionary.map(price => (
           <Tabs.TabPane tab={price.areaName} key={price.areaId}>
-            <EditableTable
+            <EditableTableForm
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}
               columns={columns}
