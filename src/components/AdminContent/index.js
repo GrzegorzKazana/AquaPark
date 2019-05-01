@@ -6,6 +6,7 @@ import MainMenu from "./MainMenu/MainMenu";
 import OccupancyPage from "./OccupacyPage/OccupacyPage";
 import NewsletterPage from "./NewsletterPage/NewsletterPage";
 import PricesPage from "./Pricing/PricesPage/PricesPage";
+import ClassDiscountPage from "./Pricing/ClassDiscountPage/ClassDiscountPage";
 import { Layout } from "antd";
 
 import { connect } from "react-redux";
@@ -22,7 +23,7 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut, prices }) => {
+const AdminContent = ({ logOut, prices, discounts }) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
@@ -39,6 +40,9 @@ const AdminContent = ({ logOut, prices }) => {
           {openPage === views.OCCUPACY && <OccupancyPage />}
           {openPage === views.NEWSLETTER && <NewsletterPage />}
           {openPage === views.PRICES && <PricesPage prices={prices} />}
+          {openPage === views.CLASS_DISCOUNT && (
+            <ClassDiscountPage discounts={discounts} />
+          )}
         </Layout.Content>
       </Layout>
     </Layout>

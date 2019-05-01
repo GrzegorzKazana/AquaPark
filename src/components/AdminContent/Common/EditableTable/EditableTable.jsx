@@ -3,32 +3,30 @@ import styles from "./EditableTable.module.scss";
 import { Table, Button, Popconfirm } from "antd";
 import { EditableFormRow, EditableCell } from "./EditableRow";
 
-const EditableTable = ({ columns, dataDefault, onSubmit }) => {
+const EditableTable = ({ columns, dataDefault, onSubmit, rowKey }) => {
   const [dataSource, setDataSource] = useState(dataDefault);
 
   const handleSave = useCallback(
     row =>
       setDataSource(ds =>
         ds.map(item =>
-          row.ticketTypeId === item.ticketTypeId ? { ...item, ...row } : item
+          row[rowKey] === item[rowKey] ? { ...item, ...row } : item
         )
       ),
-    []
+    [rowKey]
   );
 
   const handleDelete = useCallback(
     ticketTypeId =>
       setDataSource(ds =>
-        ds.length > 1
-          ? ds.filter(item => item.ticketTypeId !== ticketTypeId)
-          : ds
+        ds.length > 1 ? ds.filter(item => item[rowKey] !== ticketTypeId) : ds
       ),
-    []
+    [rowKey]
   );
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      ticketTypeId: parseInt(dataSource[dataSource.length - 1].ticketTypeId + 1)
+      ticketTypeId: parseInt(dataSource[dataSource.length - 1][rowKey] + 1)
     });
     setDataSource([...dataSource, newData]);
   };
@@ -64,20 +62,20 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
           <Popconfirm
             title="Sure to delete?"
             style={{ float: "right" }}
-            onConfirm={() => handleDelete(record.ticketTypeId)}
+            onConfirm={() => handleDelete(record[rowKey])}
           >
             <Button shape="circle" icon="delete" style={{ float: "right" }} />
           </Popconfirm>
         )
       }
     ],
-    [columns, handleDelete, handleSave]
+    [columns, handleDelete, handleSave, rowKey]
   );
 
   return (
     <>
       <Table
-        rowKey="ticketTypeId"
+        rowKey={rowKey}
         components={components}
         rowClassName={styles.EditableRow}
         bordered

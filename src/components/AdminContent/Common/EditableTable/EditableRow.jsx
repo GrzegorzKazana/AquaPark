@@ -28,7 +28,7 @@ export const EditableCell = props => {
       if (!(error && error[e.currentTarget.id])) {
         const parsedValues = numberInput
           ? Object.fromEntries(
-              Object.entries(values).map(([key, val]) => [key, parseInt(val)])
+              Object.entries(values).map(([key, val]) => [key, parseFloat(val)])
             )
           : values;
 
