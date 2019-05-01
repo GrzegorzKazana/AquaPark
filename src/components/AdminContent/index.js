@@ -22,7 +22,7 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut }) => {
+const AdminContent = ({ logOut, prices }) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
@@ -38,7 +38,7 @@ const AdminContent = ({ logOut }) => {
         <Layout.Content className={styles.Content}>
           {openPage === views.OCCUPACY && <OccupancyPage />}
           {openPage === views.NEWSLETTER && <NewsletterPage />}
-          {openPage === views.PRICES && <PricesPage />}
+          {openPage === views.PRICES && <PricesPage prices={prices} />}
         </Layout.Content>
       </Layout>
     </Layout>

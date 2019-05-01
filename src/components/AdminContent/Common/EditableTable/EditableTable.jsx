@@ -9,22 +9,28 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
   const handleSave = useCallback(
     row =>
       setDataSource(ds =>
-        ds.map(item => (row.key === item.key ? { ...item, ...row } : item))
+        ds.map(item =>
+          row.ticketTypeId === item.ticketTypeId ? { ...item, ...row } : item
+        )
       ),
     []
   );
 
   const handleDelete = useCallback(
-    key =>
+    ticketTypeId =>
       setDataSource(ds =>
-        ds.length > 1 ? ds.filter(item => item.key !== key) : ds
+        ds.length > 1
+          ? ds.filter(item => item.ticketTypeId !== ticketTypeId)
+          : ds
       ),
     []
   );
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      key: parseInt(dataSource[dataSource.length - 1].key + 1).toString()
+      ticketTypeId: parseInt(
+        dataSource[dataSource.length - 1].ticketTypeId + 1
+      ).toString()
     });
     setDataSource([...dataSource, newData]);
   };
@@ -44,6 +50,7 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
               ...col,
               onCell: record => ({
                 record,
+                numberInput: col.numberInput,
                 editable: col.editable,
                 dataIndex: col.dataIndex,
                 title: col.title,
@@ -59,7 +66,7 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
           <Popconfirm
             title="Sure to delete?"
             style={{ float: "right" }}
-            onConfirm={() => handleDelete(record.key)}
+            onConfirm={() => handleDelete(record.ticketTypeId)}
           >
             <Button shape="circle" icon="delete" style={{ float: "right" }} />
           </Popconfirm>
@@ -72,6 +79,7 @@ const EditableTable = ({ columns, dataDefault, onSubmit }) => {
   return (
     <>
       <Table
+        rowKey="ticketTypeId"
         components={components}
         rowClassName={styles.EditableRow}
         bordered

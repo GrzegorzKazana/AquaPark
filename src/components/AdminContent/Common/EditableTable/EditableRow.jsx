@@ -22,17 +22,24 @@ export const EditableCell = props => {
   }, [editing, inputRef]);
 
   const save = (e, form) => {
-    const { record, handleSave } = props;
+    const { record, handleSave, numberInput } = props;
 
     form.validateFields((error, values) => {
       if (!(error && error[e.currentTarget.id])) {
+        const parsedValues = numberInput
+          ? Object.fromEntries(
+              Object.entries(values).map(([key, val]) => [key, parseInt(val)])
+            )
+          : values;
+
         toggleEdit();
-        handleSave({ ...record, ...values });
+        handleSave({ ...record, ...parsedValues });
       }
     });
   };
 
   const {
+    numberInput,
     editable,
     dataIndex,
     title,
@@ -59,6 +66,7 @@ export const EditableCell = props => {
                   initialValue: record[dataIndex]
                 })(
                   <Input
+                    type={numberInput ? "number" : "text"}
                     ref={inputRef}
                     onPressEnter={e => save(e, form)}
                     onBlur={e => save(e, form)}

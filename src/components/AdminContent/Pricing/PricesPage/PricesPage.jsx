@@ -29,23 +29,34 @@ const dataDefault = [
 const columns = [
   {
     title: "Rodzaj biletu",
-    dataIndex: "ticketType",
-    key: "ticketType",
-    editable: true
+    dataIndex: "ticketTypeName",
+    key: "ticketTypeName",
+    editable: true,
+    numberInput: false
   },
   {
     title: "Cena",
-    dataIndex: "ticketPrice",
-    key: "ticketPrice",
-    editable: true
+    dataIndex: "price",
+    key: "price",
+    editable: true,
+    numberInput: true
   }
 ];
 
-const PricesPage = () => {
+const PricesPage = ({ prices }) => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <Tabs tabPosition="top">
-        <Tabs.TabPane tab="Stefa Basenów" key="1">
+        {prices.dictionary.map(price => (
+          <Tabs.TabPane tab={price.areaName} key={price.areaId}>
+            <EditableTable
+              dataDefault={price.ticketTypes}
+              columns={columns}
+              onSubmit={data => console.log(data)}
+            />
+          </Tabs.TabPane>
+        ))}
+        {/* <Tabs.TabPane tab="Stefa Basenów" key="1">
           <EditableTable
             dataDefault={dataDefault}
             columns={columns}
@@ -72,7 +83,7 @@ const PricesPage = () => {
             columns={columns}
             onSubmit={data => console.log(data)}
           />
-        </Tabs.TabPane>
+        </Tabs.TabPane> */}
       </Tabs>
     </Card>
   );
