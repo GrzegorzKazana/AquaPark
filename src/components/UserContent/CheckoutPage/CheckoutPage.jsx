@@ -32,6 +32,11 @@ const CheckoutPage = ({
     setPurchaseUserData(userData);
   };
 
+  const handleBuy = () => {
+    console.log(purchaseUserData);
+    console.log(cart);
+  };
+
   const steps = [
     {
       title: "Koszyk",
@@ -62,7 +67,7 @@ const CheckoutPage = ({
     },
     {
       title: "Zakup",
-      content: <PurchaseView handleCancel={prev} />
+      content: <PurchaseView handleCancel={prev} handleBuy={handleBuy} />
     }
   ];
 

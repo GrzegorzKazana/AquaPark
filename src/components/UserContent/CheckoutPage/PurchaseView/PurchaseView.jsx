@@ -2,13 +2,13 @@ import React from "react";
 import styles from "./PurchaseView.module.scss";
 import { Card, Button } from "antd";
 
-export const PurchaseView = ({ handleCancel }) => (
+export const PurchaseView = ({ handleCancel, handleBuy }) => (
   <Card
     style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}
     bodyStyle={{ flexGrow: 1, position: "relative" }}
   >
     <div className={styles.PurchaseView}>
-      <Button type="primary" size="large">
+      <Button type="primary" size="large" onClick={handleBuy}>
         Kupuję i płacę
       </Button>
     </div>
