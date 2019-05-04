@@ -5,6 +5,7 @@ const SignUpModal = ({
   handleSubmit,
   handleCancel,
   open,
+  loading,
   form: { getFieldDecorator, getFieldValue, validateFields, resetFields }
 }) => {
   const onCancel = () => {
@@ -27,6 +28,7 @@ const SignUpModal = ({
       okText="Ok"
       onCancel={onCancel}
       onOk={onSubmit}
+      confirmLoading={loading}
     >
       <Form>
         <Form.Item label="E-mail">

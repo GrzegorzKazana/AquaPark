@@ -63,6 +63,24 @@ const UserContent = ({
     }
   }, [user.userFetchingError]);
 
+  const { userSigningUp, userSigningUpSuccess, userSigningUpError } = user;
+  useEffect(() => {
+    // close signup modal when got positive response
+    if (userSigningUp) {
+      return;
+    }
+    if (userSigningUpSuccess) {
+      setSignUpModalOpen(false);
+      notification.success({
+        message: "Na email została wysłana wiadomość aktywacyjna"
+      });
+    } else if (userSigningUpError) {
+      notification.error({
+        message: "Błąd rejestracji"
+      });
+    }
+  }, [userSigningUp, userSigningUpSuccess, userSigningUpError]);
+
   const loginSubmit = vals => {
     console.log(vals);
     const { email, password } = vals;
@@ -73,7 +91,6 @@ const UserContent = ({
     console.log(vals);
     const { email, password } = vals;
     signUp(email, password);
-    setSignUpModalOpen(false);
   };
 
   const isLoggedIn = Boolean(user.user);
@@ -126,6 +143,7 @@ const UserContent = ({
       />
       <SignUpModal
         open={signUpModalOpen}
+        loading={user.userSigningUp}
         handleSubmit={signUpSubmit}
         handleCancel={() => setSignUpModalOpen(false)}
       />

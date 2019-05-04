@@ -2,13 +2,19 @@ import {
   FETCH_USER,
   LOAD_USER,
   FETCH_USER_ERROR,
-  LOG_OUT_USER
+  LOG_OUT_USER,
+  SIGN_UP_USER,
+  SIGN_UP_USER_SUCCESS,
+  SIGN_UP_USER_ERROR
 } from "../actions/UserActions";
 
 const defaultState = {
   userFetching: false,
   userLoaded: false,
   userFetchingError: false,
+  userSigningUp: false,
+  userSigningUpSuccess: false,
+  userSigningUpError: false,
   user: null
 };
 
@@ -41,6 +47,27 @@ const UserReducer = (state = defaultState, action) => {
         userLoaded: false,
         user: null
       };
+    case SIGN_UP_USER:
+      return {
+        ...state,
+        userSigningUp: true,
+        userSigningUpError: false
+      };
+    case SIGN_UP_USER_SUCCESS:
+      return {
+        ...state,
+        userSigningUp: false,
+        userSigningUpError: false,
+        userSigningUpSuccess: true
+      };
+    case SIGN_UP_USER_ERROR:
+      return {
+        ...state,
+        userSigningUp: false,
+        userSigningUpError: true,
+        userSigningUpSuccess: false
+      };
+
     default:
       return state;
   }
