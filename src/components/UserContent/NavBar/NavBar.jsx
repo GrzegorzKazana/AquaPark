@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NavBar.module.scss";
 import { Menu, Dropdown, Icon, Badge } from "antd";
 
-const DropdownMenuOverlay = ({
+export const DropdownMenuOverlay = ({
   onOpenLoginModal,
   onOpenSignUpModal,
   onOpenFaqModal
@@ -23,14 +23,20 @@ const DropdownMenuOverlay = ({
   </Menu>
 );
 
-const NavBar = ({
-  views,
-  setOpenPage,
-  onOpenLoginModal,
-  onOpenSignUpModal,
-  onOpenFaqModal,
-  numberCartItems
-}) => {
+export const DropdownMenuOverlayLoggedIn = ({ onLogOut, onOpenFaqModal }) => (
+  <Menu>
+    <Menu.Item key="1" onClick={onOpenFaqModal}>
+      <Icon type="question-circle" />
+      FAQ
+    </Menu.Item>
+    <Menu.Item key="2" onClick={onLogOut}>
+      <Icon type="logout" />
+      Log out
+    </Menu.Item>
+  </Menu>
+);
+
+const NavBar = ({ views, setOpenPage, numberCartItems, userMenuOverlay }) => {
   const onClick = item => setOpenPage(item.key);
   return (
     <div className={styles.Header}>
@@ -55,16 +61,7 @@ const NavBar = ({
             </Badge>
           </Menu.Item>
         </Menu>
-        <Dropdown
-          overlay={
-            <DropdownMenuOverlay
-              onOpenLoginModal={onOpenLoginModal}
-              onOpenSignUpModal={onOpenSignUpModal}
-              onOpenFaqModal={onOpenFaqModal}
-            />
-          }
-          className={styles.DropDown}
-        >
+        <Dropdown overlay={userMenuOverlay} className={styles.DropDown}>
           <a className="ant-dropdown-link" href="# ">
             <Icon type="user" />
           </a>

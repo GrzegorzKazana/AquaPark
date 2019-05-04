@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./UserContent.module.scss";
-import NavBar from "./NavBar/NavBar";
-import NavBarLoggedIn from "./NavBar/NavBarLoggedIn";
+import NavBar, {
+  DropdownMenuOverlay,
+  DropdownMenuOverlayLoggedIn
+} from "./NavBar/NavBar";
 import WelcomePage from "./WelcomePage/WelcomePage";
 import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
@@ -100,22 +102,25 @@ const UserContent = ({
   };
 
   const isLoggedIn = Boolean(user.user);
-  const navbar = isLoggedIn ? (
-    <NavBarLoggedIn
-      views={views}
-      numberCartItems={cart.itemCount}
-      onLogOut={logOut}
-      setOpenPage={setOpenPage}
-      onOpenFaqModal={() => setFaqModalOpen(true)}
-    />
-  ) : (
+  const navbar = (
     <NavBar
       views={views}
       numberCartItems={cart.itemCount}
       setOpenPage={setOpenPage}
-      onOpenLoginModal={() => setloginModalOpen(true)}
-      onOpenSignUpModal={() => setSignUpModalOpen(true)}
-      onOpenFaqModal={() => setFaqModalOpen(true)}
+      userMenuOverlay={
+        isLoggedIn ? (
+          <DropdownMenuOverlayLoggedIn
+            onLogOut={logOut}
+            onOpenFaqModal={() => setFaqModalOpen(true)}
+          />
+        ) : (
+          <DropdownMenuOverlay
+            onOpenLoginModal={() => setloginModalOpen(true)}
+            onOpenSignUpModal={() => setSignUpModalOpen(true)}
+            onOpenFaqModal={() => setFaqModalOpen(true)}
+          />
+        )
+      }
     />
   );
 
