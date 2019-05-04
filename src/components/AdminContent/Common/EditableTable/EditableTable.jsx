@@ -88,7 +88,10 @@ const EditableTable = ({
         dataSource={dataSource}
         columns={wrappedColumns}
         pagination={false}
-        expandedRowRender={createExpandedRowRender(dataSource, setDataSource)}
+        expandedRowRender={
+          createExpandedRowRender &&
+          createExpandedRowRender(dataSource, setDataSource)
+        }
       />
       <div className={styles.ButtonContainer}>
         <Button className={styles.ActionButton} onClick={handleAdd}>
