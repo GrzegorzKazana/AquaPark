@@ -1,4 +1,9 @@
-import { ADD_ITEM, REMOVE_ITEM, ADD_DISCOUNT } from "../actions/CartActions";
+import {
+  ADD_ITEM,
+  REMOVE_ITEM,
+  ADD_DISCOUNT,
+  RESET_CART
+} from "../actions/CartActions";
 
 const defaultState = {
   items: [],
@@ -37,6 +42,10 @@ const CartReducer = (state = defaultState, action) => {
           state.totalPriceWithDiscount -
           action.prevPriceWithDiscount +
           action.item.priceWithDiscount
+      };
+    case RESET_CART:
+      return {
+        ...defaultState
       };
     default:
       return state;

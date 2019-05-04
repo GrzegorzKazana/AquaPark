@@ -44,3 +44,8 @@ export const signUpUser = (email, password) => {
   });
   return logInUser(email, password);
 };
+
+export const purchaseCart = (userData, cart) => {
+  console.log(userData, "just bought", cart);
+  return defaultResolve({});
+};

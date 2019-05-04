@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./CustomerDataView.module.scss";
 import { Card, Form, Input, Button, Switch, Divider, Icon } from "antd";
 
@@ -8,11 +8,12 @@ const UserDataForm = ({
   disabled,
   handleSubmit,
   form,
-  form: { getFieldDecorator, getFieldValue, validateFields, resetFields }
+  form: { getFieldDecorator, resetFields }
 }) => {
   useEffect(() => {
+    console.log(purchaseUserData);
     resetFields();
-  }, [purchaseUserData, resetFields]);
+  }, [userLoaded, purchaseUserData, resetFields]);
 
   const handleSubmitLocal = e => {
     e.preventDefault();
@@ -26,8 +27,8 @@ const UserDataForm = ({
     <Form id="myForm" onSubmit={handleSubmitLocal}>
       <Form.Item label="E-mail">
         {getFieldDecorator("email", {
+          initialValue: purchaseUserData ? purchaseUserData.email : "",
           rules: [
-            { initialValue: purchaseUserData ? purchaseUserData.email : "" },
             {
               required: true,
               message: "Please input your E-mail!"
@@ -41,8 +42,8 @@ const UserDataForm = ({
       </Form.Item>
       <Form.Item label="Name">
         {getFieldDecorator("name", {
+          initialValue: purchaseUserData ? purchaseUserData.name : "",
           rules: [
-            { initialValue: purchaseUserData ? purchaseUserData.name : "" },
             {
               required: true,
               message: "Please input your Name"
@@ -52,10 +53,8 @@ const UserDataForm = ({
       </Form.Item>
       <Form.Item label="Surname">
         {getFieldDecorator("surname", {
+          initialValue: purchaseUserData ? purchaseUserData.surname : "",
           rules: [
-            {
-              initialValue: purchaseUserData ? purchaseUserData.surname : ""
-            },
             {
               required: true,
               message: "Please input your Surname!"

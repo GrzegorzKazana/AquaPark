@@ -11,6 +11,7 @@ const CheckoutPage = ({
   cart,
   removeItemFromCart,
   addDiscountToItem,
+  purchaseCart,
   discounts
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -35,6 +36,7 @@ const CheckoutPage = ({
   const handleBuy = () => {
     console.log(purchaseUserData);
     console.log(cart);
+    purchaseCart(purchaseUserData, cart);
     notification.info({
       message: "Zakup potwierdzony"
     });

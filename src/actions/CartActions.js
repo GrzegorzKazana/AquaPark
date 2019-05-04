@@ -1,4 +1,5 @@
 import uuid from "uuid";
+import * as API from "../api/Mock/MockApiCalls";
 
 export const ADD_ITEM = "ADD_ITEM";
 export const addItem = item => ({
@@ -27,3 +28,14 @@ export const addDiscount = (item, discount) => ({
   },
   prevPriceWithDiscount: item.priceWithDiscount
 });
+
+export const RESET_CART = "RESET_CART";
+export const resetCart = () => ({
+  type: RESET_CART
+});
+
+export const purchaseCartThunk = (userData, cart) => dispatch => {
+  API.purchaseCart(userData, cart)
+    .then(res => dispatch(resetCart()))
+    .catch(err => console.log(err));
+};

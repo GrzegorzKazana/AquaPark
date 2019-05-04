@@ -17,7 +17,12 @@ import {
   logOutUserThunk,
   singUpUserThunk
 } from "../../actions/UserActions";
-import { addItem, removeItem, addDiscount } from "../../actions/CartActions";
+import {
+  addItem,
+  removeItem,
+  addDiscount,
+  purchaseCartThunk
+} from "../../actions/CartActions";
 
 const views = {
   WELCOME: "0",
@@ -37,7 +42,8 @@ const UserContent = ({
   signUp,
   addItemToCart,
   removeItemFromCart,
-  addDiscountToItem
+  addDiscountToItem,
+  purchaseCart
 }) => {
   const [openPage, setOpenPage] = useState(views.WELCOME);
   const [loginModalOpen, setloginModalOpen] = useState(false);
@@ -131,6 +137,7 @@ const UserContent = ({
               discounts={discounts}
               removeItemFromCart={removeItemFromCart}
               addDiscountToItem={addDiscountToItem}
+              purchaseCart={purchaseCart}
             />
           )}
         </Layout.Content>
@@ -162,7 +169,8 @@ const mapDispatchToProps = dispatch => ({
   signUp: (email, password) => dispatch(singUpUserThunk(email, password)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
-  addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount))
+  addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),
+  purchaseCart: (userData, cart) => dispatch(purchaseCartThunk(userData, cart))
 });
 
 export default connect(
