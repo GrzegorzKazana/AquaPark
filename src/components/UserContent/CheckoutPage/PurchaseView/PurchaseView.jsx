@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./PurchaseView.module.scss";
 import { Card, Button } from "antd";
 
@@ -20,3 +21,8 @@ export const PurchaseView = ({ handleCancel, handleBuy }) => (
     </Button>
   </Card>
 );
+
+PurchaseView.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
+  handleBuy: PropTypes.func.isRequired
+};

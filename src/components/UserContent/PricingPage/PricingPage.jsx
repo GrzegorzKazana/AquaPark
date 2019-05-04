@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./styles/PricingPage.scss";
 import styles from "./styles/PricingPage.module.scss";
 import { Card, Tabs } from "antd";
@@ -23,3 +24,8 @@ const PricingPage = ({ prices, addItemToCart }) => (
   </div>
 );
 export default PricingPage;
+
+PricingPage.propTypes = {
+  prices: PropTypes.object.isRequired,
+  addItemToCart: PropTypes.func.isRequired
+};

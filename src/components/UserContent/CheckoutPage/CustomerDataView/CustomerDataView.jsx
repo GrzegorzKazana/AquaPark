@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./CustomerDataView.module.scss";
 import { Card, Form, Input, Button, Switch, Divider, Icon } from "antd";
 
@@ -126,4 +127,14 @@ export const CustomerDataView = ({
       </div>
     </Card>
   );
+};
+
+CustomerDataView.propTypes = {
+  edditing: PropTypes.bool.isRequired,
+  setEdditing: PropTypes.func.isRequired,
+  userLoaded: PropTypes.bool.isRequired,
+  purchaseUserData: PropTypes.object,
+  handleSubmit: PropTypes.func.isRequired,
+  onOpenLoginModal: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired
 };

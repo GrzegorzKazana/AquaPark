@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Modal, Button } from "antd";
 
 const FaqModal = ({ open, handleClose }) => {
@@ -17,3 +18,8 @@ const FaqModal = ({ open, handleClose }) => {
   );
 };
 export default FaqModal;
+
+FaqModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired
+};

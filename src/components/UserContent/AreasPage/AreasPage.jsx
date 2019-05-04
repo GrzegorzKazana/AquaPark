@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./AreasPage.scss";
 import styles from "./AreasPage.module.scss";
 import { Carousel, Typography, Icon } from "antd";
@@ -56,3 +57,13 @@ const AreasPage = ({ areas }) => {
   );
 };
 export default AreasPage;
+
+CarouselCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string
+};
+
+AreasPage.propTypes = {
+  areas: PropTypes.object.isRequired
+};

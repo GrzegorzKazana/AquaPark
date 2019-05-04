@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./UserContent.module.scss";
 import NavBar, {
   DropdownMenuOverlay,
@@ -182,3 +183,18 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserContent);
+
+UserContent.propTypes = {
+  user: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired,
+  discounts: PropTypes.object.isRequired,
+  prices: PropTypes.object.isRequired,
+  areas: PropTypes.object.isRequired,
+  logIn: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
+  signUp: PropTypes.func.isRequired,
+  addItemToCart: PropTypes.func.isRequired,
+  removeItemFromCart: PropTypes.func.isRequired,
+  addDiscountToItem: PropTypes.func.isRequired,
+  purchaseCart: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 import { Table, Button } from "antd";
 
 const columnsWithBuy = onBuyClick => [
@@ -43,3 +44,8 @@ const PriceTable = ({ tickets, addItemToCart }) => {
   );
 };
 export default PriceTable;
+
+PriceTable.propTypes = {
+  tickets: PropTypes.array.isRequired,
+  addItemToCart: PropTypes.func.isRequired
+};

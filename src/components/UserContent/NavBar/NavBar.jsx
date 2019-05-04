@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./NavBar.module.scss";
 import { Menu, Dropdown, Icon, Badge } from "antd";
 
@@ -71,3 +72,21 @@ const NavBar = ({ views, setOpenPage, numberCartItems, userMenuOverlay }) => {
   );
 };
 export default NavBar;
+
+DropdownMenuOverlay.propTypes = {
+  onOpenLoginModal: PropTypes.func.isRequired,
+  onOpenSignUpModal: PropTypes.func.isRequired,
+  onOpenFaqModal: PropTypes.func.isRequired
+};
+
+DropdownMenuOverlayLoggedIn.propTypes = {
+  onLogOut: PropTypes.func.isRequired,
+  onOpenFaqModal: PropTypes.func.isRequired
+};
+
+NavBar.propTypes = {
+  views: PropTypes.object.isRequired,
+  setOpenPage: PropTypes.func.isRequired,
+  numberCartItems: PropTypes.number.isRequired,
+  userMenuOverlay: PropTypes.element
+};

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./CheckoutPage.module.scss";
 import { Card, Steps, notification } from "antd";
 import { CartView } from "./CartView/CartView";
@@ -90,3 +91,13 @@ const CheckoutPage = ({
   );
 };
 export default CheckoutPage;
+
+CheckoutPage.propTypes = {
+  onOpenLoginModal: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired,
+  removeItemFromCart: PropTypes.func.isRequired,
+  addDiscountToItem: PropTypes.func.isRequired,
+  purchaseCart: PropTypes.func.isRequired,
+  discounts: PropTypes.object.isRequired
+};

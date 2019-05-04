@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./CartView.module.scss";
 import { Card, List, Popconfirm, Button, Select, Divider } from "antd";
 
@@ -75,4 +76,12 @@ export const CartView = ({
       </div>
     </Card>
   );
+};
+
+CartView.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  cart: PropTypes.object.isRequired,
+  discounts: PropTypes.object.isRequired,
+  removeItemFromCart: PropTypes.func.isRequired,
+  addDiscountToItem: PropTypes.func.isRequired
 };
