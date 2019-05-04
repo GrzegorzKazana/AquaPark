@@ -1,6 +1,6 @@
 import { areasDict, pricesDict, classDiscountsDict, userDb } from "./MockData";
 
-const MOCK_API_TIMEOUT = 500;
+const MOCK_API_TIMEOUT = 5000;
 
 const defaultResolve = res =>
   new Promise((resolve, reject) =>

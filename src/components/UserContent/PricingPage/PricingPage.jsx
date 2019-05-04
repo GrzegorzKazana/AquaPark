@@ -3,6 +3,7 @@ import "./styles/PricingPage.scss";
 import styles from "./styles/PricingPage.module.scss";
 import { Card, Tabs } from "antd";
 import PriceTable from "./PriceTable";
+import SpinnerOverlay from "../../Common/SpinnerOverlay/SpinnerOverlay";
 
 const PricingPage = ({ prices, addItemToCart }) => (
   <div className={styles.PricingPage}>
@@ -17,6 +18,7 @@ const PricingPage = ({ prices, addItemToCart }) => (
           </Tabs.TabPane>
         ))}
       </Tabs>
+      <SpinnerOverlay open={prices.fetching} />
     </Card>
   </div>
 );

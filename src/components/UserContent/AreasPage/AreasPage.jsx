@@ -2,6 +2,7 @@ import React from "react";
 import "./AreasPage.scss";
 import styles from "./AreasPage.module.scss";
 import { Carousel, Typography, Icon } from "antd";
+import SpinnerOverlay from "../../Common/SpinnerOverlay/SpinnerOverlay";
 
 const CarouselCard = ({ title, description, image }) => (
   <div className={styles.CarouselItem}>
@@ -50,6 +51,7 @@ const AreasPage = ({ areas }) => {
           />
         ))}
       </Carousel>
+      <SpinnerOverlay open={areas.fetching} />
     </>
   );
 };

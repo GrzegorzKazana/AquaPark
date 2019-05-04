@@ -11,8 +11,8 @@ const App = ({ user, fetchDicts }) => {
     fetchDicts();
   }, [fetchDicts]);
 
-  // const isAdminLoggedIn = user && user.isAdmin;
-  const isAdminLoggedIn = true;
+  const isAdminLoggedIn = user && user.isAdmin;
+  // const isAdminLoggedIn = true;
 
   return isAdminLoggedIn ? <AdminContent /> : <UserContent />;
 };
