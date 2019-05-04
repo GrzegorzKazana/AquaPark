@@ -19,10 +19,10 @@ const MainMenu = ({ setOpenPage, views }) => {
         }
       >
         <Menu.Item key={views.PRICES}>Ceny</Menu.Item>
-        <Menu.Item key={views.PERIOD_DISCOUNT}>Zniżki periodyczne</Menu.Item>
+        {/* <Menu.Item key={views.PERIOD_DISCOUNT}>Zniżki periodyczne</Menu.Item> */}
         <Menu.Item key={views.CLASS_DISCOUNT}>Zniżki klas</Menu.Item>
       </Menu.SubMenu>
-      <Menu.SubMenu
+      {/* <Menu.SubMenu
         key="sub2"
         title={
           <span>
@@ -33,7 +33,7 @@ const MainMenu = ({ setOpenPage, views }) => {
       >
         <Menu.Item key={views.DICT_A}>Słownik A</Menu.Item>
         <Menu.Item key={views.DICT_B}>Słownik B</Menu.Item>
-      </Menu.SubMenu>
+      </Menu.SubMenu> */}
       <Menu.Item key={views.NEWSLETTER}>
         <Icon type="mail" />
         Newsletter
