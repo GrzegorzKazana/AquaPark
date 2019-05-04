@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./UserContent.module.scss";
 import NavBar from "./NavBar/NavBar";
 import NavBarLoggedIn from "./NavBar/NavBarLoggedIn";
@@ -9,7 +9,7 @@ import CheckoutPage from "./CheckoutPage/CheckoutPage";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
-import { Layout } from "antd";
+import { Layout, notification } from "antd";
 
 import { connect } from "react-redux";
 import {
@@ -44,11 +44,29 @@ const UserContent = ({
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);
 
+  useEffect(() => {
+    // close log in modal when user loaded
+    if (user.userLoaded) {
+      setloginModalOpen(false);
+      notification.success({
+        message: "Witamy ponownie"
+      });
+    }
+  }, [user.userLoaded]);
+
+  useEffect(() => {
+    // disaply message when errror loggin in
+    if (user.userFetchingError) {
+      notification.error({
+        message: "Błąd logowania"
+      });
+    }
+  }, [user.userFetchingError]);
+
   const loginSubmit = vals => {
     console.log(vals);
     const { email, password } = vals;
     logIn(email, password);
-    setloginModalOpen(false);
   };
 
   const signUpSubmit = vals => {
@@ -102,6 +120,7 @@ const UserContent = ({
       </Layout>
       <LogInModal
         open={loginModalOpen}
+        loading={user.userFetching}
         handleSubmit={loginSubmit}
         handleCancel={() => setloginModalOpen(false)}
       />

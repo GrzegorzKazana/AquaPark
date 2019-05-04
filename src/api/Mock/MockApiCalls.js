@@ -7,7 +7,10 @@ const defaultResolve = res =>
     setTimeout(() => resolve(res), MOCK_API_TIMEOUT)
   );
 
-const defaultReject = text => Promise.reject(text);
+const defaultReject = res =>
+  new Promise((resolve, reject) =>
+    setTimeout(() => reject(res), MOCK_API_TIMEOUT)
+  );
 
 export const fetchDictFromApi = (name, url) => {
   switch (name) {

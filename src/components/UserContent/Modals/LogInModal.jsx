@@ -5,6 +5,7 @@ const LogInModal = ({
   handleSubmit,
   handleCancel,
   open,
+  loading,
   form: { getFieldDecorator, validateFields, resetFields }
 }) => {
   const onCancel = () => {
@@ -22,6 +23,7 @@ const LogInModal = ({
       okText="Ok"
       onCancel={onCancel}
       onOk={onSubmit}
+      confirmLoading={loading}
     >
       <Form>
         <Form.Item>
