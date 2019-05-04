@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./ClassDiscountPage.module.scss";
 import { Card } from "antd";
 import EditableTable from "../../Common/EditableTable/EditableTable";
@@ -40,3 +41,7 @@ const ClassDiscountPage = ({ discounts }) => {
   );
 };
 export default ClassDiscountPage;
+
+ClassDiscountPage.propTypes = {
+  discounts: PropTypes.object.isRequired
+};

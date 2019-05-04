@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./NavBar.module.scss";
 import { Menu, Dropdown, Icon } from "antd";
 
@@ -27,3 +28,11 @@ const NavBar = ({ onLogOut }) => {
   );
 };
 export default NavBar;
+
+DropdownMenuOverlay.propTypes = {
+  onLogOut: PropTypes.func.isRequired
+};
+
+NavBar.propTypes = {
+  onLogOut: PropTypes.func.isRequired
+};

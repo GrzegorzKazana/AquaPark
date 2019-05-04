@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Menu, Icon } from "antd";
 
 const MainMenu = ({ setOpenPage, views }) => {
@@ -19,21 +20,9 @@ const MainMenu = ({ setOpenPage, views }) => {
         }
       >
         <Menu.Item key={views.PRICES}>Ceny</Menu.Item>
-        {/* <Menu.Item key={views.PERIOD_DISCOUNT}>Zniżki periodyczne</Menu.Item> */}
         <Menu.Item key={views.CLASS_DISCOUNT}>Zniżki klas</Menu.Item>
       </Menu.SubMenu>
-      {/* <Menu.SubMenu
-        key="sub2"
-        title={
-          <span>
-            <Icon type="book" />
-            <span>Słowniki</span>
-          </span>
-        }
-      >
-        <Menu.Item key={views.DICT_A}>Słownik A</Menu.Item>
-        <Menu.Item key={views.DICT_B}>Słownik B</Menu.Item>
-      </Menu.SubMenu> */}
+
       <Menu.Item key={views.NEWSLETTER}>
         <Icon type="mail" />
         Newsletter
@@ -46,3 +35,8 @@ const MainMenu = ({ setOpenPage, views }) => {
   );
 };
 export default MainMenu;
+
+MainMenu.propTypes = {
+  setOpenPage: PropTypes.func.isRequired,
+  views: PropTypes.object.isRequired
+};

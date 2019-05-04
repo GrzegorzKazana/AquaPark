@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./AdminContent.scss";
 import styles from "./AdminContent.module.scss";
 import NavBar from "./NavBar/NavBar";
@@ -58,3 +59,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AdminContent);
+
+AdminContent.propTypes = {
+  logOut: PropTypes.func.isRequired,
+  prices: PropTypes.object,
+  discounts: PropTypes.object
+};

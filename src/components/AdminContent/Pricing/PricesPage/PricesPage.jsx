@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./PricesPage.module.scss";
 import { Card, Tabs } from "antd";
 import EditableTable from "../../Common/EditableTable/EditableTable";
@@ -68,3 +69,7 @@ const PricesPage = ({ prices }) => {
   );
 };
 export default PricesPage;
+
+PricesPage.propTypes = {
+  prices: PropTypes.object.isRequired
+};

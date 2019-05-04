@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
+import PropTypes from "prop-types";
 import styles from "./EditableTable.module.scss";
 import { Table, Button, Popconfirm } from "antd";
 import { EditableFormRow, EditableCell } from "./EditableRow";
@@ -109,3 +110,11 @@ const EditableTable = ({
   );
 };
 export default EditableTable;
+
+EditableTable.propTypes = {
+  columns: PropTypes.array.isRequired,
+  dataDefault: PropTypes.array.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  rowKey: PropTypes.string,
+  createExpandedRowRender: PropTypes.func
+};

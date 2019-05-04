@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./OccupacyPage.module.scss";
 import aquapark_map from "../../../assets/aquapark_map";
 
@@ -38,3 +39,7 @@ const OccupancyMap = ({ handleAttractionChange }) => (
   </div>
 );
 export default OccupancyMap;
+
+OccupancyMap.propTypes = {
+  handleAttractionChange: PropTypes.func.isRequired
+};
