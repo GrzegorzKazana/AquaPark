@@ -67,6 +67,7 @@ export const CartView = ({
             onClick={handleSubmit}
             type="primary"
             style={{ float: "right" }}
+            disabled={cart.itemCount === 0}
           >
             Next
           </Button>

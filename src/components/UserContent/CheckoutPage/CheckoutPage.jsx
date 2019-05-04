@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CheckoutPage.module.scss";
-import { Card, Steps } from "antd";
+import { Card, Steps, notification } from "antd";
 import { CartView } from "./CartView/CartView";
 import { CustomerDataView } from "./CustomerDataView/CustomerDataView";
 import { PurchaseView } from "./PurchaseView/PurchaseView";
@@ -35,6 +35,9 @@ const CheckoutPage = ({
   const handleBuy = () => {
     console.log(purchaseUserData);
     console.log(cart);
+    notification.info({
+      message: "Zakup potwierdzony"
+    });
   };
 
   const steps = [

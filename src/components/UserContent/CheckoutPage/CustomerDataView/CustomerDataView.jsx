@@ -25,52 +25,43 @@ const UserDataForm = ({
   return (
     <Form id="myForm" onSubmit={handleSubmitLocal}>
       <Form.Item label="E-mail">
-        {getFieldDecorator(
-          "email",
-          { initialValue: purchaseUserData ? purchaseUserData.email : "" },
-          {
-            rules: [
-              {
-                type: "email",
-                message: "The input is not valid E-mail!"
-              },
-              {
-                required: true,
-                message: "Please input your E-mail!"
-              }
-            ]
-          }
-        )(<Input disabled={disabled} />)}
+        {getFieldDecorator("email", {
+          rules: [
+            { initialValue: purchaseUserData ? purchaseUserData.email : "" },
+            {
+              required: true,
+              message: "Please input your E-mail!"
+            },
+            {
+              type: "email",
+              message: "The input is not valid E-mail!"
+            }
+          ]
+        })(<Input disabled={disabled} />)}
       </Form.Item>
       <Form.Item label="Name">
-        {getFieldDecorator(
-          "name",
-          { initialValue: purchaseUserData ? purchaseUserData.name : "" },
-          {
-            rules: [
-              {
-                required: true,
-                message: "Please input your Name"
-              }
-            ]
-          }
-        )(<Input disabled={disabled} />)}
+        {getFieldDecorator("name", {
+          rules: [
+            { initialValue: purchaseUserData ? purchaseUserData.name : "" },
+            {
+              required: true,
+              message: "Please input your Name"
+            }
+          ]
+        })(<Input disabled={disabled} />)}
       </Form.Item>
       <Form.Item label="Surname">
-        {getFieldDecorator(
-          "surname",
-          {
-            initialValue: purchaseUserData ? purchaseUserData.surname : ""
-          },
-          {
-            rules: [
-              {
-                required: true,
-                message: "Please input your Surname!"
-              }
-            ]
-          }
-        )(<Input disabled={disabled} />)}
+        {getFieldDecorator("surname", {
+          rules: [
+            {
+              initialValue: purchaseUserData ? purchaseUserData.surname : ""
+            },
+            {
+              required: true,
+              message: "Please input your Surname!"
+            }
+          ]
+        })(<Input disabled={disabled} />)}
       </Form.Item>
     </Form>
   );
