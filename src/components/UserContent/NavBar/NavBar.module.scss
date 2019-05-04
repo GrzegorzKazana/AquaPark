@@ -9,11 +9,19 @@
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .HeaderMenu {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+
+  & li {
+    font-size: 1.5rem;
+  }
+
+  & ul {
+    line-height: 64px;
+  }
 }
