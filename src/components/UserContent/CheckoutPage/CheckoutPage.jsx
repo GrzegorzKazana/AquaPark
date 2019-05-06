@@ -30,13 +30,10 @@ const CheckoutPage = ({
 
   const handleDataSubmit = userData => {
     next();
-    console.log(userData);
     setPurchaseUserData(userData);
   };
 
   const handleBuy = () => {
-    console.log(purchaseUserData);
-    console.log(cart);
     purchaseCart(purchaseUserData, cart);
     notification.info({
       message: "Zakup potwierdzony"
