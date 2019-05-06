@@ -35,6 +35,16 @@ export const resetCart = () => ({
   type: RESET_CART
 });
 
+export const CHANGE_ITEM_COUNT = "CHANGE_ITEM_COUNT";
+export const changeItemCount = (item, count) => ({
+  type: CHANGE_ITEM_COUNT,
+  item: {
+    ...item,
+    itemCount: count
+  },
+  prevItemCount: item.itemCount
+});
+
 export const purchaseCartThunk = (userData, cart) => dispatch => {
   API.purchaseCart(userData, cart)
     .then(res => dispatch(resetCart()))
