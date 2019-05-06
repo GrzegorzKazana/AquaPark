@@ -1,71 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styles from "./CustomerDataView.module.scss";
-import { Card, Form, Input, Button, Switch, Divider, Icon } from "antd";
-
-const UserDataForm = ({
-  userLoaded,
-  purchaseUserData,
-  disabled,
-  handleSubmit,
-  form,
-  form: { getFieldDecorator, resetFields }
-}) => {
-  useEffect(() => {
-    console.log(purchaseUserData);
-    resetFields();
-  }, [userLoaded, purchaseUserData, resetFields]);
-
-  const handleSubmitLocal = e => {
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      if (!err) {
-        handleSubmit(values);
-      }
-    });
-  };
-  return (
-    <Form id="myForm" onSubmit={handleSubmitLocal}>
-      <Form.Item label="E-mail">
-        {getFieldDecorator("email", {
-          initialValue: purchaseUserData ? purchaseUserData.email : "",
-          rules: [
-            {
-              required: true,
-              message: "Please input your E-mail!"
-            },
-            {
-              type: "email",
-              message: "The input is not valid E-mail!"
-            }
-          ]
-        })(<Input disabled={disabled} />)}
-      </Form.Item>
-      <Form.Item label="Name">
-        {getFieldDecorator("name", {
-          initialValue: purchaseUserData ? purchaseUserData.name : "",
-          rules: [
-            {
-              required: true,
-              message: "Please input your Name"
-            }
-          ]
-        })(<Input disabled={disabled} />)}
-      </Form.Item>
-      <Form.Item label="Surname">
-        {getFieldDecorator("surname", {
-          initialValue: purchaseUserData ? purchaseUserData.surname : "",
-          rules: [
-            {
-              required: true,
-              message: "Please input your Surname!"
-            }
-          ]
-        })(<Input disabled={disabled} />)}
-      </Form.Item>
-    </Form>
-  );
-};
+import { Card, Button, Switch, Divider, Icon } from "antd";
+import UserDataForm from "../../../Common/UserDataForm/UserDataForm";
 
 export const CustomerDataView = ({
   edditing,
@@ -76,14 +13,7 @@ export const CustomerDataView = ({
   onOpenLoginModal,
   handleCancel
 }) => {
-  const onSubmit = vals => {
-    //do something with form data
-    console.log(vals);
-    handleSubmit(vals);
-  };
-
-  const CustomerDataForm = Form.create()(UserDataForm);
-
+  const formName = "purchaseUserDataForm";
   return (
     <Card
       title="Dane"
@@ -105,17 +35,16 @@ export const CustomerDataView = ({
             <Divider>Lub wypełnij formularz</Divider>
           </div>
         )}
-
-        <CustomerDataForm
-          userLoaded={userLoaded}
-          purchaseUserData={purchaseUserData}
-          handleSubmit={onSubmit}
+        <UserDataForm
+          formName={formName}
+          initialData={purchaseUserData}
+          onSubmit={handleSubmit}
           disabled={userLoaded && !edditing}
         />
         <div>
           <Button onClick={handleCancel}>Prev</Button>
           <Button
-            form="myForm"
+            form={formName}
             key="submit"
             htmlType="submit"
             type="primary"

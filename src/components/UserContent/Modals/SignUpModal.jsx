@@ -1,85 +1,34 @@
 import React from "react";
-import { Modal, Form, Input, Checkbox } from "antd";
+import { Modal, Button } from "antd";
+import UserDataForm from "../../Common/UserDataForm/UserDataForm";
 
-const SignUpModal = ({
-  handleSubmit,
-  handleCancel,
-  open,
-  loading,
-  form: { getFieldDecorator, getFieldValue, validateFields, resetFields }
-}) => {
-  const onCancel = () => {
-    resetFields();
-    handleCancel();
-  };
+const SignUpModal = ({ handleSubmit, handleCancel, open, loading }) => {
+  const formName = "registerForm";
 
-  const onSubmit = () =>
-    validateFields((err, values) => !err && handleSubmit(values));
-
-  const validateConfirmPassword = (rule, value, callback) =>
-    value && value === getFieldValue("password")
-      ? callback()
-      : callback("Two passwords that you enter is inconsistent!");
+  const footer = [
+    <Button key="cancel" onClick={handleCancel}>
+      Cancel
+    </Button>,
+    <Button
+      form={formName}
+      key="submit"
+      htmlType="submit"
+      type="primary"
+      loading={loading}
+    >
+      Submit
+    </Button>
+  ];
 
   return (
-    <Modal
-      visible={open}
-      title="Log in"
-      okText="Ok"
-      onCancel={onCancel}
-      onOk={onSubmit}
-      confirmLoading={loading}
-    >
-      <Form>
-        <Form.Item label="E-mail">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                type: "email",
-                message: "The input is not valid E-mail!"
-              },
-              {
-                required: true,
-                message: "Please input your E-mail!"
-              }
-            ]
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label="Password">
-          {getFieldDecorator("password", {
-            rules: [
-              {
-                required: true,
-                message: "Please input your password!"
-              }
-            ]
-          })(<Input type="password" />)}
-        </Form.Item>
-        <Form.Item label="Confirm Password">
-          {getFieldDecorator("confirm", {
-            rules: [
-              {
-                required: true,
-                message: "Please confirm your password!"
-              },
-              {
-                validator: validateConfirmPassword
-              }
-            ]
-          })(<Input type="password" />)}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("agreement", {
-            valuePropName: "checked",
-            rules: [{ required: true, message: "Please accept the agreement" }]
-          })(
-            <Checkbox>
-              I have read the <a href="# ">agreement</a>
-            </Checkbox>
-          )}
-        </Form.Item>
-      </Form>
+    <Modal visible={open} title="Sign Up" okText="Ok" footer={footer}>
+      <UserDataForm
+        formName={formName}
+        onSubmit={handleSubmit}
+        acceptTermsFooter={true}
+        passwordInput={true}
+      />
     </Modal>
   );
 };
-export default Form.create({ name: "log_in_form" })(SignUpModal);
+export default SignUpModal;
