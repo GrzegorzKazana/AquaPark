@@ -102,6 +102,13 @@ const UserContent = ({
     signUp(email, password);
   };
 
+  const handleLogOut = () => {
+    logOut();
+    notification.info({
+      message: "Wylogowano"
+    });
+  };
+
   const isLoggedIn = Boolean(user.user);
   const navbar = (
     <NavBar
@@ -111,7 +118,7 @@ const UserContent = ({
       userMenuOverlay={
         isLoggedIn ? (
           <DropdownMenuOverlayLoggedIn
-            onLogOut={logOut}
+            onLogOut={handleLogOut}
             onOpenFaqModal={() => setFaqModalOpen(true)}
           />
         ) : (
