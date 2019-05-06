@@ -12,6 +12,7 @@ const CheckoutPage = ({
   cart,
   removeItemFromCart,
   addDiscountToItem,
+  changeItemCount,
   purchaseCart,
   discounts
 }) => {
@@ -51,6 +52,7 @@ const CheckoutPage = ({
           discounts={discounts}
           removeItemFromCart={removeItemFromCart}
           addDiscountToItem={addDiscountToItem}
+          changeItemCount={changeItemCount}
         />
       )
     },

@@ -24,6 +24,7 @@ import {
   addItem,
   removeItem,
   addDiscount,
+  changeItemCount,
   purchaseCartThunk
 } from "../../actions/CartActions";
 
@@ -46,6 +47,7 @@ const UserContent = ({
   addItemToCart,
   removeItemFromCart,
   addDiscountToItem,
+  changeItemCount,
   purchaseCart
 }) => {
   const [openPage, setOpenPage] = useState(views.WELCOME);
@@ -150,6 +152,7 @@ const UserContent = ({
               discounts={discounts}
               removeItemFromCart={removeItemFromCart}
               addDiscountToItem={addDiscountToItem}
+              changeItemCount={changeItemCount}
               purchaseCart={purchaseCart}
             />
           )}
@@ -183,6 +186,7 @@ const mapDispatchToProps = dispatch => ({
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
   addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),
+  changeItemCount: (item, count) => dispatch(changeItemCount(item, count)),
   purchaseCart: (userData, cart) => dispatch(purchaseCartThunk(userData, cart))
 });
 
@@ -203,5 +207,6 @@ UserContent.propTypes = {
   addItemToCart: PropTypes.func.isRequired,
   removeItemFromCart: PropTypes.func.isRequired,
   addDiscountToItem: PropTypes.func.isRequired,
+  changeItemCount: PropTypes.func.isRequired,
   purchaseCart: PropTypes.func.isRequired
 };

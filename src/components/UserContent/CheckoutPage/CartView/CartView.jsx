@@ -1,20 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./CartView.module.scss";
-import { Card, List, Popconfirm, Button, Select, Divider } from "antd";
+import {
+  Card,
+  List,
+  Popconfirm,
+  Button,
+  Select,
+  Divider,
+  InputNumber
+} from "antd";
 
 export const CartView = ({
   handleSubmit,
   cart,
   discounts,
   removeItemFromCart,
-  addDiscountToItem
+  addDiscountToItem,
+  changeItemCount
 }) => {
   const renderListItem = item => (
     <List.Item className={styles.CartListItem}>
       <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
       <Select
-        style={{ width: "150px" }}
+        style={{ width: "150px", marginRight: "16px" }}
         defaultValue={
           (item.discount || discounts.dictionary[0]).classDiscountId
         }
@@ -34,6 +43,15 @@ export const CartView = ({
           </Select.Option>
         ))}
       </Select>
+      <InputNumber
+        min={1}
+        max={99}
+        step={1}
+        value={item.itemCount}
+        parser={value => value.slice(1)}
+        formatter={value => "x" + value}
+        onChange={value => changeItemCount(item, value)}
+      />
       <h3 className={styles.CartListItemPrice}>{item.priceWithDiscount}zł</h3>
       <Popconfirm
         title="Sure to delete?"
@@ -83,5 +101,6 @@ CartView.propTypes = {
   cart: PropTypes.object.isRequired,
   discounts: PropTypes.object.isRequired,
   removeItemFromCart: PropTypes.func.isRequired,
-  addDiscountToItem: PropTypes.func.isRequired
+  addDiscountToItem: PropTypes.func.isRequired,
+  changeItemCount: PropTypes.func.isRequired
 };
