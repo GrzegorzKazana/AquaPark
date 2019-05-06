@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { Form, Input, Checkbox } from "antd";
 
 const UserDataForm = ({
@@ -14,7 +15,7 @@ const UserDataForm = ({
   useEffect(() => {
     //reload initials when it changes, like when user logs in
     resetFields();
-  }, [initialData]);
+  }, [initialData, resetFields]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -113,3 +114,14 @@ const UserDataForm = ({
   );
 };
 export default Form.create()(UserDataForm);
+
+PropTypes.propTypes = {
+  formName: PropTypes.string,
+  initialData: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  acceptTermsFooter: PropTypes.bool,
+  passwordInput: PropTypes.bool,
+  form: PropTypes.object,
+  formProps: PropTypes.object
+};
