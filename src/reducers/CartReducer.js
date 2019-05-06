@@ -19,18 +19,22 @@ const CartReducer = (state = defaultState, action) => {
         ...state,
         items: [...state.items, action.item],
         itemCount: state.itemCount + 1,
-        totalPrice: state.totalPrice + action.item.price,
+        totalPrice:
+          state.totalPrice + action.item.price * action.item.itemCount,
         totalPriceWithDiscount:
-          state.totalPriceWithDiscount + action.item.priceWithDiscount
+          state.totalPriceWithDiscount +
+          action.item.priceWithDiscount * action.item.itemCount
       };
     case REMOVE_ITEM:
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.item.id),
         itemCount: state.itemCount - 1,
-        totalPrice: state.totalPrice - action.item.price,
+        totalPrice:
+          state.totalPrice - action.item.price * action.item.itemCount,
         totalPriceWithDiscount:
-          state.totalPriceWithDiscount - action.item.priceWithDiscount
+          state.totalPriceWithDiscount -
+          action.item.priceWithDiscount * action.item.itemCount
       };
     case ADD_DISCOUNT:
       return {
@@ -40,8 +44,8 @@ const CartReducer = (state = defaultState, action) => {
         ),
         totalPriceWithDiscount:
           state.totalPriceWithDiscount -
-          action.prevPriceWithDiscount +
-          action.item.priceWithDiscount
+          action.prevPriceWithDiscount * action.item.itemCount +
+          action.item.priceWithDiscount * action.item.itemCount
       };
     case RESET_CART:
       return {

@@ -6,6 +6,7 @@ export const addItem = item => ({
   type: ADD_ITEM,
   item: {
     ...item,
+    itemCount: 1,
     discount: null,
     priceWithDiscount: item.price,
     id: uuid.v4()
