@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./EditableTable.module.scss";
-import { Input, Form } from "antd";
+import { Input, Form, InputNumber } from "antd";
 
 const EditableContext = React.createContext();
 
@@ -22,7 +22,7 @@ export const EditableCell = props => {
   }, [editing, inputRef]);
 
   const save = (e, form) => {
-    const { record, handleSave, numberInput } = props;
+    const { record, handleSave, numberInput, numberRange } = props;
 
     form.validateFields((error, values) => {
       if (!(error && error[e.currentTarget.id])) {
@@ -39,6 +39,7 @@ export const EditableCell = props => {
   };
 
   const {
+    numberRange,
     numberInput,
     editable,
     dataIndex,
@@ -65,12 +66,22 @@ export const EditableCell = props => {
                   ],
                   initialValue: record[dataIndex]
                 })(
-                  <Input
-                    type={numberInput ? "number" : "text"}
-                    ref={inputRef}
-                    onPressEnter={e => save(e, form)}
-                    onBlur={e => save(e, form)}
-                  />
+                  numberInput ? (
+                    <InputNumber
+                      min={numberRange.min}
+                      max={numberRange.max}
+                      ref={inputRef}
+                      onPressEnter={e => save(e, form)}
+                      onBlur={e => save(e, form)}
+                    />
+                  ) : (
+                    <Input
+                      type="text"
+                      ref={inputRef}
+                      onPressEnter={e => save(e, form)}
+                      onBlur={e => save(e, form)}
+                    />
+                  )
                 )}
               </Form.Item>
             ) : (

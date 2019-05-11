@@ -53,6 +53,7 @@ const EditableTable = ({
               ...col,
               onCell: record => ({
                 record,
+                numberRange: col.numberRange,
                 numberInput: col.numberInput,
                 editable: col.editable,
                 dataIndex: col.dataIndex,

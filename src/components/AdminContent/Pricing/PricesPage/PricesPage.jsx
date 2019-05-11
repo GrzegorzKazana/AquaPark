@@ -14,6 +14,22 @@ const columns = [
     numberInput: false
   },
   {
+    title: "Godzina rozpoczęcia",
+    dataIndex: "startHour",
+    key: "startHour",
+    editable: true,
+    numberInput: true,
+    numberRange: { min: 0, max: 24 }
+  },
+  {
+    title: "Godzina zakończenia",
+    dataIndex: "endHour",
+    key: "endHour",
+    editable: true,
+    numberInput: true,
+    numberRange: { min: 0, max: 24 }
+  },
+  {
     title: "Cena",
     dataIndex: "price",
     key: "price",
