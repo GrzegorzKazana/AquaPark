@@ -59,6 +59,8 @@ export const pricesDict = [
       {
         ticketTypeId: 0,
         ticketTypeName: "Bilet poranny 6:00-12:00",
+        startHour: 6,
+        endHour: 12,
         price: 30,
         currency: "zł",
         periodDiscount: {
@@ -71,6 +73,8 @@ export const pricesDict = [
       {
         ticketTypeId: 1,
         ticketTypeName: "Bilet popłudniowy 12:00-18:00",
+        startHour: 12,
+        endHour: 18,
         price: 35,
         currency: "zł",
         periodDiscount: null
@@ -78,6 +82,8 @@ export const pricesDict = [
       {
         ticketTypeId: 2,
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
+        startHour: 18,
+        endHour: 24,
         price: 40,
         currency: "zł",
         periodDiscount: null
@@ -85,6 +91,8 @@ export const pricesDict = [
       {
         ticketTypeId: 3,
         ticketTypeName: "Bilet całodniowy",
+        startHour: 6,
+        endHour: 24,
         price: 50,
         currency: "zł",
         periodDiscount: null
@@ -92,6 +100,8 @@ export const pricesDict = [
       {
         ticketTypeId: 4,
         ticketTypeName: "Karnet miesięczny",
+        startHour: 6,
+        endHour: 24,
         price: 300,
         currency: "zł",
         periodDiscount: null
@@ -105,6 +115,8 @@ export const pricesDict = [
       {
         ticketTypeId: 5,
         ticketTypeName: "Bilet poranny 6:00-12:00",
+        startHour: 6,
+        endHour: 12,
         price: 50,
         currency: "zł",
         periodDiscount: {
@@ -116,6 +128,8 @@ export const pricesDict = [
       {
         ticketTypeId: 6,
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
+        startHour: 18,
+        endHour: 24,
         price: 60,
         currency: "zł",
         periodDiscount: null
@@ -123,6 +137,8 @@ export const pricesDict = [
       {
         ticketTypeId: 7,
         ticketTypeName: "Karnet miesięczny",
+        startHour: 6,
+        endHour: 24,
         price: 400,
         currency: "zł",
         periodDiscount: null
@@ -136,6 +152,8 @@ export const pricesDict = [
       {
         ticketTypeId: 8,
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
+        startHour: 18,
+        endHour: 24,
         price: 80,
         currency: "zł",
         periodDiscount: {
@@ -147,6 +165,8 @@ export const pricesDict = [
       {
         ticketTypeId: 9,
         ticketTypeName: "Karnet miesięczny",
+        startHour: 18,
+        endHour: 24,
         price: 1000,
         currency: "zł",
         periodDiscount: null
