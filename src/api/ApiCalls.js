@@ -40,6 +40,17 @@ export const logOutUser = token =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
     );
 
+const editUserDataEndpoint = "users/edituser";
+export const editUserData = userData => {
+  console.log(userData);
+  return axios
+    .post(baseUrl + editUserDataEndpoint)
+    .then(res => Promise.resolve(res.data))
+    .then(data =>
+      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+    );
+};
+
 const purchaseCartEndpoint = "orders/MakeNewOrder";
 export const purchaseCart = (userData, cart) => {
   const data = {
@@ -50,5 +61,14 @@ export const purchaseCart = (userData, cart) => {
     cart
   };
   console.log(data);
-  return axios.post(baseUrl + purchaseCartEndpoint, data);
+  return axios
+    .post(baseUrl + purchaseCartEndpoint, data)
+    .then(res => Promise.resolve(res.data));
+};
+
+export const editDict = (dict, dictData) => {
+  console.log(dict, dictData);
+  return axios
+    .post(baseUrl + dict.updateUrl, dictData)
+    .then(res => Promise.resolve(res.data));
 };

@@ -26,7 +26,7 @@ export const fetchDictProcedure = (name, url, dispatch) => {
       dispatch(loadDict(name)(dict));
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       dispatch(fetchDictError(name)());
     });
 };
@@ -35,4 +35,17 @@ export const fetchAllDictsThunk = () => dispatch => {
   dictionaryList.forEach(dictInfo =>
     fetchDictProcedure(dictInfo.name, dictInfo.url, dispatch)
   );
+};
+
+export const editDictThunk = (dict, dictData) => dispatch => {
+  dispatch(fetchDict(dict.name)());
+  API.editDict(dict, dictData)
+    .then(data => {
+      console.log(data);
+      dispatch(loadDict(dict.name)(data));
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(fetchDictError(dict.name)());
+    });
 };

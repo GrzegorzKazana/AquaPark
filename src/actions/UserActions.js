@@ -69,3 +69,15 @@ export const singUpUserThunk = userData => dispatch => {
       dispatch(signInUserError(err));
     });
 };
+
+export const updateUserDataThunks = userData => dispatch => {
+  API.editUserData(userData)
+    .then(data => {
+      console.log(data);
+      dispatch(loadUser(data));
+    })
+    .catch(err => {
+      console.log(err);
+      //??
+    });
+};

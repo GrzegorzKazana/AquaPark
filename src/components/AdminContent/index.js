@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./AdminContent.scss";
+import dictionaryList from "../../config/dictionaryList";
 import styles from "./AdminContent.module.scss";
 import NavBar from "./NavBar/NavBar";
 import MainMenu from "./MainMenu/MainMenu";
@@ -12,6 +13,7 @@ import { Layout } from "antd";
 
 import { connect } from "react-redux";
 import { logOutUserThunk } from "../../actions/UserActions";
+import { editDictThunk } from "../../actions/DictionaryActions";
 
 const views = {
   OCCUPACY: "0",
@@ -24,7 +26,7 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut, prices, discounts }) => {
+const AdminContent = ({ logOut, prices, discounts, editDict }) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
@@ -40,9 +42,27 @@ const AdminContent = ({ logOut, prices, discounts }) => {
         <Layout.Content className={styles.Content}>
           {openPage === views.OCCUPACY && <OccupancyPage />}
           {openPage === views.NEWSLETTER && <NewsletterPage />}
-          {openPage === views.PRICES && <PricesPage prices={prices} />}
+          {openPage === views.PRICES && (
+            <PricesPage
+              prices={prices}
+              editDict={dictData =>
+                editDict(
+                  dictionaryList.find(d => d.name === "PRICES"),
+                  dictData
+                )
+              }
+            />
+          )}
           {openPage === views.CLASS_DISCOUNT && (
-            <ClassDiscountPage discounts={discounts} />
+            <ClassDiscountPage
+              discounts={discounts}
+              editDict={dictData =>
+                editDict(
+                  dictionaryList.find(d => d.name === "CLASS_DISCOUNTS"),
+                  dictData
+                )
+              }
+            />
           )}
         </Layout.Content>
       </Layout>
@@ -52,7 +72,8 @@ const AdminContent = ({ logOut, prices, discounts }) => {
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password))
+  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
+  editDict: (dict, dictData) => dispatch(editDictThunk(dict, dictData))
 });
 
 export default connect(

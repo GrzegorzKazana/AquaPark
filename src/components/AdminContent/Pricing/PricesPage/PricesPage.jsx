@@ -38,7 +38,7 @@ const columns = [
   }
 ];
 
-const PricesPage = ({ prices }) => {
+const PricesPage = ({ prices, editDict }) => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <Tabs tabPosition="top">
@@ -48,7 +48,7 @@ const PricesPage = ({ prices }) => {
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}
               columns={columns}
-              onSubmit={data => console.log(data)}
+              onSubmit={editDict}
               createExpandedRowRender={(dataSource, setDataSource) => (
                 record,
                 index
@@ -87,5 +87,6 @@ const PricesPage = ({ prices }) => {
 export default PricesPage;
 
 PricesPage.propTypes = {
-  prices: PropTypes.object.isRequired
+  prices: PropTypes.object.isRequired,
+  editDict: PropTypes.func.isRequired
 };

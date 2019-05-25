@@ -28,14 +28,14 @@ const columns = [
   }
 ];
 
-const ClassDiscountPage = ({ discounts }) => {
+const ClassDiscountPage = ({ discounts, editDict }) => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <EditableTable
         rowKey="classDiscountId"
         dataDefault={discounts.dictionary}
         columns={columns}
-        onSubmit={data => console.log(data)}
+        onSubmit={editDict}
       />
     </Card>
   );
@@ -43,5 +43,6 @@ const ClassDiscountPage = ({ discounts }) => {
 export default ClassDiscountPage;
 
 ClassDiscountPage.propTypes = {
-  discounts: PropTypes.object.isRequired
+  discounts: PropTypes.object.isRequired,
+  editDict: PropTypes.func.isRequired
 };
