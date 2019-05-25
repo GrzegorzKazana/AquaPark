@@ -30,14 +30,12 @@ export const logInUser = (email, password) =>
     );
 
 const logOutUserExndpoint = "";
-export const logOutUser = (email, password) =>
+export const logOutUser = token =>
   axios
     .post(baseUrl + logOutUserExndpoint, {
-      Email: email,
-      Password: password
+      userToken: token
     })
     .then(res => Promise.resolve(res.data))
-    .then(data => {
-      console.log(data);
-      return data.success ? Promise.resolve(data) : Promise.reject(data.status);
-    });
+    .then(data =>
+      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+    );

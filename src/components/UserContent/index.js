@@ -115,7 +115,7 @@ const UserContent = ({
   };
 
   const handleLogOut = () => {
-    logOut();
+    logOut(user.user.userToken);
     notification.info({
       message: "Wylogowano"
     });
@@ -191,7 +191,7 @@ const UserContent = ({
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
+  logOut: token => dispatch(logOutUserThunk(token)),
   signUp: userData => dispatch(singUpUserThunk(userData)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
