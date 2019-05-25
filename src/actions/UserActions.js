@@ -1,4 +1,5 @@
-import * as API from "../api/Mock/MockApiCalls";
+// import * as API from "../api/Mock/MockApiCalls";
+import * as API from "../api/ApiCalls";
 
 export const FETCH_USER = "FETCH_USER";
 export const fetchUser = () => ({
@@ -12,8 +13,9 @@ export const loadUser = user => ({
 });
 
 export const FETCH_USER_ERROR = "FETCH_USER_ERROR";
-export const fetchUserError = () => ({
-  type: FETCH_USER_ERROR
+export const fetchUserError = err => ({
+  type: FETCH_USER_ERROR,
+  message: err
 });
 
 export const LOG_OUT_USER = "LOG_OUT_USER";
@@ -32,8 +34,9 @@ export const signInUserSuccess = () => ({
 });
 
 export const SIGN_UP_USER_ERROR = "SIGN_UP_USER_ERROR";
-export const signInUserError = () => ({
-  type: SIGN_UP_USER_ERROR
+export const signInUserError = err => ({
+  type: SIGN_UP_USER_ERROR,
+  message: err
 });
 
 export const logInUserThunk = (email, password) => dispatch => {
@@ -45,7 +48,7 @@ export const logInUserThunk = (email, password) => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      dispatch(fetchUserError());
+      dispatch(fetchUserError(err));
     });
 };
 
@@ -54,15 +57,15 @@ export const logOutUserThunk = (email, password) => dispatch => {
   API.logOutUser(email, password);
 };
 
-export const singUpUserThunk = (email, password) => dispatch => {
+export const singUpUserThunk = userData => dispatch => {
   dispatch(signInUser());
-  API.signUpUser(email, password)
+  API.signUpUser(userData)
     .then(data => {
       console.log(data);
       dispatch(signInUserSuccess());
     })
     .catch(err => {
       console.log(err);
-      dispatch(signInUserError());
+      dispatch(signInUserError(err));
     });
 };

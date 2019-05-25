@@ -65,16 +65,22 @@ const UserContent = ({
     }
   }, [user.userLoaded]);
 
+  const { userFetchingError, userFetchingErrorMessage } = user;
   useEffect(() => {
     // disaply message when errror loggin in
-    if (user.userFetchingError) {
+    if (userFetchingError) {
       notification.error({
-        message: "Błąd logowania"
+        message: userFetchingErrorMessage || "Błąd logowania"
       });
     }
-  }, [user.userFetchingError]);
+  }, [userFetchingError, userFetchingErrorMessage]);
 
-  const { userSigningUp, userSigningUpSuccess, userSigningUpError } = user;
+  const {
+    userSigningUp,
+    userSigningUpSuccess,
+    userSigningUpError,
+    userSigningUpErrorMessage
+  } = user;
   useEffect(() => {
     // close signup modal when got positive response
     if (userSigningUp) {
@@ -87,10 +93,15 @@ const UserContent = ({
       });
     } else if (userSigningUpError) {
       notification.error({
-        message: "Błąd rejestracji"
+        message: userSigningUpErrorMessage || "Błąd rejestracji"
       });
     }
-  }, [userSigningUp, userSigningUpSuccess, userSigningUpError]);
+  }, [
+    userSigningUp,
+    userSigningUpSuccess,
+    userSigningUpError,
+    userSigningUpErrorMessage
+  ]);
 
   const loginSubmit = vals => {
     console.log(vals);
@@ -100,8 +111,7 @@ const UserContent = ({
 
   const signUpSubmit = vals => {
     console.log(vals);
-    const { email, password } = vals;
-    signUp(email, password);
+    signUp(vals);
   };
 
   const handleLogOut = () => {
@@ -182,7 +192,7 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
   logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
-  signUp: (email, password) => dispatch(singUpUserThunk(email, password)),
+  signUp: userData => dispatch(singUpUserThunk(userData)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
   addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),

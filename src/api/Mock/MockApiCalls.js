@@ -36,13 +36,15 @@ export const logOutUser = (email, password) => {
   return defaultResolve({ status: "ok" });
 };
 
-export const signUpUser = (email, password) => {
+export const signUpUser = userData => {
   userDb.push({
-    email,
-    password,
+    email: userData.email,
+    password: userData.password,
+    name: userData.name,
+    surname: userData.surname,
     isAdmin: false
   });
-  return logInUser(email, password);
+  return logInUser(userData.email, userData.password);
 };
 
 export const purchaseCart = (userData, cart) => {
