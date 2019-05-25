@@ -1,4 +1,6 @@
 import axios from "axios";
 
+const baseUrl = "http://localhost:51232/api/";
+
 export const fetchDictFromApi = (name, url) =>
-  axios.get(url).then(res => res.json());
+  axios.get(baseUrl + url).then(res => res.data);

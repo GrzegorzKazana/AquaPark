@@ -46,8 +46,8 @@ const AreasPage = ({ areas }) => {
       <Carousel ref={carouselRef}>
         {areas.dictionary.map(area => (
           <CarouselCard
-            key={area.areaId}
-            title={area.areaName}
+            key={area.zoneId}
+            title={area.name}
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac dignissim nisl. Donec pellentesque sapien convallis arcu maximus elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod velit id justo pharetra, vitae posuere nulla molestie. Fusce ornare elit in leo ultricies scelerisque."
           />
         ))}

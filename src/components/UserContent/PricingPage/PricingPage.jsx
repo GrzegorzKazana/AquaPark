@@ -11,7 +11,7 @@ const PricingPage = ({ prices, addItemToCart }) => (
     <Card title="Cennik" className={styles.PricingPage__Card}>
       <Tabs tabPosition="left">
         {prices.dictionary.map(pricing => (
-          <Tabs.TabPane key={pricing.areaId} tab={pricing.areaName}>
+          <Tabs.TabPane key={pricing.zoneId} tab={pricing.zoneName}>
             <PriceTable
               tickets={pricing.ticketTypes}
               addItemToCart={addItemToCart}

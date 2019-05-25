@@ -43,7 +43,7 @@ const PricesPage = ({ prices }) => {
     <Card title="Cennik" className={styles.NewsletterPage}>
       <Tabs tabPosition="top">
         {prices.dictionary.map(price => (
-          <Tabs.TabPane tab={price.areaName} key={price.areaId}>
+          <Tabs.TabPane tab={price.zoneName} key={price.zoneId}>
             <EditableTable
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}

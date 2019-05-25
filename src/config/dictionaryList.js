@@ -2,16 +2,16 @@ export default [
   {
     name: "AREAS",
     reducerName: "areas",
-    url: ""
+    url: "zones/getallzoneswithattractions"
   },
   {
     name: "PRICES",
     reducerName: "prices",
-    url: ""
+    url: "zones/GetAllZonesWithTickets"
   },
   {
     name: "CLASS_DISCOUNTS",
     reducerName: "discounts",
-    url: ""
+    url: "discounts/GetAllSocialClassDiscounts"
   }
 ];

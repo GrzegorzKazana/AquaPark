@@ -1,5 +1,5 @@
-// import { fetchDictFromApi } from "../api/ApiCalls";
 import * as API from "../api/Mock/MockApiCalls";
+// import * as API from "../api/ApiCalls";
 import dictionaryList from "../config/dictionaryList";
 
 export const FETCH_DICT = "FETCH_DICT";
