@@ -25,6 +25,7 @@ export const CartView = ({
       <Select
         style={{ width: "150px", marginRight: "16px" }}
         defaultValue={
+          (item.discount || discounts.dictionary[0]) &&
           (item.discount || discounts.dictionary[0]).classDiscountId
         }
         onChange={id =>
