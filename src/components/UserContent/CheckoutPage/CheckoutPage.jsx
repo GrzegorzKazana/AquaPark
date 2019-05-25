@@ -31,7 +31,7 @@ const CheckoutPage = ({
 
   const handleDataSubmit = userData => {
     next();
-    setPurchaseUserData(userData);
+    setPurchaseUserData({ ...user.user, ...userData });
   };
 
   const handleBuy = () => {

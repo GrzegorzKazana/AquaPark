@@ -39,3 +39,16 @@ export const logOutUser = token =>
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
     );
+
+const purchaseCartEndpoint = "orders/MakeNewOrder";
+export const purchaseCart = (userData, cart) => {
+  const data = {
+    userToken: userData.userToken,
+    Email: userData.email,
+    Name: userData.name,
+    Surname: userData.surname,
+    cart
+  };
+  console.log(data);
+  return axios.post(baseUrl + purchaseCartEndpoint, data);
+};
