@@ -66,9 +66,12 @@ export const purchaseCart = (userData, cart) => {
     .then(res => Promise.resolve(res.data));
 };
 
-export const editDict = (dict, dictData) => {
+export const editDict = (userToken, dict, dictData) => {
   console.log(dict, dictData);
   return axios
-    .post(baseUrl + dict.updateUrl, dictData)
+    .post(baseUrl + dict.updateUrl, {
+      userToken,
+      ZonesWithTicketsDto: dictData
+    })
     .then(res => Promise.resolve(res.data));
 };

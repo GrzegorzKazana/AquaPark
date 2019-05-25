@@ -34,7 +34,8 @@ const columns = [
     dataIndex: "price",
     key: "price",
     editable: true,
-    numberInput: true
+    numberInput: true,
+    numberRange: { min: 0, max: 9999 }
   }
 ];
 
@@ -48,7 +49,15 @@ const PricesPage = ({ prices, editDict }) => {
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}
               columns={columns}
-              onSubmit={editDict}
+              onSubmit={ticketTypes =>
+                editDict(
+                  prices.dictionary.map(zone =>
+                    zone.zoneId === price.zoneId
+                      ? { ...zone, ticketTypes }
+                      : zone
+                  )
+                )
+              }
               createExpandedRowRender={(dataSource, setDataSource) => (
                 record,
                 index

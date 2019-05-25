@@ -37,9 +37,9 @@ export const fetchAllDictsThunk = () => dispatch => {
   );
 };
 
-export const editDictThunk = (dict, dictData) => dispatch => {
+export const editDictThunk = (userToken, dict, dictData) => dispatch => {
   dispatch(fetchDict(dict.name)());
-  API.editDict(dict, dictData)
+  API.editDict(userToken, dict, dictData)
     .then(data => {
       console.log(data);
       dispatch(loadDict(dict.name)(data));

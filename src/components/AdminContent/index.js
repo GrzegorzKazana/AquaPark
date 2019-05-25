@@ -26,7 +26,7 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut, prices, discounts, editDict }) => {
+const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
@@ -47,6 +47,7 @@ const AdminContent = ({ logOut, prices, discounts, editDict }) => {
               prices={prices}
               editDict={dictData =>
                 editDict(
+                  user.user.userToken,
                   dictionaryList.find(d => d.name === "PRICES"),
                   dictData
                 )
@@ -58,6 +59,7 @@ const AdminContent = ({ logOut, prices, discounts, editDict }) => {
               discounts={discounts}
               editDict={dictData =>
                 editDict(
+                  user.user.userToken,
                   dictionaryList.find(d => d.name === "CLASS_DISCOUNTS"),
                   dictData
                 )
@@ -73,7 +75,8 @@ const AdminContent = ({ logOut, prices, discounts, editDict }) => {
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
-  editDict: (dict, dictData) => dispatch(editDictThunk(dict, dictData))
+  editDict: (userToken, dict, dictData) =>
+    dispatch(editDictThunk(userToken, dict, dictData))
 });
 
 export default connect(
