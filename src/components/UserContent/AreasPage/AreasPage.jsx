@@ -17,8 +17,18 @@ const CarouselCard = ({ title, description, image }) => (
     />
     <span className={styles.CarouselItem__Description}>
       <Typography>
-        <Typography.Title>{title}</Typography.Title>
-        <Typography.Paragraph>{description}</Typography.Paragraph>
+        <Typography.Title style={{ fontSize: "3.5rem", marginBottom: "0px" }}>
+          {title}
+        </Typography.Title>
+        <Typography.Paragraph
+          style={{
+            fontSize: "1.25rem",
+            fontWeight: 500,
+            color: "#000"
+          }}
+        >
+          {description}
+        </Typography.Paragraph>
       </Typography>
     </span>
   </div>
