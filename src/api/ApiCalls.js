@@ -52,17 +52,28 @@ export const editUserData = userData => {
 
 const purchaseCartEndpoint = "orders/MakeNewOrder";
 export const purchaseCart = (userData, cart) => {
-  const data = {
-    userToken: userData.userToken,
+  const UserData = {
+    userToken: userData.userToken || "",
     Email: userData.email,
     Name: userData.name,
-    Surname: userData.surname,
-    cart
+    Surname: userData.surname
   };
-  console.log(data);
+  const TicketsWithClassDiscounts = cart.items.map(item => ({
+    TicketTypeId: item.ticketTypeId,
+    SocialClassDiscountId: item.discount ? item.discount.id : 0,
+    NumberOfTickets: item.itemCount
+  }));
+  const order = {
+    UserData,
+    TicketsWithClassDiscounts
+  };
+  console.log(order);
   return axios
-    .post(baseUrl + purchaseCartEndpoint, data)
-    .then(res => Promise.resolve(res.data));
+    .post(baseUrl + purchaseCartEndpoint, order)
+    .then(res => Promise.resolve(res.data))
+    .then(data =>
+      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+    );
 };
 
 export const editDict = (userToken, dict, dictData) => {

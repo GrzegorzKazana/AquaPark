@@ -94,7 +94,8 @@ export const singUpUserThunk = userData => dispatch => {
     });
 };
 
-export const updateUserDataThunks = userData => dispatch => {
+export const updateUserDataThunk = userData => dispatch => {
+  dispatch(fetchUser());
   API.editUserData(userData)
     .then(data => {
       console.log(data);
@@ -102,6 +103,8 @@ export const updateUserDataThunks = userData => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      //??
+      notification.error({
+        message: err
+      });
     });
 };

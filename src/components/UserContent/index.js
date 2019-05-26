@@ -18,7 +18,8 @@ import { connect } from "react-redux";
 import {
   logInUserThunk,
   logOutUserThunk,
-  singUpUserThunk
+  singUpUserThunk,
+  updateUserDataThunk
 } from "../../actions/UserActions";
 import {
   addItem,
@@ -44,6 +45,7 @@ const UserContent = ({
   logIn,
   logOut,
   signUp,
+  updateUserData,
   addItemToCart,
   removeItemFromCart,
   addDiscountToItem,
@@ -143,6 +145,7 @@ const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
   logOut: token => dispatch(logOutUserThunk(token)),
   signUp: userData => dispatch(singUpUserThunk(userData)),
+  updateUserData: userData => dispatch(updateUserDataThunk(userData)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
   addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),

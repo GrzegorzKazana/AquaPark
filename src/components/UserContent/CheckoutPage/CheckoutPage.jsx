@@ -26,6 +26,12 @@ const CheckoutPage = ({
   );
 
   useEffect(() => {
+    cart.items.forEach(
+      item => !item.discount && addDiscountToItem(item, discounts.dictionary[0])
+    );
+  }, [cart.items.length]);
+
+  useEffect(() => {
     setPurchaseUserData(user.user);
   }, [user.user]);
 
@@ -36,9 +42,6 @@ const CheckoutPage = ({
 
   const handleBuy = () => {
     purchaseCart(purchaseUserData, cart);
-    notification.info({
-      message: "Zakup potwierdzony"
-    });
   };
 
   const steps = [
