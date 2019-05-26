@@ -9,7 +9,11 @@ export default [
     name: "PRICES",
     reducerName: "prices",
     url: "zones/GetAllZonesWithTickets",
-    updateUrl: "zones/AddZonesWithTickets"
+    updateUrl: "zones/AddZonesWithTickets",
+    formatDictUpdate: (token, data) => ({
+      userToken: token,
+      ZonesWithTicketsDto: data
+    })
   },
   {
     name: "CLASS_DISCOUNTS",

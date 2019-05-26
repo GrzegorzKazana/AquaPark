@@ -34,7 +34,10 @@ export const logOutUser = token =>
     .post(baseUrl + logOutUserExndpoint, {
       userToken: token
     })
-    .then(res => Promise.resolve(res.data))
+    .then(res => {
+      console.log(res);
+      return Promise.resolve(res.data);
+    })
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
     );
@@ -79,9 +82,6 @@ export const purchaseCart = (userData, cart) => {
 export const editDict = (userToken, dict, dictData) => {
   console.log(dict, dictData);
   return axios
-    .post(baseUrl + dict.updateUrl, {
-      userToken,
-      ZonesWithTicketsDto: dictData
-    })
+    .post(baseUrl + dict.updateUrl, dict.formatDictUpdate(userToken, dictData))
     .then(res => Promise.resolve(res.data));
 };

@@ -31,7 +31,7 @@ const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
   return (
     <Layout className={styles.Layout}>
       <Layout.Header>
-        <NavBar onLogOut={logOut} />
+        <NavBar onLogOut={() => logOut(user.user.userToken)} />
       </Layout.Header>
       <Layout>
         <Layout.Sider theme="light" breakpoint="md" collapsedWidth={0}>
@@ -74,7 +74,7 @@ const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
+  logOut: token => dispatch(logOutUserThunk(token)),
   editDict: (userToken, dict, dictData) =>
     dispatch(editDictThunk(userToken, dict, dictData))
 });

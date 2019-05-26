@@ -59,8 +59,8 @@ export const logInUserThunk = (email, password) => dispatch => {
     });
 };
 
-export const logOutUserThunk = (email, password) => dispatch => {
-  API.logOutUser(email, password)
+export const logOutUserThunk = token => dispatch => {
+  API.logOutUser(token)
     .then(res => {
       notification.success({
         message: "Poprawnie wylogowano"
@@ -70,7 +70,7 @@ export const logOutUserThunk = (email, password) => dispatch => {
     .catch(err => {
       console.error(err);
       notification.error({
-        message: err
+        message: "Błąd"
       });
     });
 };
