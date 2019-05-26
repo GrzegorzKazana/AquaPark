@@ -19,6 +19,10 @@ export default [
     name: "CLASS_DISCOUNTS",
     reducerName: "discounts",
     url: "discounts/GetAllSocialClassDiscounts",
-    updateUrl: "discounts/AddSocialClassDiscounts/"
+    updateUrl: "discounts/AddSocialClassDiscounts/",
+    formatDictUpdate: (token, data) => ({
+      userToken: token,
+      PeriodicDiscounts: data
+    })
   }
 ];

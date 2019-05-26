@@ -7,24 +7,18 @@ import EditableTable from "../../Common/EditableTable/EditableTable";
 const columns = [
   {
     title: "Rodzaj zniżki",
-    dataIndex: "discountLabel",
-    key: "discountLabel",
-    editable: true,
-    numberInput: false
-  },
-  {
-    title: "Nazwa klasy",
-    dataIndex: "className",
-    key: "className",
+    dataIndex: "socialClassName",
+    key: "socialClassName",
     editable: true,
     numberInput: false
   },
   {
     title: "Zniżka",
-    dataIndex: "discountRate",
-    key: "discountRate",
+    dataIndex: "value",
+    key: "value",
     editable: true,
-    numberInput: true
+    numberInput: true,
+    numberRange: { min: 0, max: 1 }
   }
 ];
 
@@ -32,7 +26,7 @@ const ClassDiscountPage = ({ discounts, editDict }) => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <EditableTable
-        rowKey="classDiscountId"
+        rowKey="id"
         dataDefault={discounts.dictionary}
         columns={columns}
         onSubmit={editDict}
