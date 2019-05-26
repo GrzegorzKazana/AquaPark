@@ -48,7 +48,7 @@ const PeriodDiscountForm = Form.create()(
                 message: `Rate is required.`
               }
             ],
-            initialValue: ticket.periodDiscount && ticket.periodDiscount.rate
+            initialValue: ticket.periodDiscount && ticket.periodDiscount.value
           })(<Input type="number" />)}
         </Form.Item>
         <Form.Item>
