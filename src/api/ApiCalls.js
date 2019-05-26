@@ -53,7 +53,6 @@ export const editUserData = userData => {
 const purchaseCartEndpoint = "orders/MakeNewOrder";
 export const purchaseCart = (userData, cart) => {
   const UserData = {
-    userToken: userData.userToken || "",
     Email: userData.email,
     Name: userData.name,
     Surname: userData.surname
@@ -64,6 +63,7 @@ export const purchaseCart = (userData, cart) => {
     NumberOfTickets: item.itemCount
   }));
   const order = {
+    UserToken: userData.userToken || "",
     UserData,
     TicketsWithClassDiscounts
   };
