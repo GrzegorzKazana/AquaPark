@@ -2,7 +2,13 @@ import React from "react";
 import { Modal, Button } from "antd";
 import UserDataForm from "../../Common/UserDataForm/UserDataForm";
 
-const SignUpModal = ({ handleSubmit, handleCancel, open, loading }) => {
+const SignUpModal = ({
+  handleSubmit,
+  handleCancel,
+  open,
+  loading,
+  onClickTerms
+}) => {
   const formName = "registerForm";
 
   const footer = [
@@ -26,6 +32,7 @@ const SignUpModal = ({ handleSubmit, handleCancel, open, loading }) => {
         formName={formName}
         onSubmit={handleSubmit}
         acceptTermsFooter={true}
+        onClickTerms={onClickTerms}
         passwordInput={true}
       />
     </Modal>
