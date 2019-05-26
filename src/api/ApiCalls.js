@@ -44,10 +44,14 @@ export const logOutUser = token =>
     );
 
 const editUserDataEndpoint = "users/edituser";
-export const editUserData = userData => {
-  console.log(userData);
+export const editUserData = (token, userData) => {
+  const data = {
+    userToken: token,
+    ...userData
+  };
+  console.log(data);
   return axios
-    .post(baseUrl + editUserDataEndpoint, userData)
+    .post(baseUrl + editUserDataEndpoint, data)
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)

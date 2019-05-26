@@ -94,11 +94,14 @@ export const singUpUserThunk = userData => dispatch => {
     });
 };
 
-export const updateUserDataThunk = userData => dispatch => {
+export const updateUserDataThunk = (token, userData) => dispatch => {
   dispatch(fetchUser());
-  API.editUserData(userData)
+  API.editUserData(token, userData)
     .then(data => {
       console.log(data);
+      notification.success({
+        message: "Dane zostały zaktualizowane"
+      });
       dispatch(loadUser(data));
     })
     .catch(err => {

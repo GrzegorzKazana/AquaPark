@@ -149,7 +149,10 @@ const UserContent = ({
       <UserDataModal
         open={UserDataModalOpen}
         userData={user.user}
-        handleSubmit={vals => console.log(vals)}
+        handleSubmit={userData => {
+          setUserDataModalOpen(false);
+          updateUserData(user.user.userToken, userData);
+        }}
         handleClose={() => setUserDataModalOpen(false)}
       />
     </>
@@ -161,7 +164,8 @@ const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
   logOut: token => dispatch(logOutUserThunk(token)),
   signUp: userData => dispatch(singUpUserThunk(userData)),
-  updateUserData: userData => dispatch(updateUserDataThunk(userData)),
+  updateUserData: (token, userData) =>
+    dispatch(updateUserDataThunk(token, userData)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
   addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),
