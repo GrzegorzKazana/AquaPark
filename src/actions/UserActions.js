@@ -1,5 +1,6 @@
 // import * as API from "../api/Mock/MockApiCalls";
 import * as API from "../api/ApiCalls";
+import { notification } from "antd";
 
 export const FETCH_USER = "FETCH_USER";
 export const fetchUser = () => ({
@@ -44,17 +45,34 @@ export const logInUserThunk = (email, password) => dispatch => {
   API.logInUser(email, password)
     .then(user => {
       console.log(user);
+      notification.success({
+        message: "Witamy ponownie!"
+      });
       dispatch(loadUser(user));
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
+      notification.error({
+        message: err
+      });
       dispatch(fetchUserError(err));
     });
 };
 
 export const logOutUserThunk = (email, password) => dispatch => {
-  dispatch(logOutUser());
-  API.logOutUser(email, password);
+  API.logOutUser(email, password)
+    .then(res => {
+      notification.success({
+        message: "Poprawnie wylogowano"
+      });
+      dispatch(logOutUser());
+    })
+    .catch(err => {
+      console.error(err);
+      notification.error({
+        message: err
+      });
+    });
 };
 
 export const singUpUserThunk = userData => dispatch => {
@@ -62,10 +80,16 @@ export const singUpUserThunk = userData => dispatch => {
   API.signUpUser(userData)
     .then(data => {
       console.log(data);
+      notification.success({
+        message: "Konto aktywowane"
+      });
       dispatch(signInUserSuccess());
     })
     .catch(err => {
       console.log(err);
+      notification.error({
+        message: err
+      });
       dispatch(signInUserError(err));
     });
 };

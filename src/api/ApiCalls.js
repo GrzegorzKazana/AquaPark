@@ -9,7 +9,6 @@ const signUpEndpoint = "users/registeruser";
 export const signUpUser = userData =>
   axios
     .post(baseUrl + signUpEndpoint, {
-      Login: userData.name,
       Password: userData.password,
       Name: userData.name,
       Surname: userData.surname,
@@ -29,7 +28,7 @@ export const logInUser = (email, password) =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
     );
 
-const logOutUserExndpoint = "";
+const logOutUserExndpoint = "users/logout";
 export const logOutUser = token =>
   axios
     .post(baseUrl + logOutUserExndpoint, {
@@ -44,7 +43,7 @@ const editUserDataEndpoint = "users/edituser";
 export const editUserData = userData => {
   console.log(userData);
   return axios
-    .post(baseUrl + editUserDataEndpoint)
+    .post(baseUrl + editUserDataEndpoint, userData)
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)

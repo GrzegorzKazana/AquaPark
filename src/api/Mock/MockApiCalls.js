@@ -51,3 +51,11 @@ export const purchaseCart = (userData, cart) => {
   console.log(userData, "just bought", cart);
   return defaultResolve({});
 };
+
+export const editDict = (userToken, dict, dictData) => {
+  console.log(dict, dictData);
+};
+
+export const editUserData = userData => {
+  console.log(userData);
+};

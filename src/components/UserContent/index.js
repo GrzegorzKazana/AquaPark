@@ -57,30 +57,10 @@ const UserContent = ({
 
   useEffect(() => {
     // close log in modal when user loaded
-    if (user.userLoaded) {
-      setloginModalOpen(false);
-      notification.success({
-        message: "Witamy ponownie"
-      });
-    }
+    user.userLoaded && setloginModalOpen(false);
   }, [user.userLoaded]);
 
-  const { userFetchingError, userFetchingErrorMessage } = user;
-  useEffect(() => {
-    // disaply message when errror loggin in
-    if (userFetchingError) {
-      notification.error({
-        message: userFetchingErrorMessage || "Błąd logowania"
-      });
-    }
-  }, [userFetchingError, userFetchingErrorMessage]);
-
-  const {
-    userSigningUp,
-    userSigningUpSuccess,
-    userSigningUpError,
-    userSigningUpErrorMessage
-  } = user;
+  const { userSigningUp, userSigningUpSuccess } = user;
   useEffect(() => {
     // close signup modal when got positive response
     if (userSigningUp) {
@@ -88,38 +68,8 @@ const UserContent = ({
     }
     if (userSigningUpSuccess) {
       setSignUpModalOpen(false);
-      notification.success({
-        message: "Na email została wysłana wiadomość aktywacyjna"
-      });
-    } else if (userSigningUpError) {
-      notification.error({
-        message: userSigningUpErrorMessage || "Błąd rejestracji"
-      });
     }
-  }, [
-    userSigningUp,
-    userSigningUpSuccess,
-    userSigningUpError,
-    userSigningUpErrorMessage
-  ]);
-
-  const loginSubmit = vals => {
-    console.log(vals);
-    const { email, password } = vals;
-    logIn(email, password);
-  };
-
-  const signUpSubmit = vals => {
-    console.log(vals);
-    signUp(vals);
-  };
-
-  const handleLogOut = () => {
-    logOut(user.user.userToken);
-    notification.info({
-      message: "Wylogowano"
-    });
-  };
+  }, [userSigningUp, userSigningUpSuccess]);
 
   const isLoggedIn = Boolean(user.user);
   const navbar = (
@@ -130,7 +80,7 @@ const UserContent = ({
       userMenuOverlay={
         isLoggedIn ? (
           <DropdownMenuOverlayLoggedIn
-            onLogOut={handleLogOut}
+            onLogOut={() => logOut(user.user.userToken)}
             onOpenFaqModal={() => setFaqModalOpen(true)}
           />
         ) : (
@@ -171,13 +121,13 @@ const UserContent = ({
       <LogInModal
         open={loginModalOpen}
         loading={user.userFetching}
-        handleSubmit={loginSubmit}
+        handleSubmit={({ email, password }) => logIn(email, password)}
         handleCancel={() => setloginModalOpen(false)}
       />
       <SignUpModal
         open={signUpModalOpen}
         loading={user.userSigningUp}
-        handleSubmit={signUpSubmit}
+        handleSubmit={signUp}
         handleCancel={() => setSignUpModalOpen(false)}
       />
       <FaqModal
