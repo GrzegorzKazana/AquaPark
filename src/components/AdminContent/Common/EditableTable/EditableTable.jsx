@@ -33,7 +33,7 @@ const EditableTable = ({
 
   const handleAdd = () => {
     const newData = Object.assign({}, dataSource[dataSource.length - 1], {
-      ticketTypeId: parseInt(dataSource[dataSource.length - 1][rowKey] + 1)
+      [rowKey]: Math.floor(Math.random() * 1000 + 1000)
     });
     setDataSource([...dataSource, newData]);
   };

@@ -22,7 +22,7 @@ export default [
     updateUrl: "discounts/AddSocialClassDiscounts/",
     formatDictUpdate: (token, data) => ({
       userToken: token,
-      PeriodicDiscounts: data
+      socialClassDiscounts: data
     })
   }
 ];

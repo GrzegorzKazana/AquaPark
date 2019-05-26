@@ -80,8 +80,9 @@ export const purchaseCart = (userData, cart) => {
 };
 
 export const editDict = (userToken, dict, dictData) => {
-  console.log(dict, dictData);
+  const data = dict.formatDictUpdate(userToken, dictData);
+  console.log(data);
   return axios
-    .post(baseUrl + dict.updateUrl, dict.formatDictUpdate(userToken, dictData))
+    .post(baseUrl + dict.updateUrl, data)
     .then(res => Promise.resolve(res.data));
 };
