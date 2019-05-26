@@ -34,8 +34,10 @@ const CheckoutPage = ({
     setPurchaseUserData(userData);
   };
 
+
   const handleBuy = () => {
     purchaseCart(purchaseUserData, cart);
+
     notification.info({
       message: "Zakup potwierdzony"
     });
