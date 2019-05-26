@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./NewsletterPage.module.scss";
 import { Card, Input, Button } from "antd";
 
-const NewsletterPage = () => {
+const NewsletterPage = ({ onEmit }) => {
   const [inputValue, setInputValue] = useState("");
   return (
     <Card title="Newsletter" className={styles.NewsletterPage}>
@@ -11,7 +11,11 @@ const NewsletterPage = () => {
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
       />
-      <Button type="primary" className={styles.NewsletterEndButton}>
+      <Button
+        type="primary"
+        className={styles.NewsletterEndButton}
+        onClick={() => onEmit(inputValue)}
+      >
         Wyślij
       </Button>
     </Card>

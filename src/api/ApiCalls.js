@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notification } from "antd";
 
 const baseUrl = "http://localhost:51232/api/";
 
@@ -86,3 +87,17 @@ export const editDict = (userToken, dict, dictData) => {
     .post(baseUrl + dict.updateUrl, data)
     .then(res => Promise.resolve(res.data));
 };
+
+const emitNewsletterEndpoint = "admin/SendNewsletter";
+export const emitNewsletter = (token, message) =>
+  axios
+    .post(baseUrl + emitNewsletterEndpoint, {
+      UserToken: token,
+      Message: message
+    })
+    .then(res => Promise.resolve(res.data))
+    .then(data =>
+      data.success
+        ? notification.success({ message: data.status })
+        : notification.success({ message: data.status })
+    );

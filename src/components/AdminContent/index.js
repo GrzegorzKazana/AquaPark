@@ -14,6 +14,7 @@ import { Layout } from "antd";
 import { connect } from "react-redux";
 import { logOutUserThunk } from "../../actions/UserActions";
 import { editDictThunk } from "../../actions/DictionaryActions";
+import { emitNewsletter } from "../../api/ApiCalls";
 
 const views = {
   OCCUPACY: "0",
@@ -41,7 +42,11 @@ const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
         </Layout.Sider>
         <Layout.Content className={styles.Content}>
           {openPage === views.OCCUPACY && <OccupancyPage />}
-          {openPage === views.NEWSLETTER && <NewsletterPage />}
+          {openPage === views.NEWSLETTER && (
+            <NewsletterPage
+              onEmit={msg => emitNewsletter(user.user.userToken, msg)}
+            />
+          )}
           {openPage === views.PRICES && (
             <PricesPage
               prices={prices}
