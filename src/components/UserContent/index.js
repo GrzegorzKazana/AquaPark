@@ -12,6 +12,8 @@ import CheckoutPage from "./CheckoutPage/CheckoutPage";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
+import UserDataModal from "./Modals/UserDataModal";
+
 import { Layout, notification } from "antd";
 
 import { connect } from "react-redux";
@@ -54,6 +56,7 @@ const UserContent = ({
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);
+  const [UserDataModalOpen, setUserDataModalOpen] = useState(false);
 
   useEffect(() => {
     // close log in modal when user loaded
@@ -122,6 +125,7 @@ const UserContent = ({
           <DropdownMenuOverlayLoggedIn
             onLogOut={handleLogOut}
             onOpenFaqModal={() => setFaqModalOpen(true)}
+            onOpenUserDataModal={() => setUserDataModalOpen(true)}
           />
         ) : (
           <DropdownMenuOverlay
@@ -173,6 +177,10 @@ const UserContent = ({
       <FaqModal
         open={faqModalOpen}
         handleClose={() => setFaqModalOpen(false)}
+      />
+      <UserDataModal
+        open={UserDataModalOpen}
+        handleClose={() => setUserDataModalOpen(false)}
       />
     </>
   );

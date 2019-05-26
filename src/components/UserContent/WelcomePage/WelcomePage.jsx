@@ -2,11 +2,21 @@ import React from "react";
 import styles from "./WelcomePage.module.scss";
 import { Card } from "antd";
 
-const WelcomePage = () => (
-  <Card title="Witaj w aquaparku" className={styles.Card}>
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
-  </Card>
-);
+class WelcomePage extends React.Component {
+  render() {
+    const Background = "http://www.photos-public-domain.com/wp-content/uploads/2012/04/aqua-colored-water-texture.jpg";
+    return (
+      <div className={styles.welcomePage}>
+        <img src={`${Background})`} className={styles.welcomePicture}></img>
+     
+        <p className={styles.welcomeText}>Witaj w AquaParku</p>
+        <div className={styles.welcomeTextBackground}></div>
+        {/* <p className={styles.welcomeText}>text</p>
+        <p className={styles.welcomeText}>text</p> */}
+
+
+      </div>
+    );
+  }
+}
 export default WelcomePage;

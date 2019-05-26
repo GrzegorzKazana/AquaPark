@@ -8,29 +8,33 @@ export const DropdownMenuOverlay = ({
   onOpenSignUpModal,
   onOpenFaqModal
 }) => (
-  <Menu>
-    <Menu.Item key="1" onClick={onOpenFaqModal}>
-      <Icon type="question-circle" />
-      FAQ
+    <Menu>
+      <Menu.Item key="1" onClick={onOpenFaqModal}>
+        <Icon type="question-circle" />
+        FAQ
     </Menu.Item>
-    <Menu.Item key="2" onClick={onOpenLoginModal}>
-      <Icon type="login" />
-      Log in
+      <Menu.Item key="2" onClick={onOpenLoginModal}>
+        <Icon type="login" />
+        Log in
     </Menu.Item>
-    <Menu.Item key="3" onClick={onOpenSignUpModal}>
-      <Icon type="user-add" />
-      Sign up
+      <Menu.Item key="3" onClick={onOpenSignUpModal}>
+        <Icon type="user-add" />
+        Sign up
     </Menu.Item>
-  </Menu>
-);
+    </Menu>
+  );
 
-export const DropdownMenuOverlayLoggedIn = ({ onLogOut, onOpenFaqModal }) => (
+export const DropdownMenuOverlayLoggedIn = ({ onLogOut, onOpenFaqModal, onOpenUserDataModal }) => (
   <Menu>
-    <Menu.Item key="1" onClick={onOpenFaqModal}>
+    <Menu.Item key="1" onClick={onOpenUserDataModal}>
+      <Icon type="edit" />
+      Edit user data
+    </Menu.Item>
+    <Menu.Item key="2" onClick={onOpenFaqModal}>
       <Icon type="question-circle" />
       FAQ
     </Menu.Item>
-    <Menu.Item key="2" onClick={onLogOut}>
+    <Menu.Item key="3" onClick={onLogOut}>
       <Icon type="logout" />
       Log out
     </Menu.Item>
@@ -81,7 +85,8 @@ DropdownMenuOverlay.propTypes = {
 
 DropdownMenuOverlayLoggedIn.propTypes = {
   onLogOut: PropTypes.func.isRequired,
-  onOpenFaqModal: PropTypes.func.isRequired
+  onOpenFaqModal: PropTypes.func.isRequired,
+  onopenUserDataModal: PropTypes.func.isRequired,
 };
 
 NavBar.propTypes = {
