@@ -1,50 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Modal, Button, Input } from "antd";
+import { Modal, Button } from "antd";
+import UserDataForm from "../../Common/UserDataForm/UserDataForm";
 
-const UserDataModal = ({ open, handleClose }) => {
-    const footer = (
-        <Button type="primary" onClick={handleClose}>
-            Ok
+const UserDataModal = ({ userData, open, handleSubmit, handleClose }) => {
+  const formName = "editUserDataForm";
+
+  const footer = [
+    <Button key="cancel" onClick={handleClose}>
+      Cancel
+    </Button>,
+    <Button
+      form={formName}
+      key="submit"
+      htmlType="submit"
+      type="primary"
+      loading={false}
+    >
+      Submit
     </Button>
-    );
+  ];
 
-    const [email, setEmail] = useState('email');
-    const [password, setPassword] = useState('password');
-    const [name, setName] = useState('name');
-    const [surname, setSurname] = useState('surname');
-
-    const handleChangeEmail = event => setEmail(event.target.value);
-    const handleChangeName = event => setName(event.target.value);
-    const handleChangeSurname = event => setSurname(event.target.value);
-    const handleChangePassword = event => setPassword(event.target.value);
-
-    return (
-        <Modal title="Edit User Data" visible={open} onOk={handleClose} footer={footer}>
-            <form>
-                <div style={{ padding: "10px" }}>
-                    <Input name="email" value={email} onChange={handleChangeEmail} />
-                </div>
-                <div style={{ padding: "10px" }}>
-                    <Input name="name" value={name} onChange={handleChangeName} />
-                </div>
-                <div style={{ padding: "10px" }}>
-                    <Input name="surname" value={surname} onChange={handleChangeSurname} />
-                </div>
-                <div style={{ padding: "10px" }}>
-                    <Input name="password" value={password} onChange={handleChangePassword} />
-                </div>
-            </form>
-        </Modal>
-    );
+  return (
+    <Modal visible={open} title="Sign Up" okText="Ok" footer={footer}>
+      <UserDataForm
+        formName={formName}
+        initialData={userData}
+        onSubmit={handleSubmit}
+      />
+    </Modal>
+  );
 };
 export default UserDataModal;
 
 UserDataModal.propTypes = {
-    open: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired,
-    email: PropTypes,
-    password: PropTypes,
-    name: PropTypes,
-    surname: PropTypes,
+  userData: PropTypes.object,
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };

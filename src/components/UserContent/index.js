@@ -187,6 +187,8 @@ const UserContent = ({
       />
       <UserDataModal
         open={UserDataModalOpen}
+        userData={user.user}
+        handleSubmit={vals => console.log(vals)}
         handleClose={() => setUserDataModalOpen(false)}
       />
     </>

@@ -40,6 +40,8 @@ export const signUpUser = (email, password) => {
   userDb.push({
     email,
     password,
+    name: email,
+    surname: email,
     isAdmin: false
   });
   return logInUser(email, password);
