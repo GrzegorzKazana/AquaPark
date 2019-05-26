@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Checkbox } from "antd";
+import { Form, Input, Checkbox, Button } from "antd";
 
 const UserDataForm = ({
   formName,
@@ -9,6 +9,7 @@ const UserDataForm = ({
   disabled,
   acceptTermsFooter,
   passwordInput,
+  onClickTerms,
   form: { getFieldDecorator, resetFields, validateFields, getFieldValue },
   ...formProps
 }) => {
@@ -105,7 +106,10 @@ const UserDataForm = ({
             rules: [{ required: true, message: "Please accept the agreement" }]
           })(
             <Checkbox>
-              I have read the <a href="# ">agreement</a>
+              I have read the{" "}
+              <Button type="link" style={{ padding: 0 }} onClick={onClickTerms}>
+                agreement
+              </Button>
             </Checkbox>
           )}
         </Form.Item>

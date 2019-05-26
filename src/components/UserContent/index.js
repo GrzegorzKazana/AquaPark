@@ -9,6 +9,7 @@ import WelcomePage from "./WelcomePage/WelcomePage";
 import AreasPage from "./AreasPage/AreasPage";
 import PricingPage from "./PricingPage/PricingPage";
 import CheckoutPage from "./CheckoutPage/CheckoutPage";
+import AgreementsModal from "./Modals/AgreementsModal";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
@@ -54,6 +55,7 @@ const UserContent = ({
   const [loginModalOpen, setloginModalOpen] = useState(false);
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);
+  const [agreementsModalOpen, setAgreementsModalOpen] = useState(false);
 
   useEffect(() => {
     // close log in modal when user loaded
@@ -169,10 +171,15 @@ const UserContent = ({
         loading={user.userSigningUp}
         handleSubmit={signUpSubmit}
         handleCancel={() => setSignUpModalOpen(false)}
+        onClickTerms={() => setAgreementsModalOpen(true)}
       />
       <FaqModal
         open={faqModalOpen}
         handleClose={() => setFaqModalOpen(false)}
+      />
+      <AgreementsModal
+        open={agreementsModalOpen}
+        handleClose={() => setAgreementsModalOpen(false)}
       />
     </>
   );
