@@ -39,13 +39,13 @@ export const CartView = ({
         ))}
       </Select>
       <InputNumber
-        min={1}
+        min={0}
         max={99}
         step={1}
         value={item.itemCount}
-        parser={value => value.slice(1)}
-        formatter={value => "x" + value}
-        onChange={value => changeItemCount(item, value)}
+        parser={value => parseInt(value.slice(1)) || 0}
+        formatter={value => `x${value}`}
+        onChange={value => value && changeItemCount(item, value)}
       />
       <h3 className={styles.CartListItemPrice}>{item.priceWithDiscount}zł</h3>
       <Popconfirm
@@ -70,6 +70,7 @@ export const CartView = ({
           bordered
           dataSource={cart.items}
           renderItem={renderListItem}
+          rowKey="id"
         />
         <div>
           <Divider />
