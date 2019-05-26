@@ -20,27 +20,21 @@ export const CartView = ({
   changeItemCount
 }) => {
   const renderListItem = item => (
-    <List.Item className={styles.CartListItem}>
+    <List.Item className={styles.CartListItem} key={item.id}>
       <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
       <Select
         style={{ width: "150px", marginRight: "16px" }}
         defaultValue={
           (item.discount || discounts.dictionary[0]) &&
-          (item.discount || discounts.dictionary[0]).classDiscountId
+          (item.discount || discounts.dictionary[0]).id
         }
         onChange={id =>
-          addDiscountToItem(
-            item,
-            discounts.dictionary.find(d => d.classDiscountId === id)
-          )
+          addDiscountToItem(item, discounts.dictionary.find(d => d.id === id))
         }
       >
         {discounts.dictionary.map(disc => (
-          <Select.Option
-            value={disc.classDiscountId}
-            key={disc.classDiscountId}
-          >
-            {disc.discountLabel}
+          <Select.Option value={disc.id} key={disc.id}>
+            {disc.socialClassName}
           </Select.Option>
         ))}
       </Select>

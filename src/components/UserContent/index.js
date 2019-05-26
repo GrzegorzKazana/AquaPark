@@ -12,7 +12,7 @@ import CheckoutPage from "./CheckoutPage/CheckoutPage";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
-import { Layout, notification } from "antd";
+import { Layout } from "antd";
 
 import { connect } from "react-redux";
 import {

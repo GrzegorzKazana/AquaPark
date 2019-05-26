@@ -25,7 +25,7 @@ export const addDiscount = (item, discount) => ({
   item: {
     ...item,
     discount,
-    priceWithDiscount: item.price * (1 - discount.discountRate)
+    priceWithDiscount: item.price * (1 - discount.value)
   },
   prevPriceWithDiscount: item.priceWithDiscount
 });
