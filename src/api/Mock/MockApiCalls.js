@@ -38,10 +38,10 @@ export const logOutUser = (email, password) => {
 
 export const signUpUser = userData => {
   userDb.push({
-    email: userData.email,
-    password: userData.password,
-    name: userData.name,
-    surname: userData.surname,
+    email,
+    password,
+    name: email,
+    surname: email,
     isAdmin: false
   });
   return logInUser(userData.email, userData.password);

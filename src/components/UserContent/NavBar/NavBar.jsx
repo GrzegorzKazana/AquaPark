@@ -24,13 +24,21 @@ export const DropdownMenuOverlay = ({
   </Menu>
 );
 
-export const DropdownMenuOverlayLoggedIn = ({ onLogOut, onOpenFaqModal }) => (
+export const DropdownMenuOverlayLoggedIn = ({
+  onLogOut,
+  onOpenFaqModal,
+  onOpenUserDataModal
+}) => (
   <Menu>
-    <Menu.Item key="1" onClick={onOpenFaqModal}>
+    <Menu.Item key="1" onClick={onOpenUserDataModal}>
+      <Icon type="edit" />
+      Edit user data
+    </Menu.Item>
+    <Menu.Item key="2" onClick={onOpenFaqModal}>
       <Icon type="question-circle" />
       FAQ
     </Menu.Item>
-    <Menu.Item key="2" onClick={onLogOut}>
+    <Menu.Item key="3" onClick={onLogOut}>
       <Icon type="logout" />
       Log out
     </Menu.Item>
@@ -81,7 +89,8 @@ DropdownMenuOverlay.propTypes = {
 
 DropdownMenuOverlayLoggedIn.propTypes = {
   onLogOut: PropTypes.func.isRequired,
-  onOpenFaqModal: PropTypes.func.isRequired
+  onOpenFaqModal: PropTypes.func.isRequired,
+  onOpenUserDataModal: PropTypes.func.isRequired
 };
 
 NavBar.propTypes = {

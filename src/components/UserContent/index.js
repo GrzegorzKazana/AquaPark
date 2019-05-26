@@ -14,6 +14,7 @@ import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
 import { Layout } from "antd";
+import UserDataModal from "./Modals/UserDataModal";
 
 import { connect } from "react-redux";
 import {
@@ -58,6 +59,7 @@ const UserContent = ({
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [faqModalOpen, setFaqModalOpen] = useState(false);
   const [agreementsModalOpen, setAgreementsModalOpen] = useState(false);
+  const [UserDataModalOpen, setUserDataModalOpen] = useState(false);
 
   useEffect(() => {
     // close log in modal when user loaded
@@ -86,6 +88,7 @@ const UserContent = ({
           <DropdownMenuOverlayLoggedIn
             onLogOut={() => logOut(user.user.userToken)}
             onOpenFaqModal={() => setFaqModalOpen(true)}
+            onOpenUserDataModal={() => setUserDataModalOpen(true)}
           />
         ) : (
           <DropdownMenuOverlay
@@ -142,6 +145,12 @@ const UserContent = ({
       <AgreementsModal
         open={agreementsModalOpen}
         handleClose={() => setAgreementsModalOpen(false)}
+      />
+      <UserDataModal
+        open={UserDataModalOpen}
+        userData={user.user}
+        handleSubmit={vals => console.log(vals)}
+        handleClose={() => setUserDataModalOpen(false)}
       />
     </>
   );
