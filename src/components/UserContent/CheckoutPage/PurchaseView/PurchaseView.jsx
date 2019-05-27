@@ -4,14 +4,14 @@ import styles from "./PurchaseView.module.scss";
 import { Card, Button } from "antd";
 import { PayuView } from "./PayuView";
 
-export const PurchaseView = ({ handleCancel, handleBuy,}) => (
+export const PurchaseView = ({ handleCancel, handleBuy }) => (
   <Card
     style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}
     bodyStyle={{ flexGrow: 1, position: "relative" }}
   >
     <div className={styles.PurchaseView}>
       {/* <Button type="primary" size="large" onClick={handleBuy}> */}
-        <PayuView></PayuView>
+      <PayuView handleBuy={handleBuy} />
       {/* </Button> */}
     </div>
     <Button
