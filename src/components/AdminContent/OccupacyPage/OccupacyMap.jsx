@@ -13,6 +13,7 @@ const OccupancyMap = ({ attractions, handleAttractionChange }) => (
               const sel = attractions.find(
                 a => a.attractionId === attraction.attractionId
               );
+              console.log(sel);
               return (
                 <path
                   key={attraction.attractionId}
@@ -21,11 +22,11 @@ const OccupancyMap = ({ attractions, handleAttractionChange }) => (
                   d={attraction.path}
                   fill={(() => {
                     switch (area.zoneId) {
-                      case 0:
+                      case 3:
                         return `rgba(255, 0, 0, ${sel.occupancyRatio})`;
-                      case 1:
+                      case 4:
                         return `rgba(0, 0, 255, ${sel.occupancyRatio})`;
-                      case 2:
+                      case 5:
                         return `rgba(255, 255, 0, ${sel.occupancyRatio})`;
                       default:
                         return `rgba(255, 255, 255, 1)`;
