@@ -10,9 +10,7 @@ export const PurchaseView = ({ handleCancel, handleBuy }) => (
     bodyStyle={{ flexGrow: 1, position: "relative" }}
   >
     <div className={styles.PurchaseView}>
-      {/* <Button type="primary" size="large" onClick={handleBuy}> */}
       <PayuView handleBuy={handleBuy} />
-      {/* </Button> */}
     </div>
     <Button
       style={{ position: "absolute", bottom: 24, left: 24 }}

@@ -13,7 +13,6 @@ const OccupancyMap = ({ attractions, handleAttractionChange }) => (
               const sel = attractions.find(
                 a => a.attractionId === attraction.attractionId
               );
-              console.log(sel);
               return (
                 <path
                   key={attraction.attractionId}
