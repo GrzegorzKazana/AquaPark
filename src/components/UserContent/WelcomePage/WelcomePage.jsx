@@ -1,20 +1,18 @@
 import React from "react";
 import styles from "./WelcomePage.module.scss";
-import { Card } from "antd";
 
 class WelcomePage extends React.Component {
   render() {
-    const Background = "http://www.photos-public-domain.com/wp-content/uploads/2012/04/aqua-colored-water-texture.jpg";
+    // const Background = "http://www.photos-public-domain.com/wp-content/uploads/2012/04/aqua-colored-water-texture.jpg";
+    const Background =
+      "https://media.istockphoto.com/photos/blurred-surface-view-on-blue-swimming-pool-picture-id509109352?k=6&m=509109352&s=612x612&w=0&h=0KOFdMbtoEhL7QjCXZikqTHxcHqjUhsUAJNbhvDjkJE=";
+
     return (
       <div className={styles.welcomePage}>
-        <img src={`${Background})`} className={styles.welcomePicture}></img>
-     
-        <p className={styles.welcomeText}>Witaj w AquaParku</p>
-        <div className={styles.welcomeTextBackground}></div>
-        {/* <p className={styles.welcomeText}>text</p>
-        <p className={styles.welcomeText}>text</p> */}
+        <img src={`${Background}`} className={styles.welcomePicture} />
 
-
+        <h1 className={styles.welcomeText}>Witaj w Aquaparku</h1>
+        {/* <div className={styles.welcomeTextBackground} /> */}
       </div>
     );
   }

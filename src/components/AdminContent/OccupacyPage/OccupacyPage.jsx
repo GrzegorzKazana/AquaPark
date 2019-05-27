@@ -1,29 +1,44 @@
 import React, { useState } from "react";
 import styles from "./OccupacyPage.module.scss";
 import OccupacyMap from "./OccupacyMap";
-import { Card } from "antd";
+import { Card, Button } from "antd";
 
-const OccupacyPage = () => {
+const OccupacyPage = ({ areas, fetchDicts }) => {
   const [attraction, setAttraction] = useState({
-    id_area: -1,
-    name_area: "Aquapark",
-    id_attraction: -1,
-    name_attraction: "Aquapark",
-    occupancyRatio: Math.random(),
-    numberOfPeople: Math.random() * 500
+    zoneId: -1,
+    zoneName: "Aquapark",
+    attractionId: -1,
+    name: "Aquapark",
+    occupancyRatio: 0,
+    amountOfPeople: areas.dictionary.reduce(
+      (accum, curr) => accum + curr.amountOfPeople,
+      0
+    )
   });
+
+  const flatAttractions = areas.dictionary.flatMap(z =>
+    z.attractions.map(a => ({ ...a, zoneId: z.zoneId, zoneName: z.name }))
+  );
   return (
     <Card className={styles.OccupacyPage}>
       <Card
         size="small"
-        title={`${attraction.name_attraction} - ${attraction.name_area}`}
+        title={`${attraction.name} - ${attraction.zoneName}`}
         className={styles.OccupacyHeader}
+        extra={
+          <Button type="link" onClick={fetchDicts}>
+            Odśwież
+          </Button>
+        }
       >
         <p>
-          Ilość osób: <b>{Math.round(attraction.numberOfPeople)}</b>
+          Ilość osób: <b>{Math.round(attraction.amountOfPeople)}</b>
         </p>
       </Card>
-      <OccupacyMap handleAttractionChange={attr => setAttraction(attr)} />
+      <OccupacyMap
+        attractions={flatAttractions}
+        handleAttractionChange={attr => setAttraction(attr)}
+      />
     </Card>
   );
 };

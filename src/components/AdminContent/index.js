@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { logOutUserThunk } from "../../actions/UserActions";
 import { editDictThunk } from "../../actions/DictionaryActions";
 import { emitNewsletter } from "../../api/ApiCalls";
+import { fetchAllDictsThunk } from "../../actions/DictionaryActions";
 
 const views = {
   OCCUPACY: "0",
@@ -27,7 +28,15 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
+const AdminContent = ({
+  logOut,
+  prices,
+  areas,
+  discounts,
+  editDict,
+  user,
+  fetchDicts
+}) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
@@ -41,7 +50,9 @@ const AdminContent = ({ logOut, prices, discounts, editDict, user }) => {
           </div>
         </Layout.Sider>
         <Layout.Content className={styles.Content}>
-          {openPage === views.OCCUPACY && <OccupancyPage />}
+          {openPage === views.OCCUPACY && (
+            <OccupancyPage areas={areas} fetchDicts={fetchDicts} />
+          )}
           {openPage === views.NEWSLETTER && (
             <NewsletterPage
               onEmit={msg => emitNewsletter(user.user.userToken, msg)}
@@ -81,7 +92,8 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logOut: token => dispatch(logOutUserThunk(token)),
   editDict: (userToken, dict, dictData) =>
-    dispatch(editDictThunk(userToken, dict, dictData))
+    dispatch(editDictThunk(userToken, dict, dictData)),
+  fetchDicts: () => dispatch(fetchAllDictsThunk())
 });
 
 export default connect(
