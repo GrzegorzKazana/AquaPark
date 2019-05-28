@@ -47,7 +47,9 @@ export const CartView = ({
         formatter={value => `x${value}`}
         onChange={value => value && changeItemCount(item, value)}
       />
-      <h3 className={styles.CartListItemPrice}>{item.priceWithDiscount}zł</h3>
+      <h3 className={styles.CartListItemPrice}>
+        {Math.round(item.priceWithDiscount)}zł
+      </h3>
       <Popconfirm
         title="Sure to delete?"
         style={{ float: "right" }}
@@ -76,7 +78,7 @@ export const CartView = ({
           <Divider />
           <div className={styles.CheckoutCardContentFoorter}>
             <h2>Suma:</h2>
-            <h1>{cart.totalPriceWithDiscount}zł</h1>
+            <h1>{Math.round(cart.totalPriceWithDiscount)}zł</h1>
           </div>
           <Button
             onClick={handleSubmit}
