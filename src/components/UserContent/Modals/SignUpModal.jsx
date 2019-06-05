@@ -27,7 +27,13 @@ const SignUpModal = ({
   ];
 
   return (
-    <Modal visible={open} title="Sign Up" okText="Ok" footer={footer}>
+    <Modal
+      visible={open}
+      title="Sign Up"
+      okText="Ok"
+      footer={footer}
+      onCancel={handleCancel}
+    >
       <UserDataForm
         formName={formName}
         onSubmit={handleSubmit}

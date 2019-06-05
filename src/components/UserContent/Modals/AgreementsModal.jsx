@@ -10,7 +10,13 @@ const AgreementsModal = ({ open, handleClose }) => {
   );
 
   return (
-    <Modal title="REGULAMIN" visible={open} onOk={handleClose} footer={footer}>
+    <Modal
+      title="REGULAMIN"
+      visible={open}
+      onOk={handleClose}
+      footer={footer}
+      onCancel={handleClose}
+    >
       <ul>
         <li>
           <p>

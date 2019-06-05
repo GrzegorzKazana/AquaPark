@@ -10,7 +10,13 @@ const FaqModal = ({ open, handleClose }) => {
   );
 
   return (
-    <Modal title="FAQ" visible={open} onOk={handleClose} footer={footer}>
+    <Modal
+      title="FAQ"
+      visible={open}
+      onOk={handleClose}
+      footer={footer}
+      onCancel={handleClose}
+    >
       <ul>
         <li>
           <h3>Czy obowiązują mnie jakieś zniżki?</h3>
