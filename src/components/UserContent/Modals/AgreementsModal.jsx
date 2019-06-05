@@ -10,7 +10,13 @@ const AgreementsModal = ({ open, handleClose }) => {
   );
 
   return (
-    <Modal title="FAQ" visible={open} onOk={handleClose} footer={footer}>
+    <Modal
+      title="FAQ"
+      visible={open}
+      onOk={handleClose}
+      footer={footer}
+      onCancel={handleClose}
+    >
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>

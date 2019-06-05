@@ -22,7 +22,13 @@ const UserDataModal = ({ userData, open, handleSubmit, handleClose }) => {
   ];
 
   return (
-    <Modal visible={open} title="Sign Up" okText="Ok" footer={footer}>
+    <Modal
+      visible={open}
+      title="Sign Up"
+      okText="Ok"
+      footer={footer}
+      onCancel={handleClose}
+    >
       <UserDataForm
         formName={formName}
         initialData={userData}
