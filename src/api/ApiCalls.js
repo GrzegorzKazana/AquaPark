@@ -18,7 +18,8 @@ export const signUpUser = userData =>
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
-    );
+    )
+    .catch(err => Promise.reject(err.message));
 
 const signInEndpoint = "users/login";
 export const logInUser = (email, password) =>
@@ -27,7 +28,8 @@ export const logInUser = (email, password) =>
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
-    );
+    )
+    .catch(err => Promise.reject(err.message));
 
 const logOutUserExndpoint = "users/logout";
 export const logOutUser = token =>
@@ -41,7 +43,8 @@ export const logOutUser = token =>
     })
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
-    );
+    )
+    .catch(err => Promise.reject(err.message));
 
 const editUserDataEndpoint = "users/edituser";
 export const editUserData = (token, userData) => {
@@ -55,7 +58,8 @@ export const editUserData = (token, userData) => {
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
-    );
+    )
+    .catch(err => Promise.reject(err.message));
 };
 
 const purchaseCartEndpoint = "orders/MakeNewOrder";
@@ -81,7 +85,8 @@ export const purchaseCart = (userData, cart) => {
     .then(res => Promise.resolve(res.data))
     .then(data =>
       data.success ? Promise.resolve(data) : Promise.reject(data.status)
-    );
+    )
+    .catch(err => Promise.reject(err.message));
 };
 
 export const editDict = (userToken, dict, dictData) => {
@@ -89,7 +94,8 @@ export const editDict = (userToken, dict, dictData) => {
   console.log(data);
   return axios
     .post(baseUrl + dict.updateUrl, data)
-    .then(res => Promise.resolve(res.data));
+    .then(res => Promise.resolve(res.data))
+    .catch(err => Promise.reject(err.message));
 };
 
 const emitNewsletterEndpoint = "admin/SendNewsletter";
@@ -104,4 +110,5 @@ export const emitNewsletter = (token, message) =>
       data.success
         ? notification.success({ message: data.status })
         : notification.success({ message: data.status })
-    );
+    )
+    .catch(err => Promise.reject(err.message));
