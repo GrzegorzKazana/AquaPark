@@ -1,7 +1,7 @@
 import axios from "axios";
 import { notification } from "antd";
 
-const baseUrl = "http://localhost:51232/api/";
+const baseUrl = "http://localhost:5000/api/";
 
 export const fetchDictFromApi = (name, url) =>
   axios.get(baseUrl + url).then(res => res.data);

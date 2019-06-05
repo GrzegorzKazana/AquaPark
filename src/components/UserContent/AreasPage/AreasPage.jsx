@@ -6,9 +6,9 @@ import { Carousel, Typography, Icon } from "antd";
 import SpinnerOverlay from "../../Common/SpinnerOverlay/SpinnerOverlay";
 
 const images = {
-  3: "https://ak1.picdn.net/shutterstock/videos/8378041/thumb/1.jpg",
-  4: "https://previews.123rf.com/images/elnur/elnur1507/elnur150704702/43826228-indoor-swimming-pool-in-healthy-concept.jpg",
-  5: "https://media.istockphoto.com/photos/beauty-spa-treatment-with-candles-picture-id856952780?k=6&m=856952780&s=612x612&w=0&h=MmueGgA3nSbphx7Mbm8VO2CpVA1WJ7BWHl7Wo33mWZQ="
+  1: "https://ak1.picdn.net/shutterstock/videos/8378041/thumb/1.jpg",
+  2: "https://previews.123rf.com/images/elnur/elnur1507/elnur150704702/43826228-indoor-swimming-pool-in-healthy-concept.jpg",
+  3: "https://media.istockphoto.com/photos/beauty-spa-treatment-with-candles-picture-id856952780?k=6&m=856952780&s=612x612&w=0&h=MmueGgA3nSbphx7Mbm8VO2CpVA1WJ7BWHl7Wo33mWZQ="
 };
 
 const CarouselCard = ({ title, description, image }) => (
