@@ -8,7 +8,11 @@ class WelcomePage extends React.Component {
 
     return (
       <div className={styles.welcomePage}>
-        <img src={`${Background}`} className={styles.welcomePicture} />
+        <img
+          src={`${Background}`}
+          className={styles.welcomePicture}
+          alt="Aquapark area"
+        />
 
         <h1 className={styles.welcomeText}>Witaj w Aquaparku</h1>
       </div>

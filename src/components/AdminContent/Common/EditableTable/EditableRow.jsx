@@ -22,7 +22,7 @@ export const EditableCell = props => {
   }, [editing, inputRef]);
 
   const save = (e, form) => {
-    const { record, handleSave, numberInput, numberRange } = props;
+    const { record, handleSave, numberInput } = props;
 
     form.validateFields((error, values) => {
       if (!(error && error[e.currentTarget.id])) {
