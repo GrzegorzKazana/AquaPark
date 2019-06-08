@@ -9,6 +9,7 @@ import OccupancyPage from "./OccupacyPage/OccupacyPage";
 import NewsletterPage from "./NewsletterPage/NewsletterPage";
 import PricesPage from "./Pricing/PricesPage/PricesPage";
 import ClassDiscountPage from "./Pricing/ClassDiscountPage/ClassDiscountPage";
+import RaportPage from "./RaportPage/RaportPage";
 import { Layout } from "antd";
 
 import { connect } from "react-redux";
@@ -37,7 +38,7 @@ const AdminContent = ({
   user,
   fetchDicts
 }) => {
-  const [openPage, setOpenPage] = useState(views.OCCUPACY);
+  const [openPage, setOpenPage] = useState(views.REPORT);
   return (
     <Layout className={styles.Layout}>
       <Layout.Header>
@@ -82,6 +83,7 @@ const AdminContent = ({
               }
             />
           )}
+          {openPage === views.REPORT && <RaportPage />}
         </Layout.Content>
       </Layout>
     </Layout>

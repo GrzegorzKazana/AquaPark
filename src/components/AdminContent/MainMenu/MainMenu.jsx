@@ -27,10 +27,10 @@ const MainMenu = ({ setOpenPage, views }) => {
         <Icon type="mail" />
         Newsletter
       </Menu.Item>
-      {/* <Menu.Item key={views.REPORT}>
+      <Menu.Item key={views.REPORT}>
         <Icon type="file-done" />
         Raporty
-      </Menu.Item> */}
+      </Menu.Item>
     </Menu>
   );
 };
