@@ -3,7 +3,7 @@ import styles from "./RaportPage.module.scss";
 import { Card, Tabs, Button, Form, DatePicker } from "antd";
 
 const TimeForm = Form.create()(
-  ({ handleSubmit, form: { getFieldDecorator, validateFields } }) => {
+  ({ loading, handleSubmit, form: { getFieldDecorator, validateFields } }) => {
     const handleSubmitLocal = e => {
       e.preventDefault();
       validateFields((err, values) => {
@@ -35,6 +35,7 @@ const TimeForm = Form.create()(
             htmlType="submit"
             shape="round"
             icon="file-done"
+            loading={loading}
           >
             Generuj raport
           </Button>
@@ -44,20 +45,32 @@ const TimeForm = Form.create()(
   }
 );
 
-const RaportPage = () => {
+const RaportPage = ({ raport, getRaport, getTimedRaport }) => {
   return (
     <Card className={styles.RaportPage} title="Raporty">
       <Tabs>
         <Tabs.TabPane tab="Obecne obłożenie" key="occ_now">
           <div className={styles.TabWrapper}>
-            <Button type="primary" shape="round" icon="file-done" size="large">
+            <Button
+              type="primary"
+              shape="round"
+              icon="file-done"
+              size="large"
+              onClick={getRaport}
+              loading={raport.fetching}
+            >
               Generuj raport
             </Button>
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab="Obłożenie historyczne" key="occ_then">
           <div className={styles.TabWrapper}>
-            <TimeForm handleSubmit={vals => console.log(vals)} />
+            <TimeForm
+              handleSubmit={vals =>
+                getTimedRaport(vals.dateStart, vals.dateEnd)
+              }
+              loading={raport.fetching}
+            />
           </div>
         </Tabs.TabPane>
       </Tabs>

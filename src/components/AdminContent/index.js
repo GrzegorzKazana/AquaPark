@@ -17,6 +17,10 @@ import { logOutUserThunk } from "../../actions/UserActions";
 import { editDictThunk } from "../../actions/DictionaryActions";
 import { emitNewsletter } from "../../api/ApiCalls";
 import { fetchAllDictsThunk } from "../../actions/DictionaryActions";
+import {
+  fetchStandardRaportThunk,
+  fetchTimedRaportThunk
+} from "../../actions/RaportActions";
 
 const views = {
   OCCUPACY: "0",
@@ -36,7 +40,10 @@ const AdminContent = ({
   discounts,
   editDict,
   user,
-  fetchDicts
+  fetchDicts,
+  raport,
+  getRaport,
+  getTimedRaport
 }) => {
   const [openPage, setOpenPage] = useState(views.REPORT);
   return (
@@ -83,7 +90,13 @@ const AdminContent = ({
               }
             />
           )}
-          {openPage === views.REPORT && <RaportPage />}
+          {openPage === views.REPORT && (
+            <RaportPage
+              raport={raport}
+              getRaport={getRaport}
+              getTimedRaport={getTimedRaport}
+            />
+          )}
         </Layout.Content>
       </Layout>
     </Layout>
@@ -95,7 +108,10 @@ const mapDispatchToProps = dispatch => ({
   logOut: token => dispatch(logOutUserThunk(token)),
   editDict: (userToken, dict, dictData) =>
     dispatch(editDictThunk(userToken, dict, dictData)),
-  fetchDicts: () => dispatch(fetchAllDictsThunk())
+  fetchDicts: () => dispatch(fetchAllDictsThunk()),
+  getRaport: () => dispatch(fetchStandardRaportThunk()),
+  getTimedRaport: (startDate, endDate) =>
+    dispatch(fetchTimedRaportThunk(startDate, endDate))
 });
 
 export default connect(
