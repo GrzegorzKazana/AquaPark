@@ -122,3 +122,27 @@ export const emitNewsletter = (token, message) =>
         : notification.success({ message: data.status })
     )
     .catch(err => Promise.reject(err.message));
+
+const getRaportEndpoint = "reports/GetCurrentOccupancy";
+export const getRaport = () =>
+  axios
+    .get(baseUrl + getRaportEndpoint)
+    .then(res => Promise.resolve(res.data))
+    .then(data =>
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
+    )
+    .catch(err => Promise.reject(err.message));
+
+const getTimedRaportEndpoint = "reports/GetTimeOccupancy";
+export const getTimedRaport = (dateStart, dateEnd) =>
+  axios
+    .get(baseUrl + getTimedRaportEndpoint, { params: { dateStart, dateEnd } })
+    .then(res => Promise.resolve(res.data))
+    .then(data =>
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
+    )
+    .catch(err => Promise.reject(err.message));
