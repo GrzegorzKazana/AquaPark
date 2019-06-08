@@ -17,7 +17,9 @@ export const signUpUser = userData =>
     })
     .then(res => Promise.resolve(res.data))
     .then(data =>
-      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
     )
     .catch(err => Promise.reject(err.message));
 
@@ -27,7 +29,9 @@ export const logInUser = (email, password) =>
     .post(baseUrl + signInEndpoint, { Email: email, Password: password })
     .then(res => Promise.resolve(res.data))
     .then(data =>
-      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
     )
     .catch(err => Promise.reject(err.message));
 
@@ -42,7 +46,9 @@ export const logOutUser = token =>
       return Promise.resolve(res.data);
     })
     .then(data =>
-      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
     )
     .catch(err => Promise.reject(err.message));
 
@@ -57,7 +63,9 @@ export const editUserData = (token, userData) => {
     .post(baseUrl + editUserDataEndpoint, data)
     .then(res => Promise.resolve(res.data))
     .then(data =>
-      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
     )
     .catch(err => Promise.reject(err.message));
 };
@@ -84,7 +92,9 @@ export const purchaseCart = (userData, cart) => {
     .post(baseUrl + purchaseCartEndpoint, order)
     .then(res => Promise.resolve(res.data))
     .then(data =>
-      data.success ? Promise.resolve(data) : Promise.reject(data.status)
+      data.success
+        ? Promise.resolve(data)
+        : Promise.reject(new Error(data.status))
     )
     .catch(err => Promise.reject(err.message));
 };
