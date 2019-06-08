@@ -45,7 +45,7 @@ const AdminContent = ({
   getRaport,
   getTimedRaport
 }) => {
-  const [openPage, setOpenPage] = useState(views.REPORT);
+  const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
       <Layout.Header>

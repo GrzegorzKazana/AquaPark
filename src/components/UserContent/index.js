@@ -101,10 +101,6 @@ const UserContent = ({
     />
   );
 
-  useEffect(() => {
-    logIn("admin@admin.com", "admin");
-  }, []);
-
   return (
     <>
       <Layout className={styles.Layout}>
