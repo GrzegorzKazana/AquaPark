@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./AdminContent.scss";
+import dictionaryList from "../../config/dictionaryList";
 import styles from "./AdminContent.module.scss";
 import NavBar from "./NavBar/NavBar";
 import MainMenu from "./MainMenu/MainMenu";
@@ -8,10 +9,18 @@ import OccupancyPage from "./OccupacyPage/OccupacyPage";
 import NewsletterPage from "./NewsletterPage/NewsletterPage";
 import PricesPage from "./Pricing/PricesPage/PricesPage";
 import ClassDiscountPage from "./Pricing/ClassDiscountPage/ClassDiscountPage";
+import RaportPage from "./RaportPage/RaportPage";
 import { Layout } from "antd";
 
 import { connect } from "react-redux";
 import { logOutUserThunk } from "../../actions/UserActions";
+import { editDictThunk } from "../../actions/DictionaryActions";
+import { emitNewsletter } from "../../api/ApiCalls";
+import { fetchAllDictsThunk } from "../../actions/DictionaryActions";
+import {
+  fetchStandardRaportThunk,
+  fetchTimedRaportThunk
+} from "../../actions/RaportActions";
 
 const views = {
   OCCUPACY: "0",
@@ -24,12 +33,23 @@ const views = {
   REPORT: "7"
 };
 
-const AdminContent = ({ logOut, prices, discounts }) => {
+const AdminContent = ({
+  logOut,
+  prices,
+  areas,
+  discounts,
+  editDict,
+  user,
+  fetchDicts,
+  raport,
+  getRaport,
+  getTimedRaport
+}) => {
   const [openPage, setOpenPage] = useState(views.OCCUPACY);
   return (
     <Layout className={styles.Layout}>
       <Layout.Header>
-        <NavBar onLogOut={logOut} />
+        <NavBar onLogOut={() => logOut(user.user.userToken)} />
       </Layout.Header>
       <Layout>
         <Layout.Sider theme="light" breakpoint="md" collapsedWidth={0}>
@@ -38,11 +58,44 @@ const AdminContent = ({ logOut, prices, discounts }) => {
           </div>
         </Layout.Sider>
         <Layout.Content className={styles.Content}>
-          {openPage === views.OCCUPACY && <OccupancyPage />}
-          {openPage === views.NEWSLETTER && <NewsletterPage />}
-          {openPage === views.PRICES && <PricesPage prices={prices} />}
+          {openPage === views.OCCUPACY && (
+            <OccupancyPage areas={areas} fetchDicts={fetchDicts} />
+          )}
+          {openPage === views.NEWSLETTER && (
+            <NewsletterPage
+              onEmit={msg => emitNewsletter(user.user.userToken, msg)}
+            />
+          )}
+          {openPage === views.PRICES && (
+            <PricesPage
+              prices={prices}
+              editDict={dictData =>
+                editDict(
+                  user.user.userToken,
+                  dictionaryList.find(d => d.name === "PRICES"),
+                  dictData
+                )
+              }
+            />
+          )}
           {openPage === views.CLASS_DISCOUNT && (
-            <ClassDiscountPage discounts={discounts} />
+            <ClassDiscountPage
+              discounts={discounts}
+              editDict={dictData =>
+                editDict(
+                  user.user.userToken,
+                  dictionaryList.find(d => d.name === "CLASS_DISCOUNTS"),
+                  dictData
+                )
+              }
+            />
+          )}
+          {openPage === views.REPORT && (
+            <RaportPage
+              raport={raport}
+              getRaport={getRaport}
+              getTimedRaport={getTimedRaport}
+            />
           )}
         </Layout.Content>
       </Layout>
@@ -52,7 +105,13 @@ const AdminContent = ({ logOut, prices, discounts }) => {
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password))
+  logOut: token => dispatch(logOutUserThunk(token)),
+  editDict: (userToken, dict, dictData) =>
+    dispatch(editDictThunk(userToken, dict, dictData)),
+  fetchDicts: () => dispatch(fetchAllDictsThunk()),
+  getRaport: () => dispatch(fetchStandardRaportThunk()),
+  getTimedRaport: (startDate, endDate) =>
+    dispatch(fetchTimedRaportThunk(startDate, endDate))
 });
 
 export default connect(

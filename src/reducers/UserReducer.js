@@ -12,9 +12,11 @@ const defaultState = {
   userFetching: false,
   userLoaded: false,
   userFetchingError: false,
+  userFetchingErrorMessage: "",
   userSigningUp: false,
   userSigningUpSuccess: false,
   userSigningUpError: false,
+  userSigningUpErrorMessage: "",
   user: null
 };
 
@@ -39,7 +41,8 @@ const UserReducer = (state = defaultState, action) => {
         ...state,
         userFetching: false,
         userLoaded: false,
-        userFetchingError: true
+        userFetchingError: true,
+        userFetchingErrorMessage: action.message
       };
     case LOG_OUT_USER:
       return {
@@ -65,6 +68,7 @@ const UserReducer = (state = defaultState, action) => {
         ...state,
         userSigningUp: false,
         userSigningUpError: true,
+        userSigningUpErrorMessage: action.message,
         userSigningUpSuccess: false
       };
 

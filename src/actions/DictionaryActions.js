@@ -1,6 +1,7 @@
-// import { fetchDictFromApi } from "../api/ApiCalls";
-import * as API from "../api/Mock/MockApiCalls";
+// import * as API from "../api/Mock/MockApiCalls";
+import * as API from "../api/ApiCalls";
 import dictionaryList from "../config/dictionaryList";
+import { notification } from "antd";
 
 export const FETCH_DICT = "FETCH_DICT";
 export const fetchDict = dictionaryName => () => ({
@@ -26,7 +27,7 @@ export const fetchDictProcedure = (name, url, dispatch) => {
       dispatch(loadDict(name)(dict));
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       dispatch(fetchDictError(name)());
     });
 };
@@ -35,4 +36,23 @@ export const fetchAllDictsThunk = () => dispatch => {
   dictionaryList.forEach(dictInfo =>
     fetchDictProcedure(dictInfo.name, dictInfo.url, dispatch)
   );
+};
+
+export const editDictThunk = (userToken, dict, dictData) => dispatch => {
+  dispatch(fetchDict(dict.name)());
+  API.editDict(userToken, dict, dictData)
+    .then(data => {
+      console.log(data);
+      notification.success({
+        message: "Zaktualizowano słownik"
+      });
+      dispatch(loadDict(dict.name)(data));
+    })
+    .catch(err => {
+      console.error(err);
+      notification.success({
+        message: err
+      });
+      dispatch(fetchDictError(dict.name)());
+    });
 };

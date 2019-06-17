@@ -13,15 +13,15 @@ import AgreementsModal from "./Modals/AgreementsModal";
 import LogInModal from "./Modals/LogInModal";
 import SignUpModal from "./Modals/SignUpModal";
 import FaqModal from "./Modals/FaqModal";
+import { Layout } from "antd";
 import UserDataModal from "./Modals/UserDataModal";
-
-import { Layout, notification } from "antd";
 
 import { connect } from "react-redux";
 import {
   logInUserThunk,
   logOutUserThunk,
-  singUpUserThunk
+  singUpUserThunk,
+  updateUserDataThunk
 } from "../../actions/UserActions";
 import {
   addItem,
@@ -47,6 +47,7 @@ const UserContent = ({
   logIn,
   logOut,
   signUp,
+  updateUserData,
   addItemToCart,
   removeItemFromCart,
   addDiscountToItem,
@@ -62,24 +63,10 @@ const UserContent = ({
 
   useEffect(() => {
     // close log in modal when user loaded
-    if (user.userLoaded) {
-      setloginModalOpen(false);
-      notification.success({
-        message: "Witamy ponownie"
-      });
-    }
+    user.userLoaded && setloginModalOpen(false);
   }, [user.userLoaded]);
 
-  useEffect(() => {
-    // disaply message when errror loggin in
-    if (user.userFetchingError) {
-      notification.error({
-        message: "Błąd logowania"
-      });
-    }
-  }, [user.userFetchingError]);
-
-  const { userSigningUp, userSigningUpSuccess, userSigningUpError } = user;
+  const { userSigningUp, userSigningUpSuccess } = user;
   useEffect(() => {
     // close signup modal when got positive response
     if (userSigningUp) {
@@ -87,34 +74,8 @@ const UserContent = ({
     }
     if (userSigningUpSuccess) {
       setSignUpModalOpen(false);
-      notification.success({
-        message: "Na email została wysłana wiadomość aktywacyjna"
-      });
-    } else if (userSigningUpError) {
-      notification.error({
-        message: "Błąd rejestracji"
-      });
     }
-  }, [userSigningUp, userSigningUpSuccess, userSigningUpError]);
-
-  const loginSubmit = vals => {
-    console.log(vals);
-    const { email, password } = vals;
-    logIn(email, password);
-  };
-
-  const signUpSubmit = vals => {
-    console.log(vals);
-    const { email, password } = vals;
-    signUp(email, password);
-  };
-
-  const handleLogOut = () => {
-    logOut();
-    notification.info({
-      message: "Wylogowano"
-    });
-  };
+  }, [userSigningUp, userSigningUpSuccess]);
 
   const isLoggedIn = Boolean(user.user);
   const navbar = (
@@ -125,7 +86,7 @@ const UserContent = ({
       userMenuOverlay={
         isLoggedIn ? (
           <DropdownMenuOverlayLoggedIn
-            onLogOut={handleLogOut}
+            onLogOut={() => logOut(user.user.userToken)}
             onOpenFaqModal={() => setFaqModalOpen(true)}
             onOpenUserDataModal={() => setUserDataModalOpen(true)}
           />
@@ -167,13 +128,13 @@ const UserContent = ({
       <LogInModal
         open={loginModalOpen}
         loading={user.userFetching}
-        handleSubmit={loginSubmit}
+        handleSubmit={({ email, password }) => logIn(email, password)}
         handleCancel={() => setloginModalOpen(false)}
       />
       <SignUpModal
         open={signUpModalOpen}
         loading={user.userSigningUp}
-        handleSubmit={signUpSubmit}
+        handleSubmit={signUp}
         handleCancel={() => setSignUpModalOpen(false)}
         onClickTerms={() => setAgreementsModalOpen(true)}
       />
@@ -188,7 +149,10 @@ const UserContent = ({
       <UserDataModal
         open={UserDataModalOpen}
         userData={user.user}
-        handleSubmit={vals => console.log(vals)}
+        handleSubmit={userData => {
+          setUserDataModalOpen(false);
+          updateUserData(user.user.userToken, userData);
+        }}
         handleClose={() => setUserDataModalOpen(false)}
       />
     </>
@@ -198,8 +162,10 @@ const UserContent = ({
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   logIn: (email, password) => dispatch(logInUserThunk(email, password)),
-  logOut: (email, password) => dispatch(logOutUserThunk(email, password)),
-  signUp: (email, password) => dispatch(singUpUserThunk(email, password)),
+  logOut: token => dispatch(logOutUserThunk(token)),
+  signUp: userData => dispatch(singUpUserThunk(userData)),
+  updateUserData: (token, userData) =>
+    dispatch(updateUserDataThunk(token, userData)),
   addItemToCart: item => dispatch(addItem(item)),
   removeItemFromCart: item => dispatch(removeItem(item)),
   addDiscountToItem: (item, discount) => dispatch(addDiscount(item, discount)),

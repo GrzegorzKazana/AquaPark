@@ -36,7 +36,7 @@ export const logOutUser = (email, password) => {
   return defaultResolve({ status: "ok" });
 };
 
-export const signUpUser = (email, password) => {
+export const signUpUser = userData => {
   userDb.push({
     email,
     password,
@@ -44,10 +44,18 @@ export const signUpUser = (email, password) => {
     surname: email,
     isAdmin: false
   });
-  return logInUser(email, password);
+  return logInUser(userData.email, userData.password);
 };
 
 export const purchaseCart = (userData, cart) => {
   console.log(userData, "just bought", cart);
   return defaultResolve({});
+};
+
+export const editDict = (userToken, dict, dictData) => {
+  console.log(dict, dictData);
+};
+
+export const editUserData = userData => {
+  console.log(userData);
 };

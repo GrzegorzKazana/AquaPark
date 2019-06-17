@@ -20,39 +20,36 @@ export const CartView = ({
   changeItemCount
 }) => {
   const renderListItem = item => (
-    <List.Item className={styles.CartListItem}>
+    <List.Item className={styles.CartListItem} key={item.id}>
       <h4 className={styles.CartListItemTitle}>{item.ticketTypeName}</h4>
       <Select
         style={{ width: "150px", marginRight: "16px" }}
         defaultValue={
-          (item.discount || discounts.dictionary[0]).classDiscountId
+          (item.discount || discounts.dictionary[0]) &&
+          (item.discount || discounts.dictionary[0]).id
         }
         onChange={id =>
-          addDiscountToItem(
-            item,
-            discounts.dictionary.find(d => d.classDiscountId === id)
-          )
+          addDiscountToItem(item, discounts.dictionary.find(d => d.id === id))
         }
       >
         {discounts.dictionary.map(disc => (
-          <Select.Option
-            value={disc.classDiscountId}
-            key={disc.classDiscountId}
-          >
-            {disc.discountLabel}
+          <Select.Option value={disc.id} key={disc.id}>
+            {disc.socialClassName}
           </Select.Option>
         ))}
       </Select>
       <InputNumber
-        min={1}
+        min={0}
         max={99}
         step={1}
         value={item.itemCount}
-        parser={value => value.slice(1)}
-        formatter={value => "x" + value}
-        onChange={value => changeItemCount(item, value)}
+        parser={value => parseInt(value.slice(1)) || 0}
+        formatter={value => `x${value}`}
+        onChange={value => value && changeItemCount(item, value)}
       />
-      <h3 className={styles.CartListItemPrice}>{item.priceWithDiscount}zł</h3>
+      <h3 className={styles.CartListItemPrice}>
+        {Math.round(item.priceWithDiscount)}zł
+      </h3>
       <Popconfirm
         title="Sure to delete?"
         style={{ float: "right" }}
@@ -75,12 +72,13 @@ export const CartView = ({
           bordered
           dataSource={cart.items}
           renderItem={renderListItem}
+          rowKey="id"
         />
         <div>
           <Divider />
           <div className={styles.CheckoutCardContentFoorter}>
             <h2>Suma:</h2>
-            <h1>{cart.totalPriceWithDiscount}zł</h1>
+            <h1>{Math.round(cart.totalPriceWithDiscount)}zł</h1>
           </div>
           <Button
             onClick={handleSubmit}

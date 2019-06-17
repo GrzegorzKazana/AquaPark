@@ -1,4 +1,6 @@
-import * as API from "../api/Mock/MockApiCalls";
+// import * as API from "../api/Mock/MockApiCalls";
+import * as API from "../api/ApiCalls";
+import { notification } from "antd";
 
 export const FETCH_USER = "FETCH_USER";
 export const fetchUser = () => ({
@@ -12,8 +14,9 @@ export const loadUser = user => ({
 });
 
 export const FETCH_USER_ERROR = "FETCH_USER_ERROR";
-export const fetchUserError = () => ({
-  type: FETCH_USER_ERROR
+export const fetchUserError = err => ({
+  type: FETCH_USER_ERROR,
+  message: err
 });
 
 export const LOG_OUT_USER = "LOG_OUT_USER";
@@ -32,8 +35,9 @@ export const signInUserSuccess = () => ({
 });
 
 export const SIGN_UP_USER_ERROR = "SIGN_UP_USER_ERROR";
-export const signInUserError = () => ({
-  type: SIGN_UP_USER_ERROR
+export const signInUserError = err => ({
+  type: SIGN_UP_USER_ERROR,
+  message: err
 });
 
 export const logInUserThunk = (email, password) => dispatch => {
@@ -41,28 +45,69 @@ export const logInUserThunk = (email, password) => dispatch => {
   API.logInUser(email, password)
     .then(user => {
       console.log(user);
+      notification.success({
+        message: "Witamy ponownie!"
+      });
       dispatch(loadUser(user));
     })
     .catch(err => {
-      console.log(err);
-      dispatch(fetchUserError());
+      console.error(err);
+      notification.error({
+        message: err
+      });
+      dispatch(fetchUserError(err));
     });
 };
 
-export const logOutUserThunk = (email, password) => dispatch => {
-  dispatch(logOutUser());
-  API.logOutUser(email, password);
+export const logOutUserThunk = token => dispatch => {
+  API.logOutUser(token)
+    .then(res => {
+      notification.success({
+        message: "Poprawnie wylogowano"
+      });
+      dispatch(logOutUser());
+    })
+    .catch(err => {
+      console.error(err);
+      notification.error({
+        message: "Błąd"
+      });
+    });
 };
 
-export const singUpUserThunk = (email, password) => dispatch => {
+export const singUpUserThunk = userData => dispatch => {
   dispatch(signInUser());
-  API.signUpUser(email, password)
+  API.signUpUser(userData)
     .then(data => {
       console.log(data);
+      notification.success({
+        message: "Konto aktywowane"
+      });
       dispatch(signInUserSuccess());
     })
     .catch(err => {
       console.log(err);
-      dispatch(signInUserError());
+      notification.error({
+        message: err
+      });
+      dispatch(signInUserError(err));
+    });
+};
+
+export const updateUserDataThunk = (token, userData) => dispatch => {
+  dispatch(fetchUser());
+  API.editUserData(token, userData)
+    .then(data => {
+      console.log(data);
+      notification.success({
+        message: "Dane zostały zaktualizowane"
+      });
+      dispatch(loadUser(data));
+    })
+    .catch(err => {
+      console.log(err);
+      notification.error({
+        message: err
+      });
     });
 };

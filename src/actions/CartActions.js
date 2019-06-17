@@ -1,13 +1,15 @@
 import uuid from "uuid";
-import * as API from "../api/Mock/MockApiCalls";
+import { notification } from "antd";
+// import * as API from "../api/Mock/MockApiCalls";
+import * as API from "../api/ApiCalls";
 
 export const ADD_ITEM = "ADD_ITEM";
 export const addItem = item => ({
   type: ADD_ITEM,
   item: {
+    discount: null,
     ...item,
     itemCount: 1,
-    discount: null,
     priceWithDiscount: item.price,
     id: uuid.v4()
   }
@@ -25,7 +27,7 @@ export const addDiscount = (item, discount) => ({
   item: {
     ...item,
     discount,
-    priceWithDiscount: item.price * (1 - discount.discountRate)
+    priceWithDiscount: item.price * (1 - discount.value)
   },
   prevPriceWithDiscount: item.priceWithDiscount
 });
@@ -47,6 +49,17 @@ export const changeItemCount = (item, count) => ({
 
 export const purchaseCartThunk = (userData, cart) => dispatch => {
   API.purchaseCart(userData, cart)
-    .then(res => dispatch(resetCart()))
-    .catch(err => console.log(err));
+    .then(res => {
+      console.log(res);
+      notification.success({
+        message: "Potwierdzone zakup"
+      });
+      dispatch(resetCart());
+    })
+    .catch(err => {
+      console.error(err);
+      notification.error({
+        message: err
+      });
+    });
 };

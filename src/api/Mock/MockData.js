@@ -1,51 +1,51 @@
 export const areasDict = [
   {
-    areaId: 0,
-    areaName: "Strefa basenów",
+    zoneId: 0,
+    name: "Strefa basenów",
     attractions: [
       {
         attractionId: 0,
-        attractionName: "Sztuczne fale"
+        name: "Sztuczne fale"
       },
       {
         attractionId: 1,
-        attractionName: "Bicze wodne"
+        name: "Bicze wodne"
       },
       {
         attractionId: 2,
-        attractionName: "Basen otwarty"
+        name: "Basen otwarty"
       }
     ]
   },
   {
-    areaId: 1,
-    areaName: "Strefa saun",
+    zoneId: 1,
+    name: "Strefa saun",
     attractions: [
       {
         attractionId: 3,
-        attractionName: "Sauna fińska"
+        name: "Sauna fińska"
       },
       {
         attractionId: 4,
-        attractionName: "Sauna rosyjska"
+        name: "Sauna rosyjska"
       }
     ]
   },
   {
-    areaId: 2,
-    areaName: "Strefa spa",
+    zoneId: 2,
+    name: "Strefa spa",
     attractions: [
       {
         attractionId: 5,
-        attractionName: "Masaż"
+        name: "Masaż"
       },
       {
         attractionId: 6,
-        attractionName: "Kąpiel błotna"
+        name: "Kąpiel błotna"
       },
       {
         attractionId: 7,
-        attractionName: "Sala solankowa"
+        name: "Sala solankowa"
       }
     ]
   }
@@ -53,19 +53,22 @@ export const areasDict = [
 
 export const pricesDict = [
   {
-    areaId: 0,
-    areaName: "Strefa basenów",
+    zoneId: 0,
+    zoneName: "Strefa basenów",
     ticketTypes: [
       {
         ticketTypeId: 0,
         ticketTypeName: "Bilet poranny 6:00-12:00",
         startHour: 6,
         endHour: 12,
+        days: 0,
+        months: 0,
         price: 30,
         currency: "zł",
         periodDiscount: {
           //lub null
-          rate: 0.25,
+          id: 0,
+          value: 0.25,
           dateStart: "2019-04-01",
           dateEnd: "2019-06-01"
         }
@@ -75,6 +78,8 @@ export const pricesDict = [
         ticketTypeName: "Bilet popłudniowy 12:00-18:00",
         startHour: 12,
         endHour: 18,
+        days: 0,
+        months: 0,
         price: 35,
         currency: "zł",
         periodDiscount: null
@@ -84,6 +89,8 @@ export const pricesDict = [
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
         startHour: 18,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 40,
         currency: "zł",
         periodDiscount: null
@@ -93,6 +100,8 @@ export const pricesDict = [
         ticketTypeName: "Bilet całodniowy",
         startHour: 6,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 50,
         currency: "zł",
         periodDiscount: null
@@ -102,6 +111,8 @@ export const pricesDict = [
         ticketTypeName: "Karnet miesięczny",
         startHour: 6,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 300,
         currency: "zł",
         periodDiscount: null
@@ -109,18 +120,21 @@ export const pricesDict = [
     ]
   },
   {
-    areaId: 1,
-    areaName: "Strefa saun",
+    zoneId: 1,
+    zoneName: "Strefa saun",
     ticketTypes: [
       {
         ticketTypeId: 5,
         ticketTypeName: "Bilet poranny 6:00-12:00",
         startHour: 6,
         endHour: 12,
+        days: 0,
+        months: 0,
         price: 50,
         currency: "zł",
         periodDiscount: {
-          rate: 0.25,
+          id: 2,
+          value: 0.25,
           dateStart: "2019-04-01",
           dateEnd: "2019-06-01"
         }
@@ -130,6 +144,8 @@ export const pricesDict = [
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
         startHour: 18,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 60,
         currency: "zł",
         periodDiscount: null
@@ -139,6 +155,8 @@ export const pricesDict = [
         ticketTypeName: "Karnet miesięczny",
         startHour: 6,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 400,
         currency: "zł",
         periodDiscount: null
@@ -146,18 +164,21 @@ export const pricesDict = [
     ]
   },
   {
-    areaId: 2,
-    areaName: "Strefa spa",
+    zoneId: 2,
+    zoneName: "Strefa spa",
     ticketTypes: [
       {
         ticketTypeId: 8,
         ticketTypeName: "Bilet wieczorny 18:00-24:00",
         startHour: 18,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 80,
         currency: "zł",
         periodDiscount: {
-          rate: 0.1,
+          id: 3,
+          value: 0.1,
           dateStart: "2019-04-01",
           dateEnd: "2019-06-01"
         }
@@ -167,6 +188,8 @@ export const pricesDict = [
         ticketTypeName: "Karnet miesięczny",
         startHour: 18,
         endHour: 24,
+        days: 0,
+        months: 0,
         price: 1000,
         currency: "zł",
         periodDiscount: null

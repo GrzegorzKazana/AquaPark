@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./CheckoutPage.module.scss";
-import { Card, Steps, notification } from "antd";
+import { Card, Steps } from "antd";
 import { CartView } from "./CartView/CartView";
 import { CustomerDataView } from "./CustomerDataView/CustomerDataView";
 import { PurchaseView } from "./PurchaseView/PurchaseView";
@@ -26,21 +26,22 @@ const CheckoutPage = ({
   );
 
   useEffect(() => {
+    cart.items.forEach(
+      item => !item.discount && addDiscountToItem(item, discounts.dictionary[0])
+    );
+  }, [cart.items, addDiscountToItem, discounts.dictionary]);
+
+  useEffect(() => {
     setPurchaseUserData(user.user);
   }, [user.user]);
 
   const handleDataSubmit = userData => {
     next();
-    setPurchaseUserData(userData);
+    setPurchaseUserData({ ...user.user, ...userData });
   };
-
 
   const handleBuy = () => {
     purchaseCart(purchaseUserData, cart);
-
-    notification.info({
-      message: "Zakup potwierdzony"
-    });
   };
 
   const steps = [

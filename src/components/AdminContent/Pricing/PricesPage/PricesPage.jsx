@@ -34,21 +34,30 @@ const columns = [
     dataIndex: "price",
     key: "price",
     editable: true,
-    numberInput: true
+    numberInput: true,
+    numberRange: { min: 0, max: 9999 }
   }
 ];
 
-const PricesPage = ({ prices }) => {
+const PricesPage = ({ prices, editDict }) => {
   return (
     <Card title="Cennik" className={styles.NewsletterPage}>
       <Tabs tabPosition="top">
         {prices.dictionary.map(price => (
-          <Tabs.TabPane tab={price.areaName} key={price.areaId}>
+          <Tabs.TabPane tab={price.zoneName} key={price.zoneId}>
             <EditableTable
               rowKey={"ticketTypeId"}
               dataDefault={price.ticketTypes}
               columns={columns}
-              onSubmit={data => console.log(data)}
+              onSubmit={ticketTypes =>
+                editDict(
+                  prices.dictionary.map(zone =>
+                    zone.zoneId === price.zoneId
+                      ? { ...zone, ticketTypes }
+                      : zone
+                  )
+                )
+              }
               createExpandedRowRender={(dataSource, setDataSource) => (
                 record,
                 index
@@ -87,5 +96,6 @@ const PricesPage = ({ prices }) => {
 export default PricesPage;
 
 PricesPage.propTypes = {
-  prices: PropTypes.object.isRequired
+  prices: PropTypes.object.isRequired,
+  editDict: PropTypes.func.isRequired
 };
